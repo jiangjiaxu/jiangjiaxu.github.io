@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mysql," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="详细链接https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_34115899&#x2F;article&#x2F;details&#x2F;81190461 语法insert插入一行insert into student(NAME)VALUES(‘aa’) 插入多行insert into student(NAME)VALUES(‘dd’),(‘bb’),(‘cc’) updateupdate 表名 a set a&#x3D;? where">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql">
+<meta property="og:url" content="http://xiaojiangzbc.top/2021/11/30/mysql/index.html">
+<meta property="og:site_name" content="小姜的博客">
+<meta property="og:description" content="详细链接https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_34115899&#x2F;article&#x2F;details&#x2F;81190461 语法insert插入一行insert into student(NAME)VALUES(‘aa’) 插入多行insert into student(NAME)VALUES(‘dd’),(‘bb’),(‘cc’) updateupdate 表名 a set a&#x3D;? where">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
+<meta property="article:modified_time" content="2021-11-30T13:09:44.763Z">
+<meta property="article:author" content="Mr.JIANG">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiaojiangzbc.top/2021/11/30/mysql/"/>
+
+
+
+
+
+  <title>mysql | 小姜的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	<header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小姜的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaojiangzbc.top/2021/11/30/mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小姜的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-30T17:45:46+08:00">
+                2021-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本站总阅读数 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="详细链接"><a href="#详细链接" class="headerlink" title="详细链接"></a>详细链接</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34115899/article/details/81190461">https://blog.csdn.net/qq_34115899/article/details/81190461</a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><p>插入一行<br>insert into student(<code>NAME</code>)VALUES(‘aa’)</p>
+<p>插入多行<br>insert into student(<code>NAME</code>)VALUES(‘dd’),(‘bb’),(‘cc’)</p>
+<h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><p>update 表名 a set a=? where </p>
+<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p>①delete from 表名 where id =1</p>
+<p>注：不写条件的话删除整个表数据了    自增不归0</p>
+<p>②truncate  完全清空一个表数据，列和索引的属性不会变</p>
+<p>truncate  表名    自增会归0</p>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="生成一个伪列从1到查出的数据总数"><a href="#生成一个伪列从1到查出的数据总数" class="headerlink" title="生成一个伪列从1到查出的数据总数"></a>生成一个伪列从1到查出的数据总数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	(@rownum := @rownum + 1) AS rownum,</span><br><span class="line">	b.*</span><br><span class="line">FROM</span><br><span class="line">	(</span><br><span class="line">		SELECT</span><br><span class="line">			a.dic_key dicKey,</span><br><span class="line">			a.dic_value dicValue</span><br><span class="line">		FROM</span><br><span class="line">			NBD_RES_STANDARD_DIC a</span><br><span class="line">		WHERE</span><br><span class="line">			a.field_group = &#x27;eqp_object_class&#x27;</span><br><span class="line">		AND a.VALUE_GROUP IN (2, 3, 4)</span><br><span class="line">	) b,</span><br><span class="line">	(SELECT @rownum := 0) r</span><br></pre></td></tr></table></figure>
+<h2 id="to-number-to-char"><a href="#to-number-to-char" class="headerlink" title="to_number   to_char"></a>to_number   to_char</h2><p>转数字，转字符</p>
+<h2 id="时间相关"><a href="#时间相关" class="headerlink" title="时间相关"></a>时间相关</h2><h3 id="获取当前时间"><a href="#获取当前时间" class="headerlink" title="获取当前时间"></a>获取当前时间</h3><p>sysdate()==》 yyyy-MM-dd HH:mm:ss<br>CURRENT_TIME==》HH:mm:ss<br>current_date()==》   yyyy-MM-dd<br>now() ==》 yyyy-MM-dd HH:mm:ss</p>
+<h3 id="时间戳换算成日期-yyyy-MM-dd-HH-mm-ss"><a href="#时间戳换算成日期-yyyy-MM-dd-HH-mm-ss" class="headerlink" title="时间戳换算成日期 yyyy-MM-dd HH:mm:ss"></a>时间戳换算成日期 yyyy-MM-dd HH:mm:ss</h3><p>FROM_UNIXTIME()</p>
+<h3 id="代码中相关时间"><a href="#代码中相关时间" class="headerlink" title="代码中相关时间"></a>代码中相关时间</h3><p>@JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)<br>private Date startTime;</p>
+<p>mapper里直接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;if test=&quot;null != startTime&quot;&gt;</span><br><span class="line">    AND p.START_TIME &amp;gt; #&#123;startTime&#125;</span><br><span class="line">&lt;/if&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="获取年月日时分秒"><a href="#获取年月日时分秒" class="headerlink" title="获取年月日时分秒"></a>获取年月日时分秒</h3><p>DATE_FORMAT(a.date,’%Y-%m-%d %H:%m:%s’)<br>可以单独获取年or日等等</p>
+<h2 id="ifnull空值转换"><a href="#ifnull空值转换" class="headerlink" title="ifnull空值转换"></a>ifnull空值转换</h2><h2 id="decode"><a href="#decode" class="headerlink" title="decode"></a>decode</h2><p><strong>decode(expression,value,result1,result2)</strong><br>如果expression=value，则输出result1，否则输出result2</p>
+<p><strong>decode(expression,value1,result1,value2,result2,value3,result3……,default)</strong><br>expression=value1，则输出result1，expression=value2，输出reslut2，expression=value3，输出result3，若expression不等于所列出的所有value，则输出为default</p>
+<h2 id="左连接"><a href="#左连接" class="headerlink" title="左连接"></a>左连接</h2><p>没有where条件，已a表为基准，查出来的数据条数是a的条数<br>如果有where条件，查出来的结果最终是where条件成立的条数<br>字典值等用此方法比较简单</p>
+<h2 id="round-a-b"><a href="#round-a-b" class="headerlink" title="round(a,b)"></a>round(a,b)</h2><p>ROUND(1.323123,2)==》 1.32 四舍五入</p>
+<h2 id="Concat-a-b-拼接"><a href="#Concat-a-b-拼接" class="headerlink" title="Concat(a,b)拼接"></a>Concat(a,b)拼接</h2><h2 id="pom与application"><a href="#pom与application" class="headerlink" title="pom与application"></a>pom与application</h2><h3 id="平时自己"><a href="#平时自己" class="headerlink" title="平时自己"></a>平时自己</h3><p>application</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">    url: jdbc:mysql://localhost:3306/school?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8</span><br><span class="line">	druid:</span><br><span class="line">      driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">      username: root</span><br><span class="line">      password: root</span><br><span class="line">      max-active: 100</span><br><span class="line">      min-idle: 10</span><br><span class="line">      initial-size: 5</span><br><span class="line">      max-wait: 5000</span><br><span class="line">	  </span><br></pre></td></tr></table></figure>
+<p>pom</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--druid数据源--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;8.0.15&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h2><h4 id="ABS-8-–绝对值"><a href="#ABS-8-–绝对值" class="headerlink" title="ABS(-8) –绝对值"></a>ABS(-8) –绝对值</h4><h4 id="ceiling-9-4-–向上取整"><a href="#ceiling-9-4-–向上取整" class="headerlink" title="ceiling(9.4) –向上取整"></a>ceiling(9.4) –向上取整</h4><h4 id="floor（9-4）–向下取整"><a href="#floor（9-4）–向下取整" class="headerlink" title="floor（9.4）–向下取整"></a>floor（9.4）–向下取整</h4><h4 id="rand（）–返回【0-1）的随机数"><a href="#rand（）–返回【0-1）的随机数" class="headerlink" title="rand（）–返回【0,1）的随机数"></a>rand（）–返回【0,1）的随机数</h4><h4 id="RAND-m-n-n-返回-n-m-之间的数"><a href="#RAND-m-n-n-返回-n-m-之间的数" class="headerlink" title="RAND()*(m-n)+n:返回[n,m)之间的数"></a>RAND()*(m-n)+n:返回[n,m)之间的数</h4><h4 id="sign（num）num-0，返回0，num-正数，返回1，num-负数，返回-1"><a href="#sign（num）num-0，返回0，num-正数，返回1，num-负数，返回-1" class="headerlink" title="sign（num）num=0，返回0，num=正数，返回1，num=负数，返回-1"></a>sign（num）num=0，返回0，num=正数，返回1，num=负数，返回-1</h4><h4 id="char-length-str-–str长度"><a href="#char-length-str-–str长度" class="headerlink" title="char_length(str)–str长度"></a>char_length(str)–str长度</h4><h4 id="LOWER-Str-–小写"><a href="#LOWER-Str-–小写" class="headerlink" title="LOWER(Str)–小写"></a>LOWER(Str)–小写</h4><h4 id="UPPER-Str-–大写"><a href="#UPPER-Str-–大写" class="headerlink" title="UPPER(Str)–大写"></a>UPPER(Str)–大写</h4><h4 id="REPLACE-‘abcde’-’b’-’ee’-–把b替换成ee"><a href="#REPLACE-‘abcde’-’b’-’ee’-–把b替换成ee" class="headerlink" title="REPLACE(‘abcde’,’b’,’ee’)–把b替换成ee"></a>REPLACE(‘abcde’,’b’,’ee’)–把b替换成ee</h4><h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count（）</td>
+<td>计数</td>
+</tr>
+<tr>
+<td>sum（）</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg（）</td>
+<td>平均</td>
+</tr>
+<tr>
+<td>max（）</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min（）</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>count(字段)）忽略null值</td>
+<td></td>
+</tr>
+<tr>
+<td>count(*)   不忽略null值  ,</td>
+<td></td>
+</tr>
+<tr>
+<td>count(1)   不忽略null值</td>
+<td></td>
+</tr>
+<tr>
+<td>group by 查的字段应该有聚合函数</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="case选择判断函数"><a href="#case选择判断函数" class="headerlink" title="case选择判断函数"></a>case选择判断函数</h2><p>CASE WHEN a.？=？THEN 1 ELSE 0 END</p>
+<h2 id="foreach用法"><a href="#foreach用法" class="headerlink" title="foreach用法"></a>foreach用法</h2><h3 id="批量插入"><a href="#批量插入" class="headerlink" title="批量插入"></a>批量插入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;insertBatch&quot;&gt;</span><br><span class="line">        INSERT INTO t_user</span><br><span class="line">        (id, name, password)</span><br><span class="line">        VALUES</span><br><span class="line">        &lt;foreach collection =&quot;userList&quot; item=&quot;user&quot; separator =&quot;,&quot;&gt;</span><br><span class="line">            (#&#123;id&#125;, #&#123;name&#125;, #&#123;password&#125;)</span><br><span class="line">        &lt;/foreach &gt;</span><br><span class="line">    &lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id><a href="#" class="headerlink" title></a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;foreach collection=&quot;list&quot; item=&quot;item&quot; open=&quot;(&quot; separator=&quot;,&quot; close=&quot;)&quot; index=&quot;i&quot;&gt;</span><br><span class="line">	#&#123;item&#125;</span><br><span class="line">&lt;/foreach&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="也可以不用逗号分隔"><a href="#也可以不用逗号分隔" class="headerlink" title="也可以不用逗号分隔"></a>也可以不用逗号分隔</h3><p>separator=”or”</p>
+<h2 id="想要控制台打印sql"><a href="#想要控制台打印sql" class="headerlink" title="想要控制台打印sql"></a>想要控制台打印sql</h2><p>pom</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.7.25&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>yml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logging:</span><br><span class="line">  level:</span><br><span class="line">    root: info</span><br><span class="line">    com.jiang.mybatisplus.mapper: debug</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库对应java类"><a href="#数据库对应java类" class="headerlink" title="数据库对应java类"></a>数据库对应java类</h2><table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bigint</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>Double</td>
+</tr>
+</tbody></table>
+<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>数字型</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>大小</strong></th>
+<th><strong>范围（有符号）</strong></th>
+<th><strong>范围（无符号）</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TINYINT</td>
+<td>1 字节</td>
+<td>(-128,127)</td>
+<td>(0,255)</td>
+<td>小整数值</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>2 字节</td>
+<td>(-32768,32767)</td>
+<td>(0,65535)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>3 字节</td>
+<td>(-8388608,8388607)</td>
+<td>(0,16777215)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>INT或INTEGER</td>
+<td>4 字节</td>
+<td>(-2147483648,2147483647)</td>
+<td>(0,4294967295)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>8 字节</td>
+<td>(-9223372036854775808，9223372036854775807)</td>
+<td>(0,18446744073709551615)</td>
+<td>极大整数值</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>4 字节</td>
+<td></td>
+<td></td>
+<td>单精度 浮点数值</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>8 字节</td>
+<td></td>
+<td></td>
+<td>双精度 浮点数值</td>
+</tr>
+</tbody></table>
+<p>字符类型</p>
+<table>
+<thead>
+<tr>
+<th>CHAR</th>
+<th>0-255字节</th>
+<th>定长字符串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VARCHAR</td>
+<td>0-255字节</td>
+<td>变长字符串</td>
+</tr>
+<tr>
+<td>TINYBLOB</td>
+<td>0-255字节</td>
+<td>不超过 255 个字符的二进制字符串</td>
+</tr>
+<tr>
+<td>TINYTEXT</td>
+<td>0-255字节</td>
+<td>短文本字符串</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>0-65 535字节</td>
+<td>二进制形式的长文本数据</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>0-65 535字节</td>
+<td>长文本数据</td>
+</tr>
+<tr>
+<td>MEDIUMBLOB</td>
+<td>0-16 777 215字节</td>
+<td>二进制形式的中等长度文本数据</td>
+</tr>
+<tr>
+<td>MEDIUMTEXT</td>
+<td>0-16 777 215字节</td>
+<td>中等长度文本数据</td>
+</tr>
+<tr>
+<td>LOGNGBLOB</td>
+<td>0-4 294 967 295字节</td>
+<td>二进制形式的极大文本数据</td>
+</tr>
+<tr>
+<td>LONGTEXT</td>
+<td>0-4 294 967 295字节</td>
+<td>极大文本数据</td>
+</tr>
+</tbody></table>
+<h2 id="根据不同条件拼接不同sql-重点"><a href="#根据不同条件拼接不同sql-重点" class="headerlink" title="根据不同条件拼接不同sql(重点)"></a>根据不同条件拼接不同sql(重点)</h2><h3 id="choose-or的关系"><a href="#choose-or的关系" class="headerlink" title="choose or的关系"></a>choose or的关系</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;where&gt;</span><br><span class="line">            &lt;choose&gt;</span><br><span class="line">                &lt;when test=&quot;isUpdate !=null &quot;&gt;</span><br><span class="line">                    AND u.is_update = #&#123;isUpdate, jdbcType=INTEGER&#125;</span><br><span class="line">                &lt;/when&gt;</span><br><span class="line">                &lt;when test=&quot;isDelete != null&quot;&gt;</span><br><span class="line">                    AND u.is_delete = #&#123;isDelete, jdbcType=INTEGER&#125;</span><br><span class="line">                &lt;/when&gt;</span><br><span class="line">                &lt;otherwise&gt;</span><br><span class="line">                &lt;/otherwise&gt;</span><br><span class="line">            &lt;/choose&gt;</span><br><span class="line">            &lt;if test=&quot;tableColumnId != null&quot;&gt;</span><br><span class="line">               AND table_column_id = #&#123;tableColumnId&#125;</span><br><span class="line">            &lt;/if&gt;</span><br><span class="line">        &lt;/where&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="like"><a href="#like" class="headerlink" title="like"></a>like</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;if test=&quot;thresholdQO.titel!=null and &#x27;&#x27; !=thresholdQO.titel&quot;&gt;</span><br><span class="line">            &lt;bind name=&quot;titel&quot; value=&quot;&#x27;%&#x27; + thresholdQO.titel + &#x27;%&#x27;&quot; /&gt;</span><br><span class="line">            AND a.title LIKE #&#123;titel&#125;</span><br><span class="line">        &lt;/if&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="字符串拆分"><a href="#字符串拆分" class="headerlink" title="字符串拆分"></a>字符串拆分</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">str = &#x27;www.baidu.com&#x27;;</span><br><span class="line"></span><br><span class="line">SELECT substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, 1);    #www</span><br><span class="line"></span><br><span class="line">SELECT substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, 2);    #www.baidu</span><br><span class="line"></span><br><span class="line">SELECT substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, -1);   #com</span><br><span class="line"></span><br><span class="line">SELECT substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, -2);   #baidu.com</span><br><span class="line"></span><br><span class="line">SELECT substring_index(substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, -2), &#x27;.&#x27;, 1);  #baidu</span><br></pre></td></tr></table></figure>
+<h2 id="mapper的test里判断是否包含"><a href="#mapper的test里判断是否包含" class="headerlink" title="mapper的test里判断是否包含"></a>mapper的test里判断是否包含</h2><if test="tableName.contains("monitor")"></if>
+      
+    </div>
+    
+    
+    
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-at" aria-hidden="true"></i> mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/30/oracle/" rel="next" title="oracle">
+                <i class="fa fa-chevron-left"></i> oracle
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/30/linux%E5%91%BD%E4%BB%A4/" rel="prev" title="linux命令">
+                linux命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/a.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jiangjiaxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6428447095" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://weibo.com/u/6428447095" title="小姜的微博" target="_blank">小姜的微博</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">详细链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#insert"><span class="nav-number">2.1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update"><span class="nav-number">2.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete"><span class="nav-number">2.3.</span> <span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E4%BC%AA%E5%88%97%E4%BB%8E1%E5%88%B0%E6%9F%A5%E5%87%BA%E7%9A%84%E6%95%B0%E6%8D%AE%E6%80%BB%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">生成一个伪列从1到查出的数据总数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#to-number-to-char"><span class="nav-number">3.2.</span> <span class="nav-text">to_number   to_char</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E7%9B%B8%E5%85%B3"><span class="nav-number">3.3.</span> <span class="nav-text">时间相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4"><span class="nav-number">3.3.1.</span> <span class="nav-text">获取当前时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E6%88%B3%E6%8D%A2%E7%AE%97%E6%88%90%E6%97%A5%E6%9C%9F-yyyy-MM-dd-HH-mm-ss"><span class="nav-number">3.3.2.</span> <span class="nav-text">时间戳换算成日期 yyyy-MM-dd HH:mm:ss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9B%B8%E5%85%B3%E6%97%B6%E9%97%B4"><span class="nav-number">3.3.3.</span> <span class="nav-text">代码中相关时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B9%B4%E6%9C%88%E6%97%A5%E6%97%B6%E5%88%86%E7%A7%92"><span class="nav-number">3.3.4.</span> <span class="nav-text">获取年月日时分秒</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ifnull%E7%A9%BA%E5%80%BC%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.4.</span> <span class="nav-text">ifnull空值转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decode"><span class="nav-number">3.5.</span> <span class="nav-text">decode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A6%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.6.</span> <span class="nav-text">左连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#round-a-b"><span class="nav-number">3.7.</span> <span class="nav-text">round(a,b)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Concat-a-b-%E6%8B%BC%E6%8E%A5"><span class="nav-number">3.8.</span> <span class="nav-text">Concat(a,b)拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pom%E4%B8%8Eapplication"><span class="nav-number">3.9.</span> <span class="nav-text">pom与application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E6%97%B6%E8%87%AA%E5%B7%B1"><span class="nav-number">3.9.1.</span> <span class="nav-text">平时自己</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97"><span class="nav-number">3.10.</span> <span class="nav-text">数学运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ABS-8-%E2%80%93%E7%BB%9D%E5%AF%B9%E5%80%BC"><span class="nav-number">3.10.0.1.</span> <span class="nav-text">ABS(-8) –绝对值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ceiling-9-4-%E2%80%93%E5%90%91%E4%B8%8A%E5%8F%96%E6%95%B4"><span class="nav-number">3.10.0.2.</span> <span class="nav-text">ceiling(9.4) –向上取整</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#floor%EF%BC%889-4%EF%BC%89%E2%80%93%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4"><span class="nav-number">3.10.0.3.</span> <span class="nav-text">floor（9.4）–向下取整</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rand%EF%BC%88%EF%BC%89%E2%80%93%E8%BF%94%E5%9B%9E%E3%80%900-1%EF%BC%89%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">3.10.0.4.</span> <span class="nav-text">rand（）–返回【0,1）的随机数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RAND-m-n-n-%E8%BF%94%E5%9B%9E-n-m-%E4%B9%8B%E9%97%B4%E7%9A%84%E6%95%B0"><span class="nav-number">3.10.0.5.</span> <span class="nav-text">RAND()*(m-n)+n:返回[n,m)之间的数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sign%EF%BC%88num%EF%BC%89num-0%EF%BC%8C%E8%BF%94%E5%9B%9E0%EF%BC%8Cnum-%E6%AD%A3%E6%95%B0%EF%BC%8C%E8%BF%94%E5%9B%9E1%EF%BC%8Cnum-%E8%B4%9F%E6%95%B0%EF%BC%8C%E8%BF%94%E5%9B%9E-1"><span class="nav-number">3.10.0.6.</span> <span class="nav-text">sign（num）num&#x3D;0，返回0，num&#x3D;正数，返回1，num&#x3D;负数，返回-1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#char-length-str-%E2%80%93str%E9%95%BF%E5%BA%A6"><span class="nav-number">3.10.0.7.</span> <span class="nav-text">char_length(str)–str长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LOWER-Str-%E2%80%93%E5%B0%8F%E5%86%99"><span class="nav-number">3.10.0.8.</span> <span class="nav-text">LOWER(Str)–小写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UPPER-Str-%E2%80%93%E5%A4%A7%E5%86%99"><span class="nav-number">3.10.0.9.</span> <span class="nav-text">UPPER(Str)–大写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#REPLACE-%E2%80%98abcde%E2%80%99-%E2%80%99b%E2%80%99-%E2%80%99ee%E2%80%99-%E2%80%93%E6%8A%8Ab%E6%9B%BF%E6%8D%A2%E6%88%90ee"><span class="nav-number">3.10.0.10.</span> <span class="nav-text">REPLACE(‘abcde’,’b’,’ee’)–把b替换成ee</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">3.11.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case%E9%80%89%E6%8B%A9%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0"><span class="nav-number">3.12.</span> <span class="nav-text">case选择判断函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foreach%E7%94%A8%E6%B3%95"><span class="nav-number">3.13.</span> <span class="nav-text">foreach用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5"><span class="nav-number">3.13.1.</span> <span class="nav-text">批量插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.13.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%8D%E7%94%A8%E9%80%97%E5%8F%B7%E5%88%86%E9%9A%94"><span class="nav-number">3.13.3.</span> <span class="nav-text">也可以不用逗号分隔</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%B3%E8%A6%81%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%89%93%E5%8D%B0sql"><span class="nav-number">3.14.</span> <span class="nav-text">想要控制台打印sql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%B9%E5%BA%94java%E7%B1%BB"><span class="nav-number">3.15.</span> <span class="nav-text">数据库对应java类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6"><span class="nav-number">3.16.</span> <span class="nav-text">长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E4%B8%8D%E5%90%8C%E6%9D%A1%E4%BB%B6%E6%8B%BC%E6%8E%A5%E4%B8%8D%E5%90%8Csql-%E9%87%8D%E7%82%B9"><span class="nav-number">3.17.</span> <span class="nav-text">根据不同条件拼接不同sql(重点)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#choose-or%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.17.1.</span> <span class="nav-text">choose or的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#like"><span class="nav-number">3.17.2.</span> <span class="nav-text">like</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%86%E5%88%86"><span class="nav-number">3.18.</span> <span class="nav-text">字符串拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mapper%E7%9A%84test%E9%87%8C%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB"><span class="nav-number">3.19.</span> <span class="nav-text">mapper的test里判断是否包含</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+	<div>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1430319727&auto=1&height=66"></iframe>
+	</div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.JIANG</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

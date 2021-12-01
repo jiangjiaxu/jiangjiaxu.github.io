@@ -1,41 +1,791 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/11/30/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <title>cookie-session-token</title>
+    <url>/2021/11/30/cookie%EF%BC%8Csession%EF%BC%8Ctoken/</url>
+    <content><![CDATA[<h1 id="1-cookie"><a href="#1-cookie" class="headerlink" title="1.cookie"></a>1.cookie</h1><p>​        在浏览器发展初期，为了适应用户的需求技术上推出了各种保持 Web 浏览状态的手段，其中就包括了 Cookie 技术。Cookie 在计算机中是个存储在浏览器目录中的文本文件，当浏览器运行时，存储在 RAM 中发挥作用 （此种 Cookies 称作 Session Cookies），一旦用户从该网站或服务器退出，Cookie 可存储在用户本地的硬盘上 （此种 Cookies 称作 Persistent Cookies）。</p>
+<h2 id="Cookie时效性："><a href="#Cookie时效性：" class="headerlink" title="Cookie时效性："></a><strong>Cookie时效性：</strong></h2><p>目前有些 Cookie 是临时的，有些则是持续的。临时的 Cookie 只在浏览器上保存一段规定的时间，一旦超过规定的时间，该 Cookie 就会被系统清除。</p>
+<h2 id="Cookie使用限制："><a href="#Cookie使用限制：" class="headerlink" title="Cookie使用限制："></a><strong>Cookie使用限制：</strong></h2><p>Cookie 必须在 HTML 文件的内容输出之前设置；不同的浏览器 (Netscape Navigator、Internet Explorer) 对 Cookie 的处理不一致，使用时一定要考虑；客户端用户如果设置禁止 Cookie，则 Cookie 不能建立。 并且在客户端，一个浏览器能创建的 Cookie 数量最多为 300 个，并且每个不能超过 4KB，每个 Web 站点能设置的 Cookie 总数不能超过 20 个。</p>
+<h2 id="执行流程："><a href="#执行流程：" class="headerlink" title="执行流程："></a><strong>执行流程：</strong></h2><p>A：首先，客户端会发送一个http请求到服务器端；</p>
+<p>B： 服务器端接受客户端请求后，发送一个http响应到客户端，这个响应头，其中就包含Set-Cookie头部；</p>
+<p>C：在客户端发起的第二次请求（注意：如果服务器需要我们带上Cookie，我们就需要在B步骤上面拿到这个Cookie然后作为请求头一起发起第二次请求），提供给了服务器端可以用来唯一标识客户端身份的信息。这时，服务器端也就可以判断客户端是否启用了cookies。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//cookie常用于存储用户的登录信息。</span></span><br><span class="line">Cookie c = <span class="keyword">new</span> Cookie(“username”,“john”);</span><br><span class="line"><span class="comment">//设置有效期：设置时间为0，则销毁cookie</span></span><br><span class="line">c.setMaxAge(<span class="number">3600</span>);</span><br><span class="line">response.addCookie；</span><br><span class="line"></span><br><span class="line">Cookie[] c = request.getCookies();</span><br><span class="line"><span class="keyword">if</span>(c != <span class="keyword">null</span>)</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; c.length;i++)&#123;</span><br><span class="line"><span class="keyword">if</span>(“username”.equals(c.getName()))</span><br><span class="line">out.println(c.getValue());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取cookie的代码：</span></span><br><span class="line"></span><br><span class="line">Cookie[] cookies = request.getCookies();</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<p><img src="https://imagecdn.gaopinimages.com/133120663623.jpg?x-image-process=style/H650_WN_MC" alt="bb"></p>
-<p><img src="/img/a.png" alt="a"></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h1 id="2-session"><a href="#2-session" class="headerlink" title="2.session"></a>2.session</h1><p>​        Cookie 虽然很方便，但是使用 Cookie 有一个很大的弊端，Cookie 中的所有数据在客户端就可以被修改，数据非常容易被伪造，那么一些重要的数据就不能存放在 Cookie 中了，而且如果 Cookie 中数据字段太多会影响传输效率。为了解决这些问题，就产生了 Session，<strong>Session 中的数据是保留在服务器端的</strong>。</p>
+<p>​        Session是服务器在和客户端建立连接时添加客户端连接标志，最终会在服务器软件（Apache、Tomcat、JBoss）转化为一个临时Cookie发送给给客户端，当客户端第一请求时服务器会检查是否携带了这个Session（临时Cookie），如果没有则会添加Session，如果有就拿出这个Session来做相关操作。</p>
+<p>Session 的运作通过一个session_id来进行。session_id通常是存放在客户端的 Cookie 中</p>
+<h2 id="Session-可以存放在："><a href="#Session-可以存放在：" class="headerlink" title="Session 可以存放在："></a><strong>Session 可以存放在：</strong></h2><blockquote>
+<p>1）内存；</p>
+<p>2）Cookie本身；</p>
+<p>3）redis 或 memcached 等缓存中；</p>
+<p>4）数据库中</p>
+</blockquote>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/sessiondemo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionDemo</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        response.setCharacterEncoding(<span class="string">&quot;UTF=8&quot;</span>);</span><br><span class="line">        response.setContentType(<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        session.setAttribute(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;孤傲苍狼&quot;</span>);</span><br><span class="line">        String sessionId = session.getId();</span><br><span class="line">        <span class="keyword">if</span> (session.isNew()) &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">&quot;session创建成功，session的id是：&quot;</span>+sessionId);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">&quot;服务器已经存在session，session的id是：&quot;</span>+sessionId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doGet(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+
+<h1 id="3-Token"><a href="#3-Token" class="headerlink" title="3.Token"></a>3.Token</h1><p>​        token是用户身份的验证方式，我们通常叫它：令牌。最简单的token组成:uid(用户唯一的身份标识)、time(当前时间的时间戳)、sign(签名，由token的前几位+盐以哈希算法压缩成一定长的十六进制字符串，可以防止恶意第三方拼接token请求服务器)。还可以把不变的参数也放进token，避免多次查库。</p>
+<h2 id="Token的使用流程："><a href="#Token的使用流程：" class="headerlink" title="Token的使用流程："></a><strong>Token的使用流程：</strong></h2><p><strong>A：</strong>当用户首次登录成功（注册也是一种可以适用的场景）之后, 服务器端就会生成一个 token 值，这个值，会在服务器保存token值(保存在数据库中)，再将这个token值返回给客户端；</p>
+<p><strong>B：</strong>客户端拿到 token 值之后,进行本地保存。（SP存储是大家能够比较支持和易于理解操作的存储）；</p>
+<p><strong>C：</strong>当客户端再次发送网络请求(一般不是登录请求)的时候,就会将这个 token 值附带到参数中发送给服务器；</p>
+<p><strong>D：</strong>服务器接收到客户端的请求之后,会取出token值与保存在本地(数据库)中的token值做对比。</p>
+<h2 id="Token的身份认证逻辑："><a href="#Token的身份认证逻辑：" class="headerlink" title="Token的身份认证逻辑："></a><strong>Token的身份认证逻辑：</strong></h2><p>对比一：如果两个 token 值相同， 说明用户登录成功过!当前用户处于登录状态！</p>
+<p>对比二：如果没有这个 token 值, 则说明没有登录成功；</p>
+<p>对比三：如果 token 值不同: 说明原来的登录信息已经失效,让用户重新登录。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><h3 id="1-生成token"><a href="#1-生成token" class="headerlink" title="1.生成token"></a>1.生成token</h3><p><img src="/../img/image-20210820085115539.png" alt="image-20210820085115539"></p>
+<h2 id="2-从request-headers取出token"><a href="#2-从request-headers取出token" class="headerlink" title="2.从request headers取出token"></a>2.从request headers取出token</h2><p><img src="/../img/image-20210820085347348.png" alt="image-20210820085347348"></p>
+<h2 id="3-swagger从headers中取出测试token"><a href="#3-swagger从headers中取出测试token" class="headerlink" title="3.swagger从headers中取出测试token"></a>3.swagger从headers中取出测试token</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ParameterBuilder tokenPar = <span class="keyword">new</span> ParameterBuilder();</span><br><span class="line">List&lt;Parameter&gt; pars = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">tokenPar.name(<span class="string">&quot;Authorization&quot;</span>).description(<span class="string">&quot;令牌&quot;</span>).modelRef(<span class="keyword">new</span> ModelRef(<span class="string">&quot;string&quot;</span>)).parameterType(<span class="string">&quot;header&quot;</span>).required(<span class="keyword">false</span>).build();</span><br><span class="line">pars.add(tokenPar.build());</span><br></pre></td></tr></table></figure>
+
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210820091403595.png" alt="image-20210820091403595"></p>
+<h2 id="4-设置过滤器，保证每个请求都会判断token"><a href="#4-设置过滤器，保证每个请求都会判断token" class="headerlink" title="4.设置过滤器，保证每个请求都会判断token"></a>4.设置过滤器，保证每个请求都会判断token</h2><p><img src="/../img/image-20210820094546315.png" alt="image-20210820094546315"></p>
+<p>这里把token存在header中了，而秒杀商城是存在cookie中</p>
+<h2 id="5-前端里请求头中携带token"><a href="#5-前端里请求头中携带token" class="headerlink" title="5.前端里请求头中携带token"></a>5.前端里请求头中携带token</h2><p>前端接受后端传过来的token，设置进localStorage中</p>
+<p>方法：localStorage.token=”data.token”</p>
+<p><img src="/../img/image-20210820140949682.png" alt="image-20210820140949682"></p>
+<h2 id="6-跨越问题"><a href="#6-跨越问题" class="headerlink" title="6.跨越问题"></a>6.跨越问题</h2><p><img src="/../img/image-20210820141216272.png" alt="image-20210820141216272"></p>
+<h2 id="7-清楚token"><a href="#7-清楚token" class="headerlink" title="7.清楚token"></a>7.清楚token</h2><p>后端redis清楚</p>
+<p>前端</p>
+<p><img src="/../img/image-20210820141606908.png" alt="image-20210820141606908"></p>
+<h1 id="4-Cookie和Session的区别小结"><a href="#4-Cookie和Session的区别小结" class="headerlink" title="4.Cookie和Session的区别小结"></a>4.Cookie和Session的区别小结</h1><p>1）cookie数据存放在客户的浏览器上，session数据放在服务器上；</p>
+<p>2）cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗,考虑到安全应当使用session；</p>
+<p>3）session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能,考虑到减轻服务器性能方面，应当使用cookie；</p>
+<p>4）单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。</p>
+<p><strong>所以个人建议：</strong></p>
+<p>将登陆信息等重要信息存放为session；</p>
+<p>其他信息如果需要保留，可以放在cookie中。</p>
+<h1 id="5-Token-和-Session-的区别小结"><a href="#5-Token-和-Session-的区别小结" class="headerlink" title="5.Token 和 Session 的区别小结"></a>5.Token 和 Session 的区别小结</h1><p>​        Session和 token并不矛盾，作为身份认证token安全性比Session好，因为每个请求都有签名还能防止监听以及重放攻击，而Session就必须靠链路层来保障通讯安全了。如上所说，如果你需要实现有状态的会话，仍然可以增加session来在服务器端保存一些状态</p>
+<p>​        Token就是令牌，比如你授权（登录）一个程序时，他就是个依据，判断你是否已经授权该软件；cookie就是写在客户端的一个txt文件，里面包括你登录信息之类的，这样你下次在登录某个网站，就会自动调用cookie自动登录用户名；session和cookie差不多，只是Session是写在服务器端的文件，也需要在客户端写入cookie文件，但是文件里是你的浏览器编号。Session的状态是存储在服务器端，客户端只有Session id；而Token的状态是存储在客户端。</p>
+<h2 id><a href="#" class="headerlink" title></a></h2><h1 id="6-自己的秒杀项目"><a href="#6-自己的秒杀项目" class="headerlink" title="6.自己的秒杀项目"></a>6.自己的秒杀项目</h1><p><img src="/../img/image-20210824102942986.png" alt="image-20210824102942986"></p>
+<p>首先通过uuid生成一个随机sessionid，存到redis和cookie中</p>
+<p><img src="/../img/image-20210824103051506.png" alt="image-20210824103051506"></p>
+<p>以后的请求，会得到cookie中名字为token的sessionid，在通过方法getUserForToken判断redis中是否有次数据</p>
+<p><img src="/../img/image-20210824103150109.png" alt="image-20210824103150109"></p>
+<p>redis中存的key为token，value为user对象，不为空重置时间</p>
+<h1 id="token项目中"><a href="#token项目中" class="headerlink" title="token项目中"></a>token项目中</h1><p>1.登录方法uuid生成唯一token保存在redis，并普通json发送给客户端</p>
+<p>2.客户端接受保存到浏览器本地，可能是localStorage，每次请求前端设置请求头里</p>
+<p>3.后端接受请求，通过过滤器判断请求头中的token与本地redis中token是否一致，一致放行，不一致返回错误信息，比如404,</p>
+<p>4.前端接受，如果是404，跳转到登录页面，重新发送登录方法</p>
 ]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>cookie-session-token</tag>
+      </tags>
   </entry>
   <entry>
-    <title>测试</title>
-    <url>/2021/11/30/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="大标题1"><a href="#大标题1" class="headerlink" title="大标题1"></a>大标题1</h1><h2 id="大标题2"><a href="#大标题2" class="headerlink" title="大标题2"></a>大标题2</h2><p>这是一篇文章</p>
-<p><a href="https://www.baidu.com/">https://www.baidu.com</a></p>
-<p>代码块</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">javaadasdas</span><br></pre></td></tr></table></figure>
+    <title>excel操作</title>
+    <url>/2021/11/30/excel%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h1 id="1-根据一定规则，截取前一列，生成新列"><a href="#1-根据一定规则，截取前一列，生成新列" class="headerlink" title="1.根据一定规则，截取前一列，生成新列"></a>1.根据一定规则，截取前一列，生成新列</h1><p>比如I列如下，J列想要I列额汉字，ctrl+c复制杭宁到J2行，在ctrl+E即可</p>
+<p><img src="/../img/image-20211130212335916.png" alt="image-20211130212335916"></p>
+<h1 id="2-筛选"><a href="#2-筛选" class="headerlink" title="2.筛选"></a>2.筛选</h1><p><img src="/../img/image-20211130212345388.png" alt="image-20211130212345388"></p>
+<h1 id="3-去重复"><a href="#3-去重复" class="headerlink" title="3.去重复"></a>3.去重复</h1><p>把要去重的列单独复制到新sheet，点击第一行，然后去重</p>
+<p><img src="/../img/image-20211130212354849.png" alt="image-20211130212354849"></p>
+<h1 id="4-快速复制"><a href="#4-快速复制" class="headerlink" title="4.快速复制"></a>4.快速复制</h1><p><img src="/../img/image-20211130212400995.png" alt="image-20211130212400995"></p>
+<p>复制两个竖格一样的，选中两格在下面格子双击右下角</p>
+<h1 id="5-复制or序列递增"><a href="#5-复制or序列递增" class="headerlink" title="5.复制or序列递增"></a>5.复制or序列递增</h1><p>序列方式（0,1,2,3这样自动增加），也可以直接复制</p>
+<p>双击右下角</p>
+<p><img src="/../img/image-20211130212407585.png" alt="image-20211130212407585"></p>
+<p>选择填充方式</p>
+<p><img src="/../img/image-20211130212416233.png" alt="image-20211130212416233"></p>
+<h1 id="6-粘贴内容转置"><a href="#6-粘贴内容转置" class="headerlink" title="6.粘贴内容转置"></a>6.粘贴内容转置</h1><p>先复制，右键选择性粘贴，粘贴内容转置</p>
+<p><img src="/../img/image-20211130212420340.png" alt="image-20211130212420340"></p>
+<p><img src="/../img/image-20211130212426558.png" alt="image-20211130212426558"></p>
+<h1 id="7-清空内容"><a href="#7-清空内容" class="headerlink" title="7.清空内容"></a>7.清空内容</h1><p>右键清除内容</p>
+<p><img src="/../img/image-20211130212439038.png" alt="image-20211130212439038"></p>
+]]></content>
+      <categories>
+        <category>excel</category>
+      </categories>
+      <tags>
+        <tag>excel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git</title>
+    <url>/2021/11/30/git/</url>
+    <content><![CDATA[<h1 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h1><p><img src="/../img/image-20211126144703898.png" alt="image-20211126144703898"></p>
+<h2 id="版本控制工具"><a href="#版本控制工具" class="headerlink" title="版本控制工具"></a>版本控制工具</h2><h3 id="集中式版本控制"><a href="#集中式版本控制" class="headerlink" title="集中式版本控制"></a>集中式版本控制</h3><p>SVN（subversion）</p>
+<img src="https://img2018.cnblogs.com/blog/1460324/201902/1460324-20190218103211790-549550561.png" alt="img" style="zoom:50%;">
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">集中式代码管理的核心是服务器，所有开发者在开始新一天的工作之前必须从服务器获取代码，然后开发，最后解决冲突，提交。所有的版本信息都放在服务器上。如果脱离了服务器，开发者基本上可以说是无法工作的。下面举例说明：</span><br><span class="line">开始新一天的工作：</span><br><span class="line">1、从服务器下载项目组最新代码。</span><br><span class="line">2、进入自己的分支，进行工作，每隔一个小时向服务器自己的分支提交一次代码（很多人都有这个习惯。因为有时候自己对代码改来改去，最后又想还原到前一个小时的版本，或者看看前一个小时自己修改了哪些代码，就需要这样做了）。</span><br><span class="line">3、下班时间快到了，把自己的分支合并到服务器主分支上，一天的工作完成，并反映给服务器。</span><br><span class="line"></span><br><span class="line">缺点:如果中央服务器故障一小时，那么所有人都无法提交了</span><br></pre></td></tr></table></figure>
+
+<h3 id="分布式版本控制"><a href="#分布式版本控制" class="headerlink" title="分布式版本控制"></a>分布式版本控制</h3><p>git</p>
+<p><img src="/../img/image-20211201092810923.png" alt="image-20211201092810923"></p>
+<p>每台个人电脑就是一个本地库，在自己电脑做版本控制</p>
+<h3 id="就是说svb不能在本地进行版本控制，而git可以"><a href="#就是说svb不能在本地进行版本控制，而git可以" class="headerlink" title="就是说svb不能在本地进行版本控制，而git可以"></a>就是说svb不能在本地进行版本控制，而git可以</h3><h2 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h2><p><img src="/../img/image-20211201111651132.png" alt="image-20211201111651132"> </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">工作区：代码存放的磁盘的目录的位置</span><br><span class="line">暂存区：需要让git追踪（知道）有这样一个代码需要进行版本控制，把工作区的代码添加到暂存区</span><br><span class="line">	   临时存储，是可以删掉的（一个命令），还没有生成历史版本</span><br><span class="line">本地库：暂存区，提交本地库，一旦提交了，就会生成对应的历史版本，一旦生成历史版本，代码就删不掉了</span><br><span class="line">	   除非删除代码，重新拉取</span><br></pre></td></tr></table></figure>
+
+<h2 id="托管中心"><a href="#托管中心" class="headerlink" title="托管中心"></a>托管中心</h2><h3 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h3><p>gitlab</p>
+<h3 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h3><p>github</p>
+<p>gitee</p>
+<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p>file:///D:/git/%E5%B0%9A%E7%A1%85%E8%B0%B7%E6%8A%80%E6%9C%AF%E8%AF%BE%E7%A8%8B%E7%B3%BB%E5%88%97%E4%B9%8BGit%20V2.0.pdf</p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name 用户名 设置用户签名</span><br><span class="line">git config --global user.email 邮箱 设置用户签名</span><br><span class="line">git init 初始化本地库</span><br><span class="line">git status 查看本地库状态</span><br><span class="line">git add 文件名 添加到暂存区</span><br><span class="line">git commit -m &quot;日志信息&quot; 文件名 提交到本地库</span><br><span class="line">git reflog 查看历史记录</span><br><span class="line">git reset --hard 版本号 版本穿梭</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置全局用户签名"><a href="#设置全局用户签名" class="headerlink" title="设置全局用户签名"></a>设置全局用户签名</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：这里设置用户签名和将来登录 GitHub（或其他代码托管中心）的账号没有任 何关系。仅代表是本地客户端的用户签名</strong></p>
+<p>在路径C:\Users\Administrator.gitconfig文件内</p>
+<p><img src="/../img/image-20211201133237841.png" alt="image-20211201133237841"></p>
+<h3 id="查看全局用户签名"><a href="#查看全局用户签名" class="headerlink" title="查看全局用户签名"></a>查看全局用户签名</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
+
+<h3 id="这只局部用户签名"><a href="#这只局部用户签名" class="headerlink" title="这只局部用户签名"></a>这只局部用户签名</h3><p>如果你的公司邮箱，github，gitee邮箱都不一致，需要拉取项目后，使用命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config  user.name &quot;用户名&quot;</span><br><span class="line">git config  user.email &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p>设置成注册github或者gitee时的邮箱</p>
+<h2 id="初始化本地库"><a href="#初始化本地库" class="headerlink" title="初始化本地库"></a>初始化本地库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p>告诉git，获取这个目录的管理权</p>
+<h2 id="查看本地库状态"><a href="#查看本地库状态" class="headerlink" title="查看本地库状态"></a>查看本地库状态</h2><p>git status</p>
+<p><img src="/../img/image-20211201134228268.png" alt="image-20211201134228268"></p>
+<p>第一行：在master分支</p>
+<p>第二行：没有提交过任何</p>
+<p>第三行：没有任何可以提交，暂存区为空</p>
+<h4 id="新建hello-txt文件再次"><a href="#新建hello-txt文件再次" class="headerlink" title="新建hello.txt文件再次"></a>新建hello.txt文件再次</h4><p>gitstatus</p>
+<p><img src="/../img/image-20211201134906698.png" alt="image-20211201134906698"></p>
+<p>第三行：发现一个未被追踪（add）的文件，存在于工作区，使用git add追踪</p>
+<h2 id="添加暂存区"><a href="#添加暂存区" class="headerlink" title="添加暂存区"></a>添加暂存区</h2><p>git add 文件名</p>
+<p><img src="/../img/image-20211201135957361.png" alt="image-20211201135957361"></p>
+<p>这个警告是转换了行末换行符</p>
+<p>用LF（linux） 替换 CRLF（windows）</p>
+<h3 id="再一次git-status"><a href="#再一次git-status" class="headerlink" title="再一次git status"></a>再一次git status</h3><p><img src="/../img/image-20211201140152942.png" alt="image-20211201140152942"></p>
+<p>git追踪到了这个hello.txt文件，目前在暂存区里</p>
+<h3 id="如果想删除暂存区里的hello-txt文件"><a href="#如果想删除暂存区里的hello-txt文件" class="headerlink" title="如果想删除暂存区里的hello.txt文件"></a>如果想删除暂存区里的hello.txt文件</h3><p>git rm –cached hello.txt</p>
+<p><img src="/../img/image-20211201140332382.png" alt="image-20211201140332382"></p>
+<p>仅删除暂存区，工作区（磁盘上的没有删除）</p>
+<h2 id="提交本地库"><a href="#提交本地库" class="headerlink" title="提交本地库"></a>提交本地库</h2><p>git commit -m “日志信息” 文件名</p>
+<p><img src="/../img/image-20211201140632161.png" alt="image-20211201140632161"></p>
+<h3 id="再一次查看状态"><a href="#再一次查看状态" class="headerlink" title="再一次查看状态"></a>再一次查看状态</h3><p>git status</p>
+<p><img src="/../img/image-20211201140644875.png" alt="image-20211201140644875"></p>
+<h2 id="查看版本信息"><a href="#查看版本信息" class="headerlink" title="查看版本信息"></a>查看版本信息</h2><p>git reflog</p>
+<p><img src="/../img/image-20211201140813139.png" alt="image-20211201140813139"></p>
+<p>git log更详细</p>
+<p><img src="/../img/image-20211201140834667.png" alt="image-20211201140834667"></p>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><p>修改了hello.txt</p>
+<p>再次git status</p>
+<p><img src="/../img/image-20211201141219010.png" alt="image-20211201141219010"></p>
+<p>这时需要再次追踪一下</p>
+<p>git add hello.txt</p>
+<p>在提交</p>
+<p>git commit -m “second commit” hello.txt</p>
+<h3 id="再次查看版本信息"><a href="#再次查看版本信息" class="headerlink" title="再次查看版本信息"></a>再次查看版本信息</h3><p>git reflog </p>
+<p><img src="/../img/image-20211201141611951.png" alt="image-20211201141611951"></p>
+<p>发现有两个版本，并且head指针指向第二个版本</p>
+<h2 id="版本穿梭"><a href="#版本穿梭" class="headerlink" title="版本穿梭"></a>版本穿梭</h2><p>git reset –hard 版本号</p>
+<p><img src="/../img/image-20211201144449686.png" alt="image-20211201144449686"></p>
+<p>穿越回第一次提交的版本</p>
+<p>查看hello.txt发现第一行没有1234</p>
+<h3 id="再次git-reflog"><a href="#再次git-reflog" class="headerlink" title="再次git reflog"></a>再次git reflog</h3><p><img src="/../img/image-20211201144538596.png" alt="image-20211201144538596"></p>
+<p>发现指针指向了第一次提交的版本（第三行）</p>
+<p>而第一行是日志，意思是指针指向了哪个版本号</p>
+<h1 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch 分支名 创建分支</span><br><span class="line">git branch -v 查看分支</span><br><span class="line">git checkout 分支名 切换分支</span><br><span class="line">git merge 分支名 把指定的分支合并到当前分支上</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h2><p>git branch -v</p>
+<h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><p>git branch 分支名</p>
+<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><p>git checkout 分支名</p>
+<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><p>git merge 分支名</p>
+<p>把指定分支合并到当前分支</p>
+<h3 id="正常合并"><a href="#正常合并" class="headerlink" title="正常合并"></a>正常合并</h3><p>master分支</p>
+<p><img src="/../img/image-20211201151626602.png" alt="image-20211201151626602"></p>
+<p>新建了一个a分支，内容没变之前也为</p>
+<p><img src="/../img/image-20211201151644224.png" alt="image-20211201151644224"></p>
+<p>现在a分支改变内容为</p>
+<p><img src="/../img/image-20211201151739563.png" alt="image-20211201151739563"></p>
+<p>add，commit以后</p>
+<p><img src="/../img/image-20211201151852805.png" alt="image-20211201151852805"></p>
+<p>合并，注意要站在master合并a，就要先去master，发现可以合并</p>
+<p>因为master分支没有改动，只改动了a分支是没问题的</p>
+<p><img src="/../img/image-20211201151944461.png" alt="image-20211201151944461"></p>
+<h3 id="异常合并"><a href="#异常合并" class="headerlink" title="异常合并"></a>异常合并</h3><p>两个分支在同一个文件的同一个位置有两套完全不同的修改</p>
+<p>就需要a改动，master分支也改动了，此时有异常</p>
+<p>现在改动master内容</p>
+<p><img src="/../img/image-20211201152218626.png" alt="image-20211201152218626"></p>
+<p>add，commit以后，切换a分支</p>
+<p><img src="/../img/image-20211201152549163.png" alt="image-20211201152549163"></p>
+<p>add，commit以后，切换master分支</p>
+<p>自动合并失败了，在hello.txt里有冲突</p>
+<p><img src="/../img/image-20211201152710721.png" alt="image-20211201152710721"></p>
+<p><img src="/../img/image-20211201152925624.png" alt="image-20211201152925624"></p>
+<p>&lt;&lt;&lt;和==之间是当前分支的代码</p>
+<p>&gt;&gt;&gt;和==之前是要合并的代码</p>
+<p>就要手动删除不要的代码和符号</p>
+<p><img src="/../img/image-20211201153303861.png" alt="image-20211201153303861"></p>
+<p>删除以后，还要add，commit（不能带文件名了）</p>
+<p><img src="/../img/image-20211201153243165.png" alt="image-20211201153243165"></p>
+<p>在查看文件，发现合并成功了</p>
+<p><img src="/../img/image-20211201153317524.png" alt="image-20211201153317524"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.开发代码时，先pull拉取，开发完代码，commit了以后，在拉取一次，看有无冲突，没有冲突在push提交</span><br><span class="line">2.push页面的就是最后版本的版本代码，以及之前的版本日志信息</span><br></pre></td></tr></table></figure>
+
+<h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><h2 id="撤销指定commit"><a href="#撤销指定commit" class="headerlink" title="撤销指定commit"></a>撤销指定commit</h2><p><img src="/../img/image-20211015110906139.png" alt="image-20211015110906139"></p>
+<p><img src="/../img/image-20211015110919733.png" alt="image-20211015110919733"></p>
+<p>可以看到本地commit里有一个a</p>
+<p>在version control里找到log，找到刚才提交的a的上一个</p>
+<p><img src="/../img/image-20211015111009766.png" alt="image-20211015111009766"></p>
+<p><img src="/../img/image-20211015111700760.png" alt="image-20211015111700760"></p>
+<p>右键a下一个11111可以看到版本号，第一个copy版本号</p>
+<p><img src="/../img/image-20211015111801700.png" alt="image-20211015111801700"></p>
+<p><img src="/../img/image-20211015111040231.png" alt="image-20211015111040231"></p>
+<p>找到terminal控制台</p>
+<p>输入git reset 版本号</p>
+<p><img src="/../img/image-20211015111814112.png" alt="image-20211015111814112"></p>
+<p>出现表示成功撤销commit</p>
+<p><img src="/../img/image-20211015111912140.png" alt="image-20211015111912140"></p>
+<p>此时push里发现commit为空</p>
+<p><img src="/../img/image-20211015111931107.png" alt="image-20211015111931107"></p>
+<h2 id="git回滚版本（使用第二个）"><a href="#git回滚版本（使用第二个）" class="headerlink" title="git回滚版本（使用第二个）"></a>git回滚版本（使用第二个）</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">第一步：点击项目右键git-&gt;Show Histroy -&gt;选择需要回滚的版本，右键Copy Revision Number</span><br><span class="line">第二步：方法一：</span><br><span class="line">之后在TerMinal上输入命令git reset --hard XXXXX</span><br><span class="line">git push -f -u origin master.</span><br><span class="line">方法二：a.右击项目依次选中：git-&gt;Repository-&gt;Reset HEAD</span><br><span class="line">b. 选中Reset Type:Mixed, To Commit:08d537b4fdc74f880f572e948df9a1e87e2ea41f；然后点击Reset按钮</span><br><span class="line"></span><br><span class="line">方法一是会把回滚版本之后的全部抹杀掉，而方法二会重新设置一个版本号，不会把回滚版本之后的版本删除掉。</span><br><span class="line">团队合作的回滚版本最好是使用第二种方法</span><br></pre></td></tr></table></figure>
+
+
+
+<p>回滚以后消失的commit版本，在回滚之前复制版本号，可以用同样方法回滚回来</p>
+<h2 id="回滚版本与版本穿梭的区别"><a href="#回滚版本与版本穿梭的区别" class="headerlink" title="回滚版本与版本穿梭的区别"></a>回滚版本与版本穿梭的区别</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">版本穿梭，你没有commit的代码都会消失</span><br><span class="line"></span><br><span class="line">回滚版本，代码不会消失，可以重新commit</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="添加忽略自动add的文件"><a href="#添加忽略自动add的文件" class="headerlink" title="添加忽略自动add的文件"></a>添加忽略自动add的文件</h2><h3 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h3><p>setting==》editor==》file types</p>
+<p><img src="/../img/image-20211201162537280.png" alt="image-20211201162537280"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*.hprof;*.iml;*.pyc;*.pyo;*.rbc;*.yarb;*~;.DS_Store;.git;.hg;.idea;.svn;CVS;__pycache__;_svn;data;logs;transaction-logs;vssver.scc;vssver2.scc;</span><br></pre></td></tr></table></figure>
+
+<p>这里idea会不显示这些文件，并且git不会自动add</p>
+<h3 id="第二种（第一种第二种可以一起来）"><a href="#第二种（第一种第二种可以一起来）" class="headerlink" title="第二种（第一种第二种可以一起来）"></a>第二种（第一种第二种可以一起来）</h3><p>new 一个忽略文件</p>
+<p><img src="/../img/image-20211201163051769.png" alt="image-20211201163051769"></p>
+<p>选择java模板</p>
+<p><img src="/../img/image-20211201163152562.png" alt="image-20211201163152562"></p>
+<p>点击add</p>
+<p><img src="/../img/image-20211201163209937.png" alt="image-20211201163209937"></p>
+<p>取消忽略文件的add</p>
+<p><img src="/../img/image-20211201162851800.png" alt="image-20211201162851800"></p>
+<p>想忽略什么可以自己添加</p>
+<p><img src="/../img/image-20211201163442740.png" alt="image-20211201163442740"></p>
+<h2 id="取消其他文件的add"><a href="#取消其他文件的add" class="headerlink" title="取消其他文件的add"></a>取消其他文件的add</h2><p>同取消忽略文件的add</p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux命令</title>
+    <url>/2021/11/30/linux%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>Linux相关命令的总结，包括网络、操作系统、文件、脚本、环境配置</p>
+<h1 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h1><ul>
+<li>虚拟机网络配置模板</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 编辑正在使用的网卡，可以先进入到network-scripts目录下查看，ifconfig先看正在使用哪个网卡</span><br><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"># 文件模板</span><br><span class="line">TYPE=&quot;Ethernet&quot; # 不变</span><br><span class="line">BOOTPROTO=&quot;static&quot; # 静态的不用改</span><br><span class="line">NAME=&quot;ens33&quot; # 和文件名严格一致</span><br><span class="line">DEVICE=&quot;ens33&quot; # 和文件名严格一致</span><br><span class="line">ONBOOT=&quot;yes&quot; # 不用动</span><br><span class="line">IPADDR=&quot;192.168.25.160&quot; # 改成需要的ip，注意网段</span><br><span class="line">GATEWAY=&quot;192.168.25.2&quot; # 网关，可以先查下网关</span><br><span class="line">NETMASK=&quot;255.255.255.0&quot; # 不用动</span><br><span class="line">DNS1=&quot;114.114.114.114&quot; # dns自己配置能用的</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询正在使用的网关</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# ip route show</span><br><span class="line">default via 192.168.25.2 dev ens33 proto static metric 100</span><br><span class="line">192.168.25.0/24 dev ens33 proto kernel scope link src 192.168.25.160 metric 100</span><br><span class="line"></span><br><span class="line"># 很明确的可以看到网关用的是192.168.25.2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重启网络</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果遇到主机无法解析问题，直接重启网络，因为可能是dns解析出问题了，重启刷新下</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 一定要先重启NetworkManager，再重启network</span><br><span class="line"># NetworkManager服务是一个网络管理的守护线程</span><br><span class="line">systemctl restart  NetworkManager</span><br><span class="line">systemctl restart  network</span><br></pre></td></tr></table></figure>
+
+<h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看防火墙状态：systemctl status firewalld.service </span><br><span class="line">关闭防火墙：systemctl stop firewalld.service </span><br><span class="line">永久关闭：systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启指定端口"><a href="#开启指定端口" class="headerlink" title="开启指定端口"></a>开启指定端口</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">先开启防火墙：systemctl start firewalld</span><br><span class="line"></span><br><span class="line">再开放8080端口：firewall-cmd –zone=public –add-port=8080/tcp –permanent</span><br><span class="line"></span><br><span class="line">最后刷新配置：firewall-cmd –reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行jar包，通用脚本文件"><a href="#执行jar包，通用脚本文件" class="headerlink" title="执行jar包，通用脚本文件"></a>执行jar包，通用脚本文件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">jar_pid=`ps -ef|grep -v grep | grep &#x27;example.jar&#x27;|awk &#x27;&#123; print $2 &#125;&#x27;`</span><br><span class="line">echo $jar_pid</span><br><span class="line">if [ ! -n &quot;$jar_pid&quot; ]; then</span><br><span class="line">echo &#x27;will redploy.&#x27;</span><br><span class="line"></span><br><span class="line">rm -rf nohup.out</span><br><span class="line">nohup java -Xms512m -Xmx2048m -Dspring.profiles.active=pro -jar example.jar &amp;</span><br><span class="line">echo &#x27;redploy success0.&#x27;</span><br><span class="line">else</span><br><span class="line">kill -9 $jar_pid</span><br><span class="line">echo &#x27;kill&#x27; $jar_pid</span><br><span class="line"></span><br><span class="line">rm -rf nohup.out</span><br><span class="line">nohup java -Xms512m -Xmx2048m -Dspring.profiles.active=pro -jar example.jar &amp;</span><br><span class="line">echo &#x27;redploy success1.&#x27;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h1 id="vim命令"><a href="#vim命令" class="headerlink" title="vim命令"></a>vim命令</h1><h2 id="复制粘贴"><a href="#复制粘贴" class="headerlink" title="复制粘贴"></a>复制粘贴</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">esc之后</span><br><span class="line">光标到要复制的行</span><br><span class="line">yy复制一行</span><br><span class="line">p粘贴1行</span><br><span class="line">5p粘贴5行</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>dd删除一行</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql</title>
+    <url>/2021/11/30/mysql/</url>
+    <content><![CDATA[<h1 id="详细链接"><a href="#详细链接" class="headerlink" title="详细链接"></a>详细链接</h1><p><a href="https://blog.csdn.net/qq_34115899/article/details/81190461">https://blog.csdn.net/qq_34115899/article/details/81190461</a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><p>插入一行<br>insert into student(<code>NAME</code>)VALUES(‘aa’)</p>
+<p>插入多行<br>insert into student(<code>NAME</code>)VALUES(‘dd’),(‘bb’),(‘cc’)</p>
+<h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><p>update 表名 a set a=? where </p>
+<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p>①delete from 表名 where id =1</p>
+<p>注：不写条件的话删除整个表数据了    自增不归0</p>
+<p>②truncate  完全清空一个表数据，列和索引的属性不会变</p>
+<p>truncate  表名    自增会归0</p>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="生成一个伪列从1到查出的数据总数"><a href="#生成一个伪列从1到查出的数据总数" class="headerlink" title="生成一个伪列从1到查出的数据总数"></a>生成一个伪列从1到查出的数据总数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	(@rownum := @rownum + 1) AS rownum,</span><br><span class="line">	b.*</span><br><span class="line">FROM</span><br><span class="line">	(</span><br><span class="line">		SELECT</span><br><span class="line">			a.dic_key dicKey,</span><br><span class="line">			a.dic_value dicValue</span><br><span class="line">		FROM</span><br><span class="line">			NBD_RES_STANDARD_DIC a</span><br><span class="line">		WHERE</span><br><span class="line">			a.field_group = &#x27;eqp_object_class&#x27;</span><br><span class="line">		AND a.VALUE_GROUP IN (2, 3, 4)</span><br><span class="line">	) b,</span><br><span class="line">	(SELECT @rownum := 0) r</span><br></pre></td></tr></table></figure>
+<h2 id="to-number-to-char"><a href="#to-number-to-char" class="headerlink" title="to_number   to_char"></a>to_number   to_char</h2><p>转数字，转字符</p>
+<h2 id="时间相关"><a href="#时间相关" class="headerlink" title="时间相关"></a>时间相关</h2><h3 id="获取当前时间"><a href="#获取当前时间" class="headerlink" title="获取当前时间"></a>获取当前时间</h3><p>sysdate()==》 yyyy-MM-dd HH:mm:ss<br>CURRENT_TIME==》HH:mm:ss<br>current_date()==》   yyyy-MM-dd<br>now() ==》 yyyy-MM-dd HH:mm:ss</p>
+<h3 id="时间戳换算成日期-yyyy-MM-dd-HH-mm-ss"><a href="#时间戳换算成日期-yyyy-MM-dd-HH-mm-ss" class="headerlink" title="时间戳换算成日期 yyyy-MM-dd HH:mm:ss"></a>时间戳换算成日期 yyyy-MM-dd HH:mm:ss</h3><p>FROM_UNIXTIME()</p>
+<h3 id="代码中相关时间"><a href="#代码中相关时间" class="headerlink" title="代码中相关时间"></a>代码中相关时间</h3><p>@JsonFormat(pattern = “yyyy-MM-dd HH:mm:ss”)<br>private Date startTime;</p>
+<p>mapper里直接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;if test=&quot;null != startTime&quot;&gt;</span><br><span class="line">    AND p.START_TIME &amp;gt; #&#123;startTime&#125;</span><br><span class="line">&lt;/if&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="获取年月日时分秒"><a href="#获取年月日时分秒" class="headerlink" title="获取年月日时分秒"></a>获取年月日时分秒</h3><p>DATE_FORMAT(a.date,’%Y-%m-%d %H:%m:%s’)<br>可以单独获取年or日等等</p>
+<h2 id="ifnull空值转换"><a href="#ifnull空值转换" class="headerlink" title="ifnull空值转换"></a>ifnull空值转换</h2><h2 id="decode"><a href="#decode" class="headerlink" title="decode"></a>decode</h2><p><strong>decode(expression,value,result1,result2)</strong><br>如果expression=value，则输出result1，否则输出result2</p>
+<p><strong>decode(expression,value1,result1,value2,result2,value3,result3……,default)</strong><br>expression=value1，则输出result1，expression=value2，输出reslut2，expression=value3，输出result3，若expression不等于所列出的所有value，则输出为default</p>
+<h2 id="左连接"><a href="#左连接" class="headerlink" title="左连接"></a>左连接</h2><p>没有where条件，已a表为基准，查出来的数据条数是a的条数<br>如果有where条件，查出来的结果最终是where条件成立的条数<br>字典值等用此方法比较简单</p>
+<h2 id="round-a-b"><a href="#round-a-b" class="headerlink" title="round(a,b)"></a>round(a,b)</h2><p>ROUND(1.323123,2)==》 1.32 四舍五入</p>
+<h2 id="Concat-a-b-拼接"><a href="#Concat-a-b-拼接" class="headerlink" title="Concat(a,b)拼接"></a>Concat(a,b)拼接</h2><h2 id="pom与application"><a href="#pom与application" class="headerlink" title="pom与application"></a>pom与application</h2><h3 id="平时自己"><a href="#平时自己" class="headerlink" title="平时自己"></a>平时自己</h3><p>application</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">    url: jdbc:mysql://localhost:3306/school?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8</span><br><span class="line">	druid:</span><br><span class="line">      driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">      username: root</span><br><span class="line">      password: root</span><br><span class="line">      max-active: 100</span><br><span class="line">      min-idle: 10</span><br><span class="line">      initial-size: 5</span><br><span class="line">      max-wait: 5000</span><br><span class="line">	  </span><br></pre></td></tr></table></figure>
+<p>pom</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--druid数据源--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;8.0.15&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h2><h4 id="ABS-8-–绝对值"><a href="#ABS-8-–绝对值" class="headerlink" title="ABS(-8) –绝对值"></a>ABS(-8) –绝对值</h4><h4 id="ceiling-9-4-–向上取整"><a href="#ceiling-9-4-–向上取整" class="headerlink" title="ceiling(9.4) –向上取整"></a>ceiling(9.4) –向上取整</h4><h4 id="floor（9-4）–向下取整"><a href="#floor（9-4）–向下取整" class="headerlink" title="floor（9.4）–向下取整"></a>floor（9.4）–向下取整</h4><h4 id="rand（）–返回【0-1）的随机数"><a href="#rand（）–返回【0-1）的随机数" class="headerlink" title="rand（）–返回【0,1）的随机数"></a>rand（）–返回【0,1）的随机数</h4><h4 id="RAND-m-n-n-返回-n-m-之间的数"><a href="#RAND-m-n-n-返回-n-m-之间的数" class="headerlink" title="RAND()*(m-n)+n:返回[n,m)之间的数"></a>RAND()*(m-n)+n:返回[n,m)之间的数</h4><h4 id="sign（num）num-0，返回0，num-正数，返回1，num-负数，返回-1"><a href="#sign（num）num-0，返回0，num-正数，返回1，num-负数，返回-1" class="headerlink" title="sign（num）num=0，返回0，num=正数，返回1，num=负数，返回-1"></a>sign（num）num=0，返回0，num=正数，返回1，num=负数，返回-1</h4><h4 id="char-length-str-–str长度"><a href="#char-length-str-–str长度" class="headerlink" title="char_length(str)–str长度"></a>char_length(str)–str长度</h4><h4 id="LOWER-Str-–小写"><a href="#LOWER-Str-–小写" class="headerlink" title="LOWER(Str)–小写"></a>LOWER(Str)–小写</h4><h4 id="UPPER-Str-–大写"><a href="#UPPER-Str-–大写" class="headerlink" title="UPPER(Str)–大写"></a>UPPER(Str)–大写</h4><h4 id="REPLACE-‘abcde’-’b’-’ee’-–把b替换成ee"><a href="#REPLACE-‘abcde’-’b’-’ee’-–把b替换成ee" class="headerlink" title="REPLACE(‘abcde’,’b’,’ee’)–把b替换成ee"></a>REPLACE(‘abcde’,’b’,’ee’)–把b替换成ee</h4><h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count（）</td>
+<td>计数</td>
+</tr>
+<tr>
+<td>sum（）</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg（）</td>
+<td>平均</td>
+</tr>
+<tr>
+<td>max（）</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min（）</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>count(字段)）忽略null值</td>
+<td></td>
+</tr>
+<tr>
+<td>count(*)   不忽略null值  ,</td>
+<td></td>
+</tr>
+<tr>
+<td>count(1)   不忽略null值</td>
+<td></td>
+</tr>
+<tr>
+<td>group by 查的字段应该有聚合函数</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="case选择判断函数"><a href="#case选择判断函数" class="headerlink" title="case选择判断函数"></a>case选择判断函数</h2><p>CASE WHEN a.？=？THEN 1 ELSE 0 END</p>
+<h2 id="foreach用法"><a href="#foreach用法" class="headerlink" title="foreach用法"></a>foreach用法</h2><h3 id="批量插入"><a href="#批量插入" class="headerlink" title="批量插入"></a>批量插入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;insert id=&quot;insertBatch&quot;&gt;</span><br><span class="line">        INSERT INTO t_user</span><br><span class="line">        (id, name, password)</span><br><span class="line">        VALUES</span><br><span class="line">        &lt;foreach collection =&quot;userList&quot; item=&quot;user&quot; separator =&quot;,&quot;&gt;</span><br><span class="line">            (#&#123;id&#125;, #&#123;name&#125;, #&#123;password&#125;)</span><br><span class="line">        &lt;/foreach &gt;</span><br><span class="line">    &lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id><a href="#" class="headerlink" title></a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;foreach collection=&quot;list&quot; item=&quot;item&quot; open=&quot;(&quot; separator=&quot;,&quot; close=&quot;)&quot; index=&quot;i&quot;&gt;</span><br><span class="line">	#&#123;item&#125;</span><br><span class="line">&lt;/foreach&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="也可以不用逗号分隔"><a href="#也可以不用逗号分隔" class="headerlink" title="也可以不用逗号分隔"></a>也可以不用逗号分隔</h3><p>separator=”or”</p>
+<h2 id="想要控制台打印sql"><a href="#想要控制台打印sql" class="headerlink" title="想要控制台打印sql"></a>想要控制台打印sql</h2><p>pom</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.7.25&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>yml</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">logging:</span><br><span class="line">  level:</span><br><span class="line">    root: info</span><br><span class="line">    com.jiang.mybatisplus.mapper: debug</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库对应java类"><a href="#数据库对应java类" class="headerlink" title="数据库对应java类"></a>数据库对应java类</h2><table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bigint</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>Double</td>
+</tr>
+</tbody></table>
+<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2><p>数字型</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>大小</strong></th>
+<th><strong>范围（有符号）</strong></th>
+<th><strong>范围（无符号）</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TINYINT</td>
+<td>1 字节</td>
+<td>(-128,127)</td>
+<td>(0,255)</td>
+<td>小整数值</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>2 字节</td>
+<td>(-32768,32767)</td>
+<td>(0,65535)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>3 字节</td>
+<td>(-8388608,8388607)</td>
+<td>(0,16777215)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>INT或INTEGER</td>
+<td>4 字节</td>
+<td>(-2147483648,2147483647)</td>
+<td>(0,4294967295)</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>8 字节</td>
+<td>(-9223372036854775808，9223372036854775807)</td>
+<td>(0,18446744073709551615)</td>
+<td>极大整数值</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>4 字节</td>
+<td></td>
+<td></td>
+<td>单精度 浮点数值</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>8 字节</td>
+<td></td>
+<td></td>
+<td>双精度 浮点数值</td>
+</tr>
+</tbody></table>
+<p>字符类型</p>
+<table>
+<thead>
+<tr>
+<th>CHAR</th>
+<th>0-255字节</th>
+<th>定长字符串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VARCHAR</td>
+<td>0-255字节</td>
+<td>变长字符串</td>
+</tr>
+<tr>
+<td>TINYBLOB</td>
+<td>0-255字节</td>
+<td>不超过 255 个字符的二进制字符串</td>
+</tr>
+<tr>
+<td>TINYTEXT</td>
+<td>0-255字节</td>
+<td>短文本字符串</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>0-65 535字节</td>
+<td>二进制形式的长文本数据</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>0-65 535字节</td>
+<td>长文本数据</td>
+</tr>
+<tr>
+<td>MEDIUMBLOB</td>
+<td>0-16 777 215字节</td>
+<td>二进制形式的中等长度文本数据</td>
+</tr>
+<tr>
+<td>MEDIUMTEXT</td>
+<td>0-16 777 215字节</td>
+<td>中等长度文本数据</td>
+</tr>
+<tr>
+<td>LOGNGBLOB</td>
+<td>0-4 294 967 295字节</td>
+<td>二进制形式的极大文本数据</td>
+</tr>
+<tr>
+<td>LONGTEXT</td>
+<td>0-4 294 967 295字节</td>
+<td>极大文本数据</td>
+</tr>
+</tbody></table>
+<h2 id="根据不同条件拼接不同sql-重点"><a href="#根据不同条件拼接不同sql-重点" class="headerlink" title="根据不同条件拼接不同sql(重点)"></a>根据不同条件拼接不同sql(重点)</h2><h3 id="choose-or的关系"><a href="#choose-or的关系" class="headerlink" title="choose or的关系"></a>choose or的关系</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;where&gt;</span><br><span class="line">            &lt;choose&gt;</span><br><span class="line">                &lt;when test=&quot;isUpdate !=null &quot;&gt;</span><br><span class="line">                    AND u.is_update = #&#123;isUpdate, jdbcType=INTEGER&#125;</span><br><span class="line">                &lt;/when&gt;</span><br><span class="line">                &lt;when test=&quot;isDelete != null&quot;&gt;</span><br><span class="line">                    AND u.is_delete = #&#123;isDelete, jdbcType=INTEGER&#125;</span><br><span class="line">                &lt;/when&gt;</span><br><span class="line">                &lt;otherwise&gt;</span><br><span class="line">                &lt;/otherwise&gt;</span><br><span class="line">            &lt;/choose&gt;</span><br><span class="line">            &lt;if test=&quot;tableColumnId != null&quot;&gt;</span><br><span class="line">               AND table_column_id = #&#123;tableColumnId&#125;</span><br><span class="line">            &lt;/if&gt;</span><br><span class="line">        &lt;/where&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="like"><a href="#like" class="headerlink" title="like"></a>like</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;if test=&quot;thresholdQO.titel!=null and &#x27;&#x27; !=thresholdQO.titel&quot;&gt;</span><br><span class="line">            &lt;bind name=&quot;titel&quot; value=&quot;&#x27;%&#x27; + thresholdQO.titel + &#x27;%&#x27;&quot; /&gt;</span><br><span class="line">            AND a.title LIKE #&#123;titel&#125;</span><br><span class="line">        &lt;/if&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="字符串拆分"><a href="#字符串拆分" class="headerlink" title="字符串拆分"></a>字符串拆分</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">str = &#x27;www.baidu.com&#x27;;</span><br><span class="line"></span><br><span class="line">SELECT substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, 1);    #www</span><br><span class="line"></span><br><span class="line">SELECT substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, 2);    #www.baidu</span><br><span class="line"></span><br><span class="line">SELECT substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, -1);   #com</span><br><span class="line"></span><br><span class="line">SELECT substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, -2);   #baidu.com</span><br><span class="line"></span><br><span class="line">SELECT substring_index(substring_index(&#x27;www.baidu.com&#x27;,&#x27;.&#x27;, -2), &#x27;.&#x27;, 1);  #baidu</span><br></pre></td></tr></table></figure>
+<h2 id="mapper的test里判断是否包含"><a href="#mapper的test里判断是否包含" class="headerlink" title="mapper的test里判断是否包含"></a>mapper的test里判断是否包含</h2><if test="tableName.contains("monitor")"></if>]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>oracle</title>
+    <url>/2021/11/30/oracle/</url>
+    <content><![CDATA[<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="生成一个伪列从1到查出的数据总数"><a href="#生成一个伪列从1到查出的数据总数" class="headerlink" title="生成一个伪列从1到查出的数据总数"></a>生成一个伪列从1到查出的数据总数</h2><p>SELECT rownum intId,’No.’||rownum rank</p>
+<h2 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h2><p>||</p>
+<h2 id="NVL空值转换"><a href="#NVL空值转换" class="headerlink" title="NVL空值转换"></a>NVL空值转换</h2><p>NVL(a,b),a不为空为a，a为空为b，a和b需要是同一种类型</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>stream流</title>
+    <url>/2021/11/30/stream%E6%B5%81/</url>
+    <content><![CDATA[<h1 id="stream流（待看）"><a href="#stream流（待看）" class="headerlink" title="stream流（待看）"></a>stream流（待看）</h1><p>请看以下博客</p>
+<p><a href="https://blog.csdn.net/mu_wind/article/details/109516995">https://blog.csdn.net/mu_wind/article/details/109516995</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">list.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<h2 id="广铁大屏获取数据时"><a href="#广铁大屏获取数据时" class="headerlink" title="广铁大屏获取数据时"></a>广铁大屏获取数据时</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public List&lt;ResourceBO&gt; getCountLoadCabinet() &#123;</span><br><span class="line">    List&lt;ResourceBO&gt; result = LoadCabinetEnum.create();</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; list = cabinetMonitorMapper.selectCountLoadCabinet();</span><br><span class="line">    if (list.isEmpty()) &#123;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    for (ResourceBO item : result) &#123;</span><br><span class="line">        Optional&lt;Map&lt;String, Object&gt;&gt; optional = list.stream().filter(s -&gt; Convert.toInt(s.get(&quot;type&quot;)) == 1).filter(s -&gt; s.get(&quot;objectId&quot;).toString().equals(item.getId())).findFirst();</span><br><span class="line">        optional.ifPresent(stringObjectMap -&gt; item.setCount(Convert.toInt(stringObjectMap.get(&quot;totalNumber&quot;), 0)));</span><br><span class="line"></span><br><span class="line">        Optional&lt;Map&lt;String, Object&gt;&gt; optional1 = list.stream().filter(s -&gt; Convert.toInt(s.get(&quot;type&quot;)) == 0).filter(s -&gt; s.get(&quot;objectId&quot;).toString().equals(item.getId())).findFirst();</span><br><span class="line">        optional1.ifPresent(stringObjectMap -&gt; item.setProCount(Convert.toInt(stringObjectMap.get(&quot;totalNumber&quot;), 0)));</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="比较经典的例子，递归获取菜单树"><a href="#比较经典的例子，递归获取菜单树" class="headerlink" title="比较经典的例子，递归获取菜单树"></a>比较经典的例子，递归获取菜单树</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public List&lt;CategoryEntity&gt; listWithTree() &#123;</span><br><span class="line">        //1.查出所有分类</span><br><span class="line">        List&lt;CategoryEntity&gt; entities = baseMapper.selectList(null);</span><br><span class="line"></span><br><span class="line">        //2.组装成父子树形结构</span><br><span class="line">            //找到所有的1级分类，父id是0</span><br><span class="line"></span><br><span class="line">//        List&lt;CategoryEntity&gt; level1Menus = entities.stream().filter((categoryEntity) -&gt; &#123;</span><br><span class="line">//            return categoryEntity.getParentCid() == 0;</span><br><span class="line">//        &#125;).collect(Collectors.toList());</span><br><span class="line">        //只有一个参数，只有一个语句优化，参数外的括号去掉，return和分号，大括号，都去掉</span><br><span class="line">        List&lt;CategoryEntity&gt; levelMenus = entities.stream().filter( categoryEntity -&gt;</span><br><span class="line">             categoryEntity.getParentCid() == 0</span><br><span class="line">        ).map((menu)-&gt;&#123;</span><br><span class="line">            menu.setChildren(getChildrens(menu,entities));</span><br><span class="line">            return menu;</span><br><span class="line">        &#125;).sorted((menu1,menu2)-&gt;&#123;</span><br><span class="line">            return (menu1.getSort()==null?0:menu1.getSort())-(menu2.getSort()==null?0:menu2.getSort());</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line">        return levelMenus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> private List&lt;CategoryEntity&gt; getChildrens(CategoryEntity root,List&lt;CategoryEntity&gt; all)&#123;</span><br><span class="line">    List&lt;CategoryEntity&gt; children = all.stream().filter(categoryEntity -&gt; &#123;</span><br><span class="line">        return categoryEntity.getParentCid() == root.getCatId();</span><br><span class="line">    &#125;).map(categoryEntity-&gt;&#123;</span><br><span class="line">        //1.找到子菜单</span><br><span class="line">        categoryEntity.setChildren(getChildrens(categoryEntity,all));</span><br><span class="line">        return categoryEntity;</span><br><span class="line">    &#125;).sorted((menu1,menu2)-&gt;&#123;</span><br><span class="line">        //2.菜单的排序</span><br><span class="line">        return (menu1.getSort()==null?0:menu1.getSort())-(menu2.getSort()==null?0:menu2.getSort());</span><br><span class="line">    &#125;).collect(Collectors.toList());</span><br><span class="line">    return children;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
-        <category>分类1</category>
-        <category>分类2</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>标签1</tag>
-        <tag>标签2</tag>
+        <tag>stream流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>反射</title>
+    <url>/2021/11/30/%E5%8F%8D%E5%B0%84/</url>
+    <content><![CDATA[<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>通过包.类路径获取类对象</span><br><span class="line">       Class c1 <span class="operator">=</span> Class.forName(&quot;com.example.demo.demo.A&quot;);</span><br><span class="line">       Class c2 <span class="operator">=</span> Class.forName(&quot;com.example.demo.demo.A&quot;);</span><br><span class="line">       <span class="operator">/</span><span class="operator">/</span>一个类在内存中只有一个class对象</span><br><span class="line">       System.out.println(c1<span class="operator">=</span><span class="operator">=</span>c2);<span class="operator">/</span><span class="operator">/</span><span class="literal">true</span></span><br><span class="line">       <span class="operator">/</span><span class="operator">/</span>一个类被加载后，类的整个结构都会被封装在class对象中</span><br></pre></td></tr></table></figure>
+
+<h1 id="1-获取Class类的方法"><a href="#1-获取Class类的方法" class="headerlink" title="1.获取Class类的方法"></a>1.获取Class类的方法</h1><p>Class clazz=Person.class;</p>
+<p>Class clazz=person.getClass();</p>
+<p>Class clazz=Class.forName(“包.类路径&quot;);</p>
+<h1 id="2-类的加载过程"><a href="#2-类的加载过程" class="headerlink" title="2.类的加载过程"></a>2.类的加载过程</h1><p>类的加载：把class文件读入内存,并创建一个java.lang.class对象。此过程由类加载器完成</p>
+<p>类的链接：将类的二进制数据合并jvm的运行状态</p>
+<p>初始化：对类进行初始化</p>
+<h1 id="3-反射调用方法"><a href="#3-反射调用方法" class="headerlink" title="3.反射调用方法"></a>3.反射调用方法</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//调用无参函数</span><br><span class="line">Object c  调用方法在哪个类的对象   User user那么c=user</span><br><span class="line">methodName要调用的方法名</span><br><span class="line">c.getClass().getMethod(methodName, null).invoke(c, null);</span><br><span class="line"></span><br><span class="line">Object obj 参数和参数类型</span><br><span class="line"></span><br><span class="line">c.getClass().getMethod(methodName, obj.getClass()).invoke(c, obj);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Service(&quot;jiang&quot;)</span><br><span class="line">public class testService &#123;</span><br><span class="line">    public String haha(int age,String name)&#123;</span><br><span class="line">        String a=age+&quot;&quot;;</span><br><span class="line">        return name+a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@RequestMapping(&quot;/aaa&quot;)</span><br><span class="line">public String aaa() throws Exception&#123;</span><br><span class="line">    ApplicationContext appCtx = SpringContextUtil.getApplicationContext();</span><br><span class="line">    Object c = (testService)SpringContextUtil.getBean(&quot;jiang&quot;);</span><br><span class="line">    //Object str = c.getClass().getMethod(&quot;haha&quot;, String.class).invoke(c, &quot;nihaoa&quot;);</span><br><span class="line">    Object str = c.getClass().getMethod(&quot;haha&quot;, new Class[]&#123;int.class,String.class&#125;).invoke(c, 16,&quot;nihaoa&quot;);</span><br><span class="line">    return (String)str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-根据属性获取属性值"><a href="#4-根据属性获取属性值" class="headerlink" title="4.根据属性获取属性值"></a>4.根据属性获取属性值</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">         * 根据属性获取属性值</span><br><span class="line">         * @param fieldName</span><br><span class="line">         * @param object</span><br><span class="line">         * @return</span><br><span class="line">         */</span><br><span class="line">        public static Double getFieldValueByFieldName(String fieldName,Object object) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Field field = object.getClass().getDeclaredField(fieldName);</span><br><span class="line">                if(field!=null)&#123;</span><br><span class="line">                    //对private的属性的访问</span><br><span class="line">                    field.setAccessible(true);</span><br><span class="line">                    return (Double) field.get(object);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    return null;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>反射</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机网络</title>
+    <url>/2021/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<h1 id="网络配置-待看"><a href="#网络配置-待看" class="headerlink" title="网络配置(待看)"></a>网络配置(待看)</h1><p><img src="/../img/image-20211105151850464.png" alt="image-20211105151850464"></p>
+<p><img src="/../img/image-20211105151905200.png" alt="image-20211105151905200"></p>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里巴巴开发手册</title>
+    <url>/2021/11/30/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h1 id="命名风格"><a href="#命名风格" class="headerlink" title="命名风格"></a>命名风格</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3. 【参考】分层领域模型规约：</span><br><span class="line"> DO（Data Object）：与数据库表结构一一对应，通过 DAO 层向上传输数据源对象。</span><br><span class="line"> DTO（Data Transfer Object）：数据传输对象，Service 或 Manager 向外传输的对象。</span><br><span class="line"> BO（Business Object）：业务对象。由 Service 层输出的封装业务逻辑的对象。</span><br><span class="line"> AO（Application Object）：应用对象。在 Web 层与 Service 层之间抽象的复用对象模型，</span><br><span class="line">极为贴近展示层，复用度不高。</span><br><span class="line"> VO（View Object）：显示层对象，通常是 Web 向模板渲染引擎层传输的对象。</span><br><span class="line"> Query：数据查询对象，各层接收上层的查询请求。注意超过 2 个参数的查询封装，禁止</span><br><span class="line">使用 Map 类来传输。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 【强制】类名使用 UpperCamelCase 风格，必须遵从驼峰形式，但以下情形例外：DO / BO /</span><br><span class="line">   DTO / VO / AO</span><br><span class="line">   正例：MarcoPolo / UserDO / XmlService / TcpUdpDeal / TaPromotion</span><br><span class="line">   反例：macroPolo / UserDo / XMLService / TCPUDPDeal / TAPromotion</span><br><span class="line">2. 【强制】POJO 类中布尔类型的变量，都不要加 is，否则部分框架解析会引起序列化错误。</span><br><span class="line">   反例：定义为基本数据类型 Boolean isDeleted；的属性，它的方法也是 isDeleted()，RPC</span><br><span class="line">   阿里巴巴 Java 开发手册</span><br><span class="line">    ——禁止用于商业用途，违者必究—— 2 /35</span><br><span class="line">   框架在反向解析的时候，“以为”对应的属性名称是 deleted，导致属性获取不到，进而抛出异</span><br><span class="line">   常。</span><br><span class="line">3. 【推荐】接口类中的方法和属性不要加任何修饰符号（public 也不要加），保持代码的简洁</span><br><span class="line">   性，并加上有效的 Javadoc 注释。尽量不要在接口里定义变量，如果一定要定义变量，肯定是</span><br><span class="line">   与接口方法相关，并且是整个应用的基础常量。</span><br><span class="line">   正例：接口方法签名：void f();</span><br><span class="line">    接口基础常量表示：String COMPANY = &quot;alibaba&quot;;</span><br><span class="line">   反例：接口方法定义：public abstract void f();</span><br><span class="line">   说明：JDK8 中接口允许有默认实现，那么这个 default 方法，是对所有实现类都有价值的默</span><br><span class="line">   认实现。</span><br><span class="line">4. 【参考】枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。</span><br><span class="line">   说明：枚举其实就是特殊的常量类，且构造方法被默认强制是私有。</span><br><span class="line">   正例：枚举名字为 ProcessStatusEnum 的成员名称：SUCCESS / UNKOWN_REASON。</span><br><span class="line">5. 【参考】各层命名规约：</span><br><span class="line">   A) Service/DAO 层方法命名规约</span><br><span class="line">   1） 获取单个对象的方法用 get 做前缀。</span><br><span class="line">   2） 获取多个对象的方法用 list 做前缀。</span><br><span class="line">   3） 获取统计值的方法用 count 做前缀。</span><br><span class="line">   4） 插入的方法用 save/insert 做前缀。</span><br><span class="line">   5） 删除的方法用 remove/delete 做前缀。</span><br><span class="line">   6） 修改的方法用 update 做前缀。</span><br><span class="line">   B) 领域模型命名规约</span><br><span class="line">   1） 数据对象：xxxDO，xxx 即为数据表名。</span><br><span class="line">   2） 数据传输对象：xxxDTO，xxx 为业务领域相关的名称。</span><br><span class="line">   3） 展示对象：xxxVO，xxx 一般为网页名称。</span><br><span class="line">   4） POJO 是 DO/DTO/BO/VO 的统称，禁止命名成 xxxPOJO。</span><br></pre></td></tr></table></figure>
+
+<h1 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 【强制】不允许任何魔法值（即未经定义的常量）直接出现在代码中。</span><br><span class="line">反例：String key = &quot;Id#taobao_&quot; + tradeId;</span><br><span class="line"> cache.put(key, value);</span><br><span class="line"> </span><br><span class="line">2. 【强制】long 或者 Long 初始赋值时，使用大写的 L，不能是小写的 l，小写容易跟数字 1 混</span><br><span class="line">淆，造成误解。</span><br><span class="line">说明：Long a = 2l; 写的是数字的 21，还是 Long 型的 2?</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 缩进 4 个空格</span></span><br><span class="line">    String say = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    <span class="comment">// 运算符的左右必须有一个空格</span></span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格</span></span><br><span class="line">    <span class="keyword">if</span> (flag == <span class="number">0</span>) &#123;</span><br><span class="line">    	System.out.println(say);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 左大括号前加空格且不换行；左大括号后换行</span></span><br><span class="line">    <span class="keyword">if</span> (flag == <span class="number">1</span>) &#123;</span><br><span class="line">    	System.out.println(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">    <span class="comment">// 右大括号前换行，右大括号后有 else，不用换行</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	System.out.println(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line">    <span class="comment">// 在右大括号后直接结束，则必须换行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> 【强制】注释的双斜线与注释内容之间有且仅有一个空格。</span><br><span class="line">正例：<span class="comment">// 注释内容，注意在//和注释内容之间有一个空格。</span></span><br><span class="line">    </span><br><span class="line"><span class="number">7.</span> 【强制】单行字符数限制不超过 <span class="number">120</span> 个，超出需要换行，换行时遵循如下原则：</span><br><span class="line"><span class="number">1</span>） 第二行相对第一行缩进 <span class="number">4</span> 个空格，从第三行开始，不再继续缩进，参考示例。</span><br><span class="line"><span class="number">2</span>） 运算符与下文一起换行。</span><br><span class="line"><span class="number">3</span>） 方法调用的点符号与下文一起换行。</span><br><span class="line"><span class="number">4</span>） 方法调用时，多个参数，需要换行时，在逗号后进行。</span><br><span class="line"><span class="number">5</span>） 在括号前不要换行，见反例。</span><br><span class="line">正例：</span><br><span class="line">StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="comment">// 超过 120 个字符的情况下，换行缩进 4 个空格，点号和方法名称一起换行</span></span><br><span class="line">sb.append(<span class="string">&quot;zi&quot;</span>).append(<span class="string">&quot;xin&quot;</span>)...</span><br><span class="line">.append(<span class="string">&quot;huang&quot;</span>)...</span><br><span class="line">.append(<span class="string">&quot;huang&quot;</span>)...</span><br><span class="line">.append(<span class="string">&quot;huang&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">8.</span> 【强制】方法参数在定义和传入时，多个参数逗号后边必须加空格。</span><br><span class="line">正例：下例中实参的<span class="string">&quot;a&quot;</span>,后边必须要有一个空格。</span><br><span class="line">method(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>); </span><br><span class="line"></span><br><span class="line"><span class="number">9.</span> 【强制】IDE 的 text file encoding 设置为 UTF-<span class="number">8</span>; IDE 中文件的换行符使用 Unix 格式，不要使用 Windows 格式。</span><br></pre></td></tr></table></figure>
+
+<h1 id="OOP-规约"><a href="#OOP-规约" class="headerlink" title="OOP 规约"></a>OOP 规约</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 【强制】避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成</span><br><span class="line">本，直接用类名来访问即可。</span><br><span class="line"></span><br><span class="line">2. 【强制】所有的覆写方法，必须加@Override 注解。</span><br><span class="line">说明：getObject()与 get0bject()的问题。一个是字母的 O，一个是数字的 0，加@Override</span><br><span class="line">可以准确判断是否覆盖成功。另外，如果在抽象类中对方法签名进行修改，其实现类会马上编译报错。</span><br><span class="line"></span><br><span class="line">6. 【强制】Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用</span><br><span class="line">equals。</span><br><span class="line">正例：&quot;test&quot;.equals(object);</span><br><span class="line">反例：object.equals(&quot;test&quot;);</span><br><span class="line"></span><br><span class="line">7. 【强制】所有的相同类型的包装类对象之间值的比较，全部使用 equals 方法比较。</span><br><span class="line"></span><br><span class="line">8. 关于基本数据类型与包装数据类型的使用标准如下：</span><br><span class="line">1） 【强制】所有的 POJO 类属性必须使用包装数据类型。</span><br><span class="line">2） 【强制】RPC 方法的返回值和参数必须使用包装数据类型。</span><br><span class="line">3） 【推荐】所有的局部变量使用基本数据类型。</span><br><span class="line"></span><br><span class="line">9. 【强制】定义 DO/DTO/VO 等 POJO 类时，不要设定任何属性默认值。</span><br><span class="line"></span><br><span class="line">10. 【强制】序列化类新增属性时，请不要修改 serialVersionUID 字段，避免反序列失败；如</span><br><span class="line">果完全不兼容升级，避免反序列化混乱，那么请修改 serialVersionUID 值。</span><br><span class="line">说明：注意 serialVersionUID 不一致会抛出序列化运行时异常。</span><br><span class="line"></span><br><span class="line">17. 【推荐】循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。</span><br><span class="line">说明：反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，然后进行</span><br><span class="line">append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="集合处理"><a href="#集合处理" class="headerlink" title="集合处理"></a>集合处理</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 【强制】关于 hashCode 和 equals 的处理，遵循如下规则：</span><br><span class="line">1） 只要重写 equals，就必须重写 hashCode。</span><br><span class="line">2） 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的</span><br><span class="line">对象必须重写这两个方法。</span><br><span class="line">3） 如果自定义对象做为 Map 的键，那么必须重写 hashCode 和 equals。</span><br><span class="line">说明：String 重写了 hashCode 和 equals 方法，所以我们可以非常愉快地使用 String 对象</span><br><span class="line">作为 key 来使用。</span><br><span class="line"></span><br><span class="line">4. 【强制】使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全</span><br><span class="line">一样的数组，大小就是 list.size()。</span><br><span class="line">正例：</span><br><span class="line">List&lt;String&gt; list = new ArrayList&lt;String&gt;(2);</span><br><span class="line">list.add(&quot;guan&quot;);</span><br><span class="line">list.add(&quot;bao&quot;);</span><br><span class="line">String[] array = new String[list.size()];</span><br><span class="line">array = list.toArray(array); </span><br><span class="line"></span><br><span class="line">5. 【强制】使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方</span><br><span class="line">法，它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常。</span><br><span class="line">说明：asList 的返回对象是一个 Arrays 内部类，并没有实现集合的修改方法。Arrays.asList</span><br><span class="line">体现的是适配器模式，只是转换接口，后台的数据仍是数组。</span><br><span class="line"> String[] str = new String[] &#123; &quot;you&quot;, &quot;wu&quot; &#125;;</span><br><span class="line"> List list = Arrays.asList(str);</span><br><span class="line">第一种情况：list.add(&quot;yangguanbao&quot;); 运行时异常。</span><br><span class="line">第二种情况：str[0] = &quot;gujin&quot;; 那么 list.get(0)也会随之修改。</span><br><span class="line"></span><br><span class="line">7. 【强制】不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 Iterator</span><br><span class="line">方式，如果并发操作，需要对 Iterator 对象加锁。</span><br><span class="line">正例：</span><br><span class="line">Iterator&lt;String&gt; iterator = list.iterator();</span><br><span class="line">while (iterator.hasNext()) &#123;</span><br><span class="line">String item = iterator.next();</span><br><span class="line">if (删除元素的条件) &#123;</span><br><span class="line">iterator.remove();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">9. 【推荐】集合初始化时，指定集合初始值大小。</span><br><span class="line"></span><br><span class="line">10. 【推荐】使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式进行遍历。</span><br></pre></td></tr></table></figure>
+
+<h1 id="并发处理"><a href="#并发处理" class="headerlink" title="并发处理"></a>并发处理</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3. 【强制】线程资源必须通过线程池提供，不允许在应用中自行显式创建线程。</span><br><span class="line"></span><br><span class="line">4. 【强制】线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样</span><br><span class="line">的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 【强制】在一个 <span class="keyword">switch</span> 块内，每个 <span class="keyword">case</span> 要么通过 <span class="keyword">break</span>/<span class="keyword">return</span> 等来终止，要么注释说明程</span><br><span class="line">序将继续执行到哪一个 <span class="keyword">case</span> 为止；在一个 <span class="keyword">switch</span> 块内，都必须包含一个 <span class="keyword">default</span> 语句并且</span><br><span class="line">放在最后，即使它什么代码也没有。</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 【强制】在 <span class="keyword">if</span>/<span class="keyword">else</span>/<span class="keyword">for</span>/<span class="keyword">while</span>/<span class="keyword">do</span> 语句中必须使用大括号。即使只有一行代码</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 【推荐】表达异常的分支时，少用 <span class="keyword">if</span>-<span class="keyword">else</span> 方式，这种方式可以改写成：</span><br><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line"> ...</span><br><span class="line"> <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 接着写 else 的业务逻辑代码;</span></span><br><span class="line">说明：如果非得使用 <span class="keyword">if</span>()...<span class="function"><span class="keyword">else</span> <span class="title">if</span><span class="params">()</span>...<span class="keyword">else</span>...方式表达逻辑，【强制】避免后续代码维</span></span><br><span class="line"><span class="function">护困难，请勿超过 3 层。</span></span><br><span class="line"><span class="function">正例：超过 3 层的 <span class="keyword">if</span>-<span class="keyword">else</span> 的逻辑判断代码可以使用卫语句、策略模式、状态模式等来实现，</span></span><br><span class="line"><span class="function">其中卫语句示例如下：</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">today</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (isBusy()) &#123;</span><br><span class="line">System.out.println(“change time.”);</span><br><span class="line"> <span class="keyword">return</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">if</span> (isFree()) &#123;</span><br><span class="line">System.out.println(“go to travel.”);</span><br><span class="line"> <span class="keyword">return</span>;</span><br><span class="line"> &#125;</span><br><span class="line">System.out.println(“stay at home to learn Alibaba Java Coding Guidelines.”);</span><br><span class="line"> <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> 【推荐】除常用方法（如 getXxx/isXxx）等外，不要在条件判断中执行其它复杂的语句，将复</span><br><span class="line">杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。</span><br><span class="line">说明：很多 <span class="keyword">if</span> 语句内的逻辑相当复杂，阅读者需要分析条件表达式的最终结果，才能明确什么</span><br><span class="line">样的条件执行什么样的语句，那么，如果阅读者分析逻辑表达式错误呢？</span><br><span class="line">正例：</span><br><span class="line"><span class="comment">// 伪代码如下</span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">boolean</span> existed = (file.open(fileName, <span class="string">&quot;w&quot;</span>) != <span class="keyword">null</span>) &amp;&amp; (...) || (...);</span><br><span class="line"><span class="keyword">if</span> (existed) &#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line">反例：</span><br><span class="line"><span class="keyword">if</span> ((file.open(fileName, <span class="string">&quot;w&quot;</span>) != <span class="keyword">null</span>) &amp;&amp; (...) || (...)) &#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> 【推荐】循环体中的语句要考量性能，以下操作尽量移至循环体外处理，如定义对象、变量</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<h1 id="注释规约"><a href="#注释规约" class="headerlink" title="注释规约"></a>注释规约</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 【强制】类、类属性、类方法的注释必须使用 Javadoc 规范，使用/**内容*/格式，不得使用</span><br><span class="line">// xxx 方式。</span><br><span class="line">说明：在 IDE 编辑窗口中，Javadoc 方式会提示相关注释，生成 Javadoc 可以正确输出相应注</span><br><span class="line">释；在 IDE 中，工程调用方法时，不进入方法即可悬浮提示方法、参数、返回值的意义，提高</span><br><span class="line">阅读效率。</span><br><span class="line"></span><br><span class="line">2. 【强制】所有的抽象方法（包括接口中的方法）必须要用 Javadoc 注释、除了返回值、参数、</span><br><span class="line">异常说明外，还必须指出该方法做什么事情，实现什么功能。</span><br><span class="line">说明：对子类的实现要求，或者调用注意事项，请一并说明。</span><br><span class="line"></span><br><span class="line">3. 【强制】所有的类都必须添加创建者和创建日期。</span><br><span class="line"></span><br><span class="line">4. 【强制】方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释</span><br><span class="line">使用/* */注释，注意与代码对齐。</span><br></pre></td></tr></table></figure>
+
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5. 【强制】获取当前毫秒数 System.currentTimeMillis(); 而不是 new Date().getTime();</span><br></pre></td></tr></table></figure>
+
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 【强制】Java 类库中定义的一类 RuntimeException 可以通过预先检查进行规避，而不应该</span><br><span class="line">通过 catch 来处理，比如：IndexOutOfBoundsException，NullPointerException 等等。</span><br><span class="line">说明：无法通过预检查的异常除外，如在解析一个外部传来的字符串形式数字时，通过 catch</span><br><span class="line">NumberFormatException 来实现。</span><br><span class="line">正例：if (obj != null) &#123;...&#125;</span><br><span class="line">反例：try &#123; obj.method() &#125; catch (NullPointerException e) &#123;...&#125;</span><br><span class="line"></span><br><span class="line">7. 【强制】不能在 finally 块中使用 return，finally 块中的 return 返回后方法结束执行，不</span><br><span class="line">会再执行 try 块中的 return 语句。</span><br></pre></td></tr></table></figure>
+
+<h1 id="安全规约-！"><a href="#安全规约-！" class="headerlink" title="安全规约 ！"></a>安全规约 ！</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">2. 【强制】用户敏感数据禁止直接展示，必须对展示数据进行脱敏。</span><br><span class="line">说明：查看个人手机号码会显示成:158****9119，隐藏中间 4 位，防止隐私泄露。</span><br><span class="line">3. 【强制】用户输入的 SQL 参数严格使用参数绑定或者 METADATA 字段值限定，防止 SQL 注入，</span><br><span class="line">禁止字符串拼接 SQL 访问数据库。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="MySQL-数据库"><a href="#MySQL-数据库" class="headerlink" title="MySQL 数据库"></a>MySQL 数据库</h1><h2 id="一-建表规约"><a href="#一-建表规约" class="headerlink" title="(一)建表规约"></a>(一)建表规约</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 【强制】表达是与否概念的字段，必须使用 is_xxx 的方式命名，数据类型是 unsigned tinyint</span><br><span class="line">（ 1 表示是，0 表示否）。</span><br><span class="line">说明：任何字段如果为非负数，必须是 unsigned。</span><br><span class="line">正例：表达逻辑删除的字段名 is_deleted，1 表示删除，0 表示未删除。</span><br></pre></td></tr></table></figure>
+
+<h2 id="SQL-语句"><a href="#SQL-语句" class="headerlink" title="SQL 语句"></a>SQL 语句</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 【强制】不要使用 count(列名)或 count(常量)来替代 count(*)，count(*)是 SQL92 定义的</span><br><span class="line">标准统计行数的语法，跟数据库无关，跟 NULL 和非 NULL 无关。</span><br><span class="line">说明：count(*)会统计值为 NULL 的行，而 count(列名)不会统计此列为 NULL 值的行。</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>阿里巴巴开发手册</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java</title>
+    <url>/2021/11/30/java/</url>
+    <content><![CDATA[<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="下划线转驼峰"><a href="#下划线转驼峰" class="headerlink" title="下划线转驼峰"></a>下划线转驼峰</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.boco.nbd.threshold.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.regex.Matcher;</span><br><span class="line"><span class="keyword">import</span> java.util.regex.Pattern;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>:jiangjiaxu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021/11/25  16:12</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span>:V1.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringUtil</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> Pattern linePattern = Pattern.compile(<span class="string">&quot;_(\\w)&quot;</span>);</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> Pattern humpPattern = Pattern.compile(<span class="string">&quot;[A-Z]&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 驼峰转下划线,最后转为大写</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> str</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">humpToLine</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">      Matcher matcher = humpPattern.matcher(str);</span><br><span class="line">      StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">      <span class="keyword">while</span> (matcher.find()) &#123;</span><br><span class="line">         matcher.appendReplacement(sb, <span class="string">&quot;_&quot;</span> + matcher.group(<span class="number">0</span>).toUpperCase());</span><br><span class="line">      &#125;</span><br><span class="line">      matcher.appendTail(sb);</span><br><span class="line">      <span class="keyword">return</span> sb.toString().toUpperCase();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 下划线转驼峰,正常输出</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> str</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">lineToHump</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">      Matcher matcher = linePattern.matcher(str);</span><br><span class="line">      StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">      <span class="keyword">while</span> (matcher.find()) &#123;</span><br><span class="line">         matcher.appendReplacement(sb, matcher.group(<span class="number">1</span>).toUpperCase());</span><br><span class="line">      &#125;</span><br><span class="line">      matcher.appendTail(sb);</span><br><span class="line">      <span class="keyword">return</span> sb.toString();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试类如何写"><a href="#测试类如何写" class="headerlink" title="测试类如何写"></a>测试类如何写</h2><p>pom</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--test--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>test</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootTest(classes = 你的启动类.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</span><br><span class="line">@RunWith(SpringRunner.class)</span><br></pre></td></tr></table></figure>
+
+<h2 id="jar包配置文件管理"><a href="#jar包配置文件管理" class="headerlink" title="jar包配置文件管理"></a>jar包配置文件管理</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">配置文件统一管理</span><br><span class="line"></span><br><span class="line">springboot核心配置文件</span><br><span class="line"></span><br><span class="line">Springboot读取核心配置文件（application.properties）的优先级为</span><br><span class="line"></span><br><span class="line">Jar包同级目录的config目录</span><br><span class="line"></span><br><span class="line">Jar包同级目录</span><br><span class="line"></span><br><span class="line">classPath(即resources目录)的config目录</span><br><span class="line"></span><br><span class="line">classpath目录</span><br><span class="line"></span><br><span class="line">上面是springboot默认去拿自己的核心配置文件的优先级，还有一种最高优先级的方式是项目启动时通过命令的方式指定项目加载核心配置文件，命令如下</span><br><span class="line"></span><br><span class="line">java –jar -Dspring.config.location=xxx/xxx/xxxx.properties xxxx.jar</span><br><span class="line"></span><br><span class="line">如果Spring Boot在优先级更高的位置找到了配置，那么它会无视优先级更低的配置</span><br></pre></td></tr></table></figure>
+
+<h2 id="requestBody与-requestParam"><a href="#requestBody与-requestParam" class="headerlink" title="@requestBody与@requestParam"></a>@requestBody与@requestParam</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">## 当前端传数据为application/json时，</span><br><span class="line"></span><br><span class="line">后端需要用此注解</span><br><span class="line"></span><br><span class="line">一般是对象，集合，不是基本数据类型</span><br><span class="line"></span><br><span class="line">## 当context-type为表单时</span><br><span class="line"></span><br><span class="line">1.multipart/form-data</span><br><span class="line"></span><br><span class="line">既可以上传文件，也可以上传键值对，它采用了键值对的方式，所以可以上传多个文件。</span><br><span class="line"></span><br><span class="line">2.application/x-www-from-urlencoded</span><br><span class="line"></span><br><span class="line">会将表单内的数据转换为键值对，比如,name=java&amp;age = 23，不能上传文件</span><br><span class="line"></span><br><span class="line">这俩不用加@requestBody</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20211130214911983.png" alt="image-20211130214911983"></p>
+<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p>1.普通参数什么注解都不用加，String，Integer等</p>
+<p>2.查找，删除用getmappiing</p>
+<p>改，增用postmappiing</p>
+<p>3.把所有请求参数都封装成一个对象，+@requestBody</p>
+<p>参数为：集合类型，用postmapping</p>
+<p>​                一个集合类型+@requestBody or @requestParam</p>
+<p>​                多个集合类型 封装成一个对象 or 都加@requestParam</p>
+<p><img src="/../img/image-20211130215021338.png" alt="image-20211130215021338"></p>
+<h2 id="oss"><a href="#oss" class="headerlink" title="oss"></a>oss</h2><p>通过网络随时存储和调用包括文本、图片、音频和视频等在内的各种结构化或非结构化数据文件</p>
+<p>阿里云 OSS 将数据文件以对象（object）的形式上传到存储空间（bucket）中</p>
+<h2 id="ctrl-alt-L"><a href="#ctrl-alt-L" class="headerlink" title="ctrl+alt+L"></a>ctrl+alt+L</h2><p>idea  格式化java代码</p>
+<h2 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h2><h3 id="crc64"><a href="#crc64" class="headerlink" title="crc64"></a>crc64</h3><p><img src="/../img/image-20211106175402945.png" alt="image-20211106175402945"></p>
+<p>64位/8=8个字节，8字节长度为</p>
+<p>（-9223372036854775808，9223372036854775807）</p>
+<p>所以最终的值肯定在这个区间，永远都是a</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class CRC64 &#123;</span><br><span class="line">    static int crc_HashLimit = 64;</span><br><span class="line"></span><br><span class="line">    private CRC64() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void getCrc64id() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static CRC64.crcHash crcCalculate(String pStr, int len, CRC64.crcHash hv, CRC64.crcHash[] CrcXor) &#123;</span><br><span class="line">        int e = len;</span><br><span class="line">        int p = 0;</span><br><span class="line">        int s2;</span><br><span class="line">        int m;</span><br><span class="line">        int i;</span><br><span class="line">        if (crc_HashLimit &lt;= 32) &#123;</span><br><span class="line">            s2 = crc_HashLimit - 8;</span><br><span class="line">            m = -1 &gt;&gt;&gt; 32 - crc_HashLimit;</span><br><span class="line">            hv.h1 = 0;</span><br><span class="line"></span><br><span class="line">            for(hv.h2 &amp;= m; p &lt; e; ++p) &#123;</span><br><span class="line">                i = hv.h2 &gt;&gt;&gt; s2 &amp; 255;</span><br><span class="line">                hv.h2 = hv.h2 &lt;&lt; 8 &amp; m ^ pStr.charAt(p) ^ CrcXor[i].h2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else if (crc_HashLimit &lt; 40) &#123;</span><br><span class="line">            s2 = 40 - crc_HashLimit;</span><br><span class="line">            m = -1 &gt;&gt;&gt; 64 - crc_HashLimit;</span><br><span class="line"></span><br><span class="line">            for(hv.h1 &amp;= m; p &lt; e; ++p) &#123;</span><br><span class="line">                i = (hv.h1 &lt;&lt; s2 | hv.h2 &gt;&gt;&gt; 32 - s2) &amp; 255;</span><br><span class="line">                hv.h1 = (hv.h1 &lt;&lt; 8 ^ hv.h2 &gt;&gt;&gt; 24) &amp; m ^ CrcXor[i].h1;</span><br><span class="line">                hv.h2 = hv.h2 &lt;&lt; 8 ^ pStr.charAt(p) ^ CrcXor[i].h2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            s2 = crc_HashLimit - 40;</span><br><span class="line">            m = -1 &gt;&gt;&gt; 64 - crc_HashLimit;</span><br><span class="line"></span><br><span class="line">            for(hv.h1 &amp;= m; p &lt; e; ++p) &#123;</span><br><span class="line">                i = hv.h1;</span><br><span class="line">                int h2 = hv.h2;</span><br><span class="line">                int i = i &gt;&gt;&gt; s2 &amp; 255;</span><br><span class="line">                hv.h1 = i &lt;&lt; 8 &amp; m ^ h2 &gt;&gt;&gt; 24 &amp; 255 ^ CrcXor[i].h1;</span><br><span class="line">                hv.h2 = h2 &lt;&lt; 8 ^ pStr.charAt(p) ^ CrcXor[i].h2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return hv;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String getcrc64id(String source) &#123;</span><br><span class="line">        int h1 = false;</span><br><span class="line">        int h2 = false;</span><br><span class="line">        int high = false;</span><br><span class="line">        int low = false;</span><br><span class="line">        long a1 = 4294967296L;</span><br><span class="line">        int HINIT1 = -87805263;</span><br><span class="line">        int HINIT2 = 215344202;</span><br><span class="line">        int POLY1 = 6292288;</span><br><span class="line">        int POLY2 = 15783179;</span><br><span class="line">        CRC64.crcHash[] CrcXor = new CRC64.crcHash[256];</span><br><span class="line"></span><br><span class="line">        int i;</span><br><span class="line">        for(i = 0; i &lt; 256; ++i) &#123;</span><br><span class="line">            CrcXor[i] = new CRC64.crcHash();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        CRC64.crcHash[] Poly = new CRC64.crcHash[65];</span><br><span class="line"></span><br><span class="line">        for(i = 0; i &lt; 65; ++i) &#123;</span><br><span class="line">            Poly[i] = new CRC64.crcHash();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Poly[64].h1 = POLY1;</span><br><span class="line">        Poly[64].h2 = POLY2;</span><br><span class="line"></span><br><span class="line">        for(i = 63; i &gt;= 16; --i) &#123;</span><br><span class="line">            Poly[i].h1 = Poly[i + 1].h1 &gt;&gt;&gt; 1;</span><br><span class="line">            Poly[i].h2 = Poly[i + 1].h2 &gt;&gt;&gt; 1 | (Poly[i + 1].h1 &amp; 1) &lt;&lt; 31 | 1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for(i = 0; i &lt; 256; ++i) &#123;</span><br><span class="line">            int v = i;</span><br><span class="line">            CRC64.crcHash hv = new CRC64.crcHash(0, 0);</span><br><span class="line"></span><br><span class="line">            for(int j = 0; j &lt; 8; v &lt;&lt;= 1) &#123;</span><br><span class="line">                hv.h1 &lt;&lt;= 1;</span><br><span class="line">                if (((long)hv.h2 &amp; 2147483648L) != 0L) &#123;</span><br><span class="line">                    hv.h1 |= 1;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                hv.h2 &lt;&lt;= 1;</span><br><span class="line">                if ((v &amp; 128) != 0) &#123;</span><br><span class="line">                    hv.h1 ^= Poly[crc_HashLimit].h1;</span><br><span class="line">                    hv.h2 ^= Poly[crc_HashLimit].h2;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                ++j;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            CrcXor[i] = hv;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        CRC64.crcHash hv = new CRC64.crcHash(HINIT1, HINIT2);</span><br><span class="line">        CRC64.crcHash result_hash = crcCalculate(source, source.length(), hv, CrcXor);</span><br><span class="line">        int h1 = result_hash.h1;</span><br><span class="line">        int h2 = result_hash.h2;</span><br><span class="line">        int low;</span><br><span class="line">        if (h1 &gt; 2147483647) &#123;</span><br><span class="line">            low = -1 * (-1 - h1) - 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            low = h1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int high;</span><br><span class="line">        if (h2 &gt; 2147483647) &#123;</span><br><span class="line">            high = -1 * (-1 - h2) - 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            high = h2;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        long result = (long)high * a1 + (long)low;</span><br><span class="line">        return String.valueOf(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Long getCrc64id(String source) &#123;</span><br><span class="line">        return Long.valueOf(getcrc64id(source));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class crcHash &#123;</span><br><span class="line">        public int h1;</span><br><span class="line">        public int h2;</span><br><span class="line"></span><br><span class="line">        public crcHash() &#123;</span><br><span class="line">            this.h1 = 0;</span><br><span class="line">            this.h2 = 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public crcHash(int theH1, int theH2) &#123;</span><br><span class="line">            this.h1 = theH1;</span><br><span class="line">            this.h2 = theH2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="json集合和数组的区别"><a href="#json集合和数组的区别" class="headerlink" title="json集合和数组的区别"></a>json集合和数组的区别</h2><p><img src="/../img/image-20211112141659773.png" alt="image-20211112141659773"></p>
+<h2 id="生成json文件，自定义内容"><a href="#生成json文件，自定义内容" class="headerlink" title="生成json文件，自定义内容"></a>生成json文件，自定义内容</h2><pre><code>package com.boco.nbd.upload.station.util;
+
+import lombok.extern.slf4j.Slf4j;
+    import org.springframework.util.ResourceUtils;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.*;
+
+/**
+ *  生成json文件工具类     by   xwd
+ */
+
+@Slf4j
+public class JSONUtils &#123;
+
+    //封装创建json文件的方法
+    public static boolean createJSONFile(Object obj, String fileName)&#123;
+        boolean flag = true;
+
+        try &#123;
+            //获取文件的绝对路径        根路径
+            //String filePath = ResourceUtils.getURL(&quot;classpath:&quot;).getPath();
+            String filePath = &quot;D:&quot;;
+            String jsonString = com.alibaba.druid.support.json.JSONUtils.toJSONString(obj);
+            // 拼接文件完整路径// 生成json格式文件
+            String fullPath = filePath + File.separator + fileName + &quot;.json&quot;;
+            // 保证创建一个新文件
+            File file = new File(fullPath);
+            if (!file.getParentFile().exists()) &#123; // 如果父目录不存在，创建父目录
+                file.getParentFile().mkdirs();
+            &#125;
+            if (file.exists()) &#123; // 如果已存在,删除旧文件
+                file.delete();
+            &#125;
+            file.createNewFile();//创建新文件
+
+            if(jsonString.indexOf(&quot;&#39;&quot;)!=-1)&#123;
+                //将单引号转义一下，因为JSON串中的字符串类型可以单引号引起来的
+                jsonString = jsonString.replaceAll(&quot;&#39;&quot;, &quot;\\&#39;&quot;);
+            &#125;
+            if(jsonString.indexOf(&quot;\&quot;&quot;)!=-1)&#123;
+                //将双引号转义一下，因为JSON串中的字符串类型可以单引号引起来的
+                jsonString = jsonString.replaceAll(&quot;\&quot;&quot;, &quot;\\\&quot;&quot;);
+            &#125;
+
+            if(jsonString.indexOf(&quot;\r\n&quot;)!=-1)&#123;
+                //将回车换行转换一下，因为JSON串中字符串不能出现显式的回车换行
+                jsonString = jsonString.replaceAll(&quot;\r\n&quot;, &quot;\\u000d\\u000a&quot;);
+            &#125;
+            if(jsonString.indexOf(&quot;\n&quot;)!=-1)&#123;
+                //将换行转换一下，因为JSON串中字符串不能出现显式的换行
+                jsonString = jsonString.replaceAll(&quot;\n&quot;, &quot;\\u000a&quot;);
+            &#125;
+            // 将格式化后的字符串写入文件
+            Writer write = new OutputStreamWriter(new FileOutputStream(file), &quot;UTF-8&quot;);
+            log.info(&quot;json文件内容：&quot; + jsonString);
+            write.write(jsonString);
+            log.info(&quot;文件创建成功！&quot;);
+            write.flush();
+            write.close();
+        &#125; catch (Exception e) &#123;
+            flag = false;
+            e.printStackTrace();
+        &#125;
+        return flag;
+    &#125;
+</code></pre>
+<h2 id="枚举类用法"><a href="#枚举类用法" class="headerlink" title="枚举类用法"></a>枚举类用法</h2><p>初始化对象结构</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package com.boco.nbd.threshold.enums;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author:jiangjiaxu</span><br><span class="line"> * @date 2021/10/20  11:49</span><br><span class="line"> * @version:V1.0</span><br><span class="line"> * @description:**枚举类</span><br><span class="line"> */</span><br><span class="line">public enum DeviceMonitorEnum &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 动环</span><br><span class="line">     */</span><br><span class="line">    TEMP(&quot;动环&quot;, &quot;1&quot;, &quot;10&quot;),</span><br><span class="line">    /**</span><br><span class="line">     * 门架</span><br><span class="line">     */</span><br><span class="line">    GANTRY(&quot;门架&quot;, &quot;2&quot;, &quot;11&quot;),</span><br><span class="line">    /**</span><br><span class="line">     * 收费系统</span><br><span class="line">     */</span><br><span class="line">    LANE(&quot;收费系统&quot;, &quot;3&quot;, &quot;12&quot;),</span><br><span class="line">    /**</span><br><span class="line">     * 外场设备</span><br><span class="line">     */</span><br><span class="line">    MONITOR(&quot;外场设备&quot;, &quot;4&quot;, &quot;13&quot;);</span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line">    private String id;</span><br><span class="line">    private String proId;</span><br><span class="line"></span><br><span class="line">    DeviceMonitorEnum(String name, String proId, String id) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.id = id;</span><br><span class="line">        this.proId = proId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(String id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getProId() &#123;</span><br><span class="line">        return proId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setProId(String proId) &#123;</span><br><span class="line">        this.proId = proId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 初始化创建</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static List&lt;ResourceBO&gt; create() &#123;</span><br><span class="line">        DeviceMonitorEnum[] enums = DeviceMonitorEnum.values();</span><br><span class="line">        List&lt;ResourceBO&gt; list = new ArrayList&lt;&gt;(10);</span><br><span class="line">        for (int i = 0; i &lt; enums.length; i++) &#123;</span><br><span class="line">            ResourceBO bo = new ResourceBO();</span><br><span class="line">            bo.setNo(i + 1);</span><br><span class="line">            bo.setId(enums[i].getId());</span><br><span class="line">            bo.setProId(enums[i].getProId());</span><br><span class="line">            bo.setName(enums[i].getName());</span><br><span class="line">            bo.setCount(0);</span><br><span class="line">            bo.setProCount(0);</span><br><span class="line">            if (&quot;1&quot;.equals(bo.getId())) &#123;</span><br><span class="line">                bo.setProCount(-1);</span><br><span class="line">            &#125;</span><br><span class="line">            list.add(bo);</span><br><span class="line">        &#125;</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package com.boco.nbd.threshold.enums;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.annotation.JsonIgnore;</span><br><span class="line">import io.swagger.annotations.ApiModelProperty;</span><br><span class="line">import lombok.Data;</span><br><span class="line">import lombok.ToString;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author:jiangjiaxu</span><br><span class="line"> * @date 2021/10/20  11:49</span><br><span class="line"> * @version:V1.0</span><br><span class="line"> * @description:**枚举类</span><br><span class="line"> */</span><br><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">public class ResourceBO &#123;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(&quot;序号&quot;)</span><br><span class="line">    private Integer no;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(&quot;标识&quot;)</span><br><span class="line">    private String id;</span><br><span class="line"></span><br><span class="line">    @JsonIgnore</span><br><span class="line">    @ApiModelProperty(&quot;故障标识&quot;)</span><br><span class="line">    private String proId;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(&quot;标签名称&quot;)</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(&quot;总数&quot;)</span><br><span class="line">    private Integer count;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(&quot;故障总数&quot;)</span><br><span class="line">    private Integer proCount;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="判断是否在cron表达式中"><a href="#判断是否在cron表达式中" class="headerlink" title="判断是否在cron表达式中"></a>判断是否在cron表达式中</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package com.boco.nbd.threshold.util;</span><br><span class="line"></span><br><span class="line">import net.logstash.logback.encoder.org.apache.commons.lang.ArrayUtils;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author:jiangjiaxu</span><br><span class="line"> * @date 2021/10/29  16:33</span><br><span class="line"> * @version:V1.0</span><br><span class="line"> * @description:</span><br><span class="line"> */</span><br><span class="line">public class Cron &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 判断date是否在cron表达式中,没有秒，周，年的粒度</span><br><span class="line">     * @param cron</span><br><span class="line">     * @param date1</span><br><span class="line">     */</span><br><span class="line">    public static boolean isInclude(String cron,Date date1)&#123;</span><br><span class="line">        String[] s = cron.split(&quot; &quot;);</span><br><span class="line">        String[] s1=new String[4];</span><br><span class="line">        s1[0]=s[1];</span><br><span class="line">        s1[1]=s[2];</span><br><span class="line">        s1[2]=s[3];</span><br><span class="line">        s1[3]=s[4];</span><br><span class="line">        SimpleDateFormat sdf=new SimpleDateFormat(&quot;mm-HH-dd-MM&quot;);</span><br><span class="line">        String date = sdf.format(date1);</span><br><span class="line">        String[] s2 = date.split(&quot;-&quot;);</span><br><span class="line">        boolean flag=true;</span><br><span class="line">        for(int i=0;i&lt;4;i++)&#123;</span><br><span class="line">            if(!isTrue(s1[i],s2[i]))&#123;</span><br><span class="line">                flag=false;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return flag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean isTrue(String s1,String s2)&#123;</span><br><span class="line">        if(s1.contains(&quot;*&quot;))&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(s1.contains(&quot;,&quot;))&#123;</span><br><span class="line">            String[] split = s1.split(&quot;,&quot;);</span><br><span class="line">            return ArrayUtils.contains(split,s2);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(s1.contains(&quot;-&quot;))&#123;</span><br><span class="line">            String[] split = s1.split(&quot;-&quot;);</span><br><span class="line">            int a = Integer.parseInt(split[0]);</span><br><span class="line">            int b = Integer.parseInt(split[1]);</span><br><span class="line">            int c = Integer.parseInt(s2);</span><br><span class="line">            if(c&gt;=a&amp;&amp;c&lt;=b)&#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //只有一个数字,需要相等</span><br><span class="line">        else&#123;</span><br><span class="line">            if(s1.equals(s2))&#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Map遍历"><a href="#Map遍历" class="headerlink" title="Map遍历"></a>Map遍历</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</span><br><span class="line">        map.put(&quot;1&quot;,&quot;a&quot;);</span><br><span class="line">        map.put(&quot;2&quot;,&quot;b&quot;);</span><br><span class="line">        map.put(&quot;3&quot;,&quot;c&quot;);</span><br><span class="line">		System.out.println(map.keySet());</span><br><span class="line">//map.keySet()--&gt;[1,2,3],可以理解为map.keySet()遍历map里的key，然后通过map.get(key)取值，完成遍历</span><br><span class="line">        for(String key: map.keySet())&#123;</span><br><span class="line">            System.out.println(&quot;key=&quot;+key+&quot; and value = &quot;+map.get(key));</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        Set&lt;Map.Entry&lt;Integer,String&gt;&gt; entries=map.entrySet();</span><br><span class="line">    	System.out.println(entries);//[1=a, 2=b, 3=c]</span><br><span class="line">    </span><br><span class="line">        for (Map.Entry entry:entries)&#123;</span><br><span class="line">            System.out.println(&quot;key:&quot;+entry.getKey()+&quot; &quot;</span><br><span class="line">                    +&quot;value:&quot;+entry.getValue());</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="打印日志输出到本地文件"><a href="#打印日志输出到本地文件" class="headerlink" title="打印日志输出到本地文件"></a>打印日志输出到本地文件</h1><p><a href="https://blog.csdn.net/MengDiL_yl/article/details/86648197?spm=1001.2101.3001.6650.7&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-7.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-7.no_search_link">https://blog.csdn.net/MengDiL_yl/article/details/86648197?spm=1001.2101.3001.6650.7&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-7.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-7.no_search_link</a></p>
+<h1 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h1><p><a href="https://blog.csdn.net/xsp_happyboy/article/details/80987484?spm=1001.2101.3001.6650.9&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-9.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-9.no_search_link">https://blog.csdn.net/xsp_happyboy/article/details/80987484?spm=1001.2101.3001.6650.9&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-9.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-9.no_search_link</a></p>
+<h1 id="springboot自启动方法"><a href="#springboot自启动方法" class="headerlink" title="springboot自启动方法"></a>springboot自启动方法</h1><p><img src="/../img/image-20211022085446005.png" alt="image-20211022085446005"></p>
+<p>controller+ implements ApplicationRunner</p>
+<p>这样启动后此方法就自动执行了</p>
+<h1 id="自定义application-yml属性并获取"><a href="#自定义application-yml属性并获取" class="headerlink" title="自定义application.yml属性并获取"></a>自定义application.yml属性并获取</h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">jiang:</span></span><br><span class="line">  <span class="attr">test:</span> <span class="string">hahaha</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;jiang&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String test;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">MyConfig myConfig;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">a</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(myConfig.getTest());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20210726093024506.png" alt="image-20210726093024506"></p>
+<p>第二种方法蛮实用@Value注解</p>
+<p><img src="/../img/2021032410310814.png" alt="在这里插入图片描述"></p>
+<p><img src="/../img/image-20210822131414193.png" alt="image-20210822131414193"></p>
+<h2 id="想要在获取类中直接使用"><a href="#想要在获取类中直接使用" class="headerlink" title="想要在获取类中直接使用"></a>想要在获取类中直接使用</h2><p><img src="/../img/image-20211021125957183.png" alt="image-20211021125957183"></p>
+<p>比如下方，在controller里注入，就可以使用了</p>
+<p><img src="/../img/image-20211021130029410.png" alt="image-20211021130029410"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
 </search>
