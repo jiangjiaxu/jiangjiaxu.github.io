@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux单机与集群," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景1.宁杭出差，发现同事安装软件是的厉害，自己啥都不会，所以决心安装单机和集群，但是也仅仅是安装，后续使用需要待定 2.用的虚拟机，centos7，最小安装，所以需要一些前置安装 前置安装1.ifconfig命令yum install net-tools.x86_64 2.vimyum -y install vim* 3.修改静态IPcd &#x2F;etc&#x2F;sysconfig&#x2F;network-scrip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux命令">
+<meta property="og:url" content="http://xiaojiangzbc.top/2021/11/30/linux%E5%8D%95%E6%9C%BA%E4%B8%8E%E9%9B%86%E7%BE%A4/index.html">
+<meta property="og:site_name" content="小姜的博客">
+<meta property="og:description" content="背景1.宁杭出差，发现同事安装软件是的厉害，自己啥都不会，所以决心安装单机和集群，但是也仅仅是安装，后续使用需要待定 2.用的虚拟机，centos7，最小安装，所以需要一些前置安装 前置安装1.ifconfig命令yum install net-tools.x86_64 2.vimyum -y install vim* 3.修改静态IPcd &#x2F;etc&#x2F;sysconfig&#x2F;network-scrip">
+<meta property="og:locale">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211209204032394.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210153157348.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210154959902.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/wps1.jpg">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212144106526.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/wps2.jpg">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212144134857.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212145000748.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211211210627808.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210171746098.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211211181158347.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212145805338.png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWFnZXMyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTIxMTM1NS8yMDE4MDYvMTIxMTM1NS0yMDE4MDYyOTIxMDU1OTMyMy0xMTM1MjA4MDI1LnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212143624575.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212143639947.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210162347839.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211022175625401-1639125434743.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211215194509842.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210164417297.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210165030872.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210165045375.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210165135500.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212152819121.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211215200212651.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212212510719.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211214104015438.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211213085657656.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211213090142016.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211213090519363.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211213095757637.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211213095803837.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212185231903.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211213090142016.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212215816226.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211214205318046.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211214205342980.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211214205349339.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211210164417297.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211215094559262.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211215094627263.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212145000748.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211215103115196.png">
+<meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
+<meta property="article:modified_time" content="2021-12-16T00:29:51.773Z">
+<meta property="article:author" content="Mr.JIANG">
+<meta property="article:tag" content="linux单机与集群">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiaojiangzbc.top/img/image-20211209204032394.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiaojiangzbc.top/2021/11/30/linux单机与集群/"/>
+
+
+
+
+
+  <title>linux命令 | 小姜的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	<header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小姜的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaojiangzbc.top/2021/11/30/linux%E5%8D%95%E6%9C%BA%E4%B8%8E%E9%9B%86%E7%BE%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小姜的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-30T17:45:46+08:00">
+                2021-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本站总阅读数 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  21
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>1.宁杭出差，发现同事安装软件是的厉害，自己啥都不会，所以决心安装单机和集群，但是也仅仅是安装，后续使用需要待定</p>
+<p>2.用的虚拟机，centos7，最小安装，所以需要一些前置安装</p>
+<h1 id="前置安装"><a href="#前置安装" class="headerlink" title="前置安装"></a>前置安装</h1><h2 id="1-ifconfig命令"><a href="#1-ifconfig命令" class="headerlink" title="1.ifconfig命令"></a>1.ifconfig命令</h2><p>yum install net-tools.x86_64</p>
+<h2 id="2-vim"><a href="#2-vim" class="headerlink" title="2.vim"></a>2.vim</h2><p>yum -y install vim*</p>
+<h2 id="3-修改静态IP"><a href="#3-修改静态IP" class="headerlink" title="3.修改静态IP"></a>3.修改静态IP</h2><p>cd /etc/sysconfig/network-scripts</p>
+<p>找ifcfg-ens？？</p>
+<p>vim ifcfg-ens??</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IPADDR=&quot;192.168.25.160&quot; # 改成需要的ip，注意网段</span><br><span class="line">GATEWAY=&quot;192.168.25.2&quot; # 网关，可以先查下网关</span><br><span class="line">NETMASK=&quot;255.255.255.0&quot; # 不用动</span><br><span class="line">DNS1=&quot;114.114.114.114&quot; # dns自己配置能用的</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20211209204032394.png" alt="image-20211209204032394"></p>
+<p>重启网络</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
+
+<p>如果报错Failed to start LSB: Bring up/down networking RTNETLINK answers: File exists</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭 NetworkManger 服务， systemct stop NetworkManager，并且禁止开机启动 systemctl disable NetworkManager</span><br><span class="line">systemctl stop NetworkManager &amp;&amp; systemctl restart network.service</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-安装gcc与g"><a href="#4-安装gcc与g" class="headerlink" title="4.安装gcc与g++"></a>4.安装gcc与g++</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc gcc-c++ autoconf pcre pcre-devel make automake</span><br><span class="line">yum -y install wget httpd-tools vim</span><br></pre></td></tr></table></figure>
+
+<p>验证</p>
+<p>gcc -v</p>
+<p>g++ -v </p>
+<p>如果yum不下来，找到依赖包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">移动整个文件夹1，装gcc，gcc -v 如果有 跳过</span><br><span class="line">rpm -Uvh *.rpm --nodeps --force</span><br><span class="line">移动整个文件夹2，装gcc-c++ g++ -v 如果有 跳过</span><br><span class="line">rpm -Uvh *.rpm --nodeps --force</span><br></pre></td></tr></table></figure>
+
+<h1 id="单机"><a href="#单机" class="headerlink" title="单机"></a>单机</h1><h2 id="1-JDK"><a href="#1-JDK" class="headerlink" title="1.JDK"></a>1.JDK</h2><p>1.卸载CentOS自带的openJDK（自己配置不生效的话再卸载）</p>
+<p>查看是否已安装<br>rpm -qa|grep java<br>卸载<br>rpm -e –nodeps   jdk-xxx</p>
+<p>2.把jdk的包移动到/usr/local/java</p>
+<p>cd /usr/local</p>
+<p>mkdir java</p>
+<p>cd java</p>
+<p>tar  -zxvf jdk-8u131-linux-x64.tar.gz</p>
+<p>3.环境变量<br>vim /etc/profile<br>在后面追加</p>
+<p>export JAVA_HOME=/usr/local/java/jdk1.8.0_131<br>export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar<br>export PATH=$PATH:$JAVA_HOME/bin</p>
+<p>4.使配置文件生效<br>source /etc/profile</p>
+<p>5.验证是否安装完成<br>java -version</p>
+<h2 id="2-redis"><a href="#2-redis" class="headerlink" title="2.redis"></a>2.redis</h2><p>cd /opt</p>
+<p>mkdir redis</p>
+<p>cd redis</p>
+<p>把redis-4.0.10.tar.gz移动到当前目录解压</p>
+<p>tar -zvxf redis-4.0.10.tar.gz</p>
+<p>cd redis-4.0.10</p>
+<p>make install PREFIX=/opt/redis/redis-4.0.10</p>
+<p>4.开启6379tcp端口<br>firewall-cmd –zone=public –add-port=6379/tcp –permanent</p>
+<p>5.重启防火墙验证<br>systemctl reload firewalld<br>firewall-cmd –list-ports</p>
+<p>3.启动<br>cd src ./redis-server</p>
+<p>下图成功</p>
+<p><img src="/../img/image-20211210153157348.png" alt="image-20211210153157348"></p>
+<h3 id="修改redis配置文件"><a href="#修改redis配置文件" class="headerlink" title="修改redis配置文件"></a>修改redis配置文件</h3><p>在这个路径下 /opt/redis/redis-4.0.10</p>
+<p>vim redis.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#bind 127.0.0.1 //允许远程连接</span><br><span class="line">远程连接，不用绑定ip</span><br><span class="line">protected-mode no</span><br><span class="line">持久化</span><br><span class="line">appendonly yes</span><br><span class="line">后台启动</span><br><span class="line">daemonize yes</span><br></pre></td></tr></table></figure>
+
+<p>cd src</p>
+<p>./redis-server ../redis.conf</p>
+<p>ps -ef|grep redis查看是否启动</p>
+<p>7.redis命令行带密码</p>
+<p><img src="/../img/image-20211210154959902.png" alt="image-20211210154959902"></p>
+<p>这个图是没有密码，设置密码123456</p>
+<p>config set requirepass 12345</p>
+<p>exit退出</p>
+<p>./redis-cli -p 6379 -a 123456<br>也可以进去后输入auth 123456完成认证</p>
+<h2 id="3-nacos"><a href="#3-nacos" class="headerlink" title="3.nacos"></a>3.nacos</h2><p>cd /opt</p>
+<p>mkdir nacos</p>
+<p>cd nacos</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">把下载好的nacos安装包解压放到该目录</span><br><span class="line">tar xvfz nacos-server-2.0.1.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="配置MySQL-数据库"><a href="#配置MySQL-数据库" class="headerlink" title="配置MySQL 数据库"></a>配置MySQL 数据库</h3><h4 id="3-1-初始化数据库"><a href="#3-1-初始化数据库" class="headerlink" title="3.1 初始化数据库"></a><strong>3.1 初始化数据库</strong></h4><p>初始化数据库，导入nacos解压目录下conf/nacos-mysql.sql 文件</p>
+<p><img src="/../img/wps1.jpg" alt="img"> </p>
+<p>cd nacos/conf/</p>
+<h4 id="3-2-配置数据库"><a href="#3-2-配置数据库" class="headerlink" title="3.2 配置数据库"></a><strong>3.2</strong> 配置数据库</h4><p>新建nacos_config</p>
+<p><img src="/../img/image-20211212144106526.png" alt="image-20211212144106526"></p>
+<p><img src="/../img/wps2.jpg" alt="img"></p>
+<p>执行sql脚本</p>
+<p><img src="/../img/image-20211212144134857.png" alt="image-20211212144134857"></p>
+<h5 id="修改conf-application-properties-增加-mysql-数据源配置"><a href="#修改conf-application-properties-增加-mysql-数据源配置" class="headerlink" title="修改conf/application.properties,增加 mysql 数据源配置"></a>修改conf/application.properties,增加 mysql 数据源配置</h5><p>输入指令：vim /opt/nacos/nacos/conf/application.properties</p>
+<p>按住shift+g, 在文件末尾添加： 注意自己的ip地址</p>
+<p>spring.datasource.platform=mysql</p>
+<p>db.num=1</p>
+<p>db.url.0=jdbc:mysql://自己ip:3306/nacos_config?characterEncoding=utf8&amp;connectTimeout=10000&amp;socketTimeout=30000&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai</p>
+<p>db.user=root</p>
+<p>db.password=Boco.123</p>
+<h3 id="4、启动"><a href="#4、启动" class="headerlink" title="4、启动"></a><strong>4、启动</strong></h3><ol>
+<li>进入nacos目录bin下：cd /opt/nacos/nacos/bin/</li>
+</ol>
+<p>启动命令：sh startup.sh -m standalone</p>
+<p>查看运行日志： tail -500f /opt/nacos/nacos/logs/start.out</p>
+<p><img src="/../img/image-20211212145000748.png" alt="image-20211212145000748"></p>
+<p>2．界面控制台</p>
+<p>注意打开8848端口</p>
+<p>firewall-cmd –zone=public –add-port=8848/tcp –permanent</p>
+<p>systemctl reload firewalld</p>
+<p>启动完毕后。登录到界面控制台（用户名密码默认都是nacos）<a target="_blank" rel="noopener" href="http://ip:8848/nacos">http://ip:8848/nacos</a></p>
+<h3 id="5-Nacos关闭"><a href="#5-Nacos关闭" class="headerlink" title="5.Nacos关闭"></a>5.Nacos关闭</h3><p>进入 nacos/bin/目录下运行:  ./shutdown.sh </p>
+<h2 id="4-mysql"><a href="#4-mysql" class="headerlink" title="4.mysql"></a>4.mysql</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">1.先查看是否已安装</span><br><span class="line">yum list installed | grep mysql</span><br><span class="line">有的话就卸载：yum remove mysql mysql-*</span><br><span class="line"></span><br><span class="line">mkdir -p /opt/mysql/server </span><br><span class="line">mkdir -p /opt/mysql/client</span><br><span class="line"></span><br><span class="line">server.rpm文件移动到server</span><br><span class="line">client.rpm文件移动到client</span><br><span class="line"></span><br><span class="line">2.安装server</span><br><span class="line">rpm -ivh mysql-community-server-5.7.29-1.el6.x86_64.rpm --force --nodeps</span><br><span class="line">3.安装client</span><br><span class="line">rpm -ivh mysql-community-client-5.7.29-1.el6.x86_64.rpm --force --nodeps</span><br><span class="line"></span><br><span class="line">### errmsg.sys此步一定要在第4步之前做</span><br><span class="line"></span><br><span class="line">把errmsg.sys移动到 /usr/share/mysql/目录下</span><br><span class="line"></span><br><span class="line">修改配置文件my.cnf,根据情况定</span><br><span class="line">vim /etc/my.cnf</span><br><span class="line"></span><br><span class="line">4.启动mysql</span><br><span class="line">service mysqld start</span><br><span class="line">5.查看默认密码</span><br><span class="line">grep &#x27;temporary password&#x27; /var/log/mysqld.log</span><br><span class="line"></span><br><span class="line">6.复制默认密码，进入mysql</span><br><span class="line">mysql -uroot -p</span><br><span class="line"></span><br><span class="line">7.修改密码</span><br><span class="line">set global validate_password_policy=LOW;</span><br><span class="line">set global validate_password_length=8; #8为密码的长度</span><br><span class="line">alter user root@localhost identified by &#x27;Boco.123&#x27;;</span><br><span class="line"></span><br><span class="line">8.使用新密码进入</span><br><span class="line">quit</span><br><span class="line">mysql -uroot -pBoco.123</span><br><span class="line"></span><br><span class="line">9.开启允许远程访问</span><br><span class="line">9.1 使用mysql库</span><br><span class="line">use mysql;</span><br><span class="line">9.2 查看默认情况，通常应该都是只允许localhost访问</span><br><span class="line">select User,authentication_string,Host from user;</span><br><span class="line">9.3 允许远程访问</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;Boco.123&#x27;;</span><br><span class="line">9.4 刷新权限</span><br><span class="line">flush privileges;</span><br><span class="line">9.5 检测是否成功，这步报错也没关系，没啥用</span><br><span class="line">select User,authentication_string,Host from user;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">10 开放3306端口</span><br><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span><br><span class="line">11 重启防火墙</span><br><span class="line">systemctl reload firewalld</span><br><span class="line">12 验证</span><br><span class="line">firewall-cmd --list-ports</span><br></pre></td></tr></table></figure>
+
+<p>9.5 检测是否成功</p>
+<p><img src="/../img/image-20211211210627808.png" alt="image-20211211210627808"></p>
+<p>第6步：这个是默认密码</p>
+<p><img src="/../img/image-20211210171746098.png" alt="image-20211210171746098"></p>
+<h3 id="查看mysql服务启没启动"><a href="#查看mysql服务启没启动" class="headerlink" title="查看mysql服务启没启动"></a>查看mysql服务启没启动</h3><p>systemctl status mysqld.service</p>
+<h3 id="启动mysql"><a href="#启动mysql" class="headerlink" title="启动mysql"></a>启动mysql</h3><p>service mysqld start</p>
+<p>如果报错</p>
+<p><img src="/../img/image-20211211181158347.png" alt="image-20211211181158347"></p>
+<p>vim /var/log/mysqld.log 查看具体信息</p>
+<p>rm -rf /var/log/mysqld.log</p>
+<h3 id="停止mysql"><a href="#停止mysql" class="headerlink" title="停止mysql"></a>停止mysql</h3><p>service mysqld stop</p>
+<p><img src="/../img/image-20211212145805338.png" alt="image-20211212145805338"></p>
+<h3 id="没有解决就卸载重装"><a href="#没有解决就卸载重装" class="headerlink" title="没有解决就卸载重装"></a>没有解决就卸载重装</h3><h4 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">卸载旧版本的mysql：yum remove mysql mysql-*</span><br><span class="line"></span><br><span class="line">检查有没有卸载干净：yum list installed | grep mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h4><p><strong>一、使用以下命令查看当前安装mysql情况，查找以前是否装有mysql</strong></p>
+<p>rpm -qa|grep -i mysql </p>
+<p><strong>二、停止mysql服务、删除之前安装的mysql</strong></p>
+<p>　　删除命令：**<code>rpm -e –nodeps 包名</code>**</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　rpm -ev MySQL-client-5.5.25a-1.rhel5</span><br><span class="line">　　rpm -ev MySQL-server-5.5.25a-1.rhel5</span><br></pre></td></tr></table></figure>
+
+<p>　　如果提示依赖包错误，则使用以下命令尝试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ev MySQL-client-5.5.25a-1.rhel5 --nodeps</span><br></pre></td></tr></table></figure>
+
+<p>　　如果提示错误：<code>error: %preun(xxxxxx) scriptlet failed, exit status 1</code></p>
+<p>　　则用以下命令尝试：</p>
+<p><code>rpm -e --noscripts MySQL-client-``5.5``.25a-``1``.rhel5</code></p>
+<p><strong>三、查找之前老版本mysql的目录、并且删除老版本mysql的文件和库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name mysql</span><br></pre></td></tr></table></figure>
+
+<p> 查找结果如下：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/var/lib/mysql</span><br><span class="line">/var/lib/mysql/mysql</span><br><span class="line">/usr/lib64/mysql</span><br><span class="line">/usr/share/mysql</span><br></pre></td></tr></table></figure>
+
+<p>删除对应的mysql目录</p>
+<p>rm -rf /var/lib/mysql<br>rm -rf /var/lib/mysql/mysql<br>rm -rf /usr/lib64/mysql<br>rm -rf /usr/share/mysql</p>
+<p>具体的步骤如图：查找目录并删除</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWFnZXMyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTIxMTM1NS8yMDE4MDYvMTIxMTM1NS0yMDE4MDYyOTIxMDU1OTMyMy0xMTM1MjA4MDI1LnBuZw?x-oss-process=image/format,png" alt="img"></p>
+<p><strong>注意：</strong>卸载后/etc/my.cnf不会删除，需要进行手工删除</p>
+<p>rm -rf /etc/my.cnf </p>
+<p><strong>四、再次查找机器是否安装mysql</strong></p>
+<p>rpm -qa|grep -i mysql</p>
+<p> 无结果，说明已经卸载彻底，接下来直接安装mysql即可。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p><img src="/../img/image-20211212143624575.png" alt="image-20211212143624575"></p>
+<p>vim /var/log/mysqld.log 查看具体信息以后发现</p>
+<p><img src="/../img/image-20211212143639947.png" alt="image-20211212143639947"></p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>mkdir -p /var/run/mysqld</p>
+<p>chown mysql.mysql /var/run/mysqld/ </p>
+<p>systemctl start mysqld</p>
+<h2 id="5-zk-2181"><a href="#5-zk-2181" class="headerlink" title="5.zk-2181"></a>5.zk-2181</h2><p>cd /opt</p>
+<p>mkdir zookeeper</p>
+<p>cd zookeeper</p>
+<p>tar  -zxvf zookeeper-3.4.9.tar.gz</p>
+<p>cd zookeeper-3.4.9</p>
+<p>cd conf/</p>
+<p>入conf目录下，将zoo_sample.cfg，名字为zoo.cfg</p>
+<p>mv zoo_sample.cfg zoo.cfg</p>
+<h3 id="vim-zoo-cfg"><a href="#vim-zoo-cfg" class="headerlink" title="vim zoo.cfg"></a>vim zoo.cfg</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/opt/zookeeper/zookeeper-3.4.9/data</span><br><span class="line">datalogDir=/opt/zookeeper/zookeeper-3.4.9/logs</span><br><span class="line">clientPort=2181</span><br></pre></td></tr></table></figure>
+
+<p>mkdir /opt/zookeeper/zookeeper-3.4.9/data<br>mkdir /opt/zookeeper/zookeeper-3.4.9/logs</p>
+<h3 id="启动bin目录下"><a href="#启动bin目录下" class="headerlink" title="启动bin目录下"></a>启动bin目录下</h3><p>cd /opt/zookeeper/zookeeper-3.4.9/bin/</p>
+<p>./zkServer.sh start<br>./zkServer.sh stop<br>./zkServer.sh restart<br>./zkServer.sh status</p>
+<p>可以看到status是standlone单机</p>
+<p><img src="/../img/image-20211210162347839.png" alt="image-20211210162347839"></p>
+<h2 id="6-kafka-9092-D-kafka-kafka-txt"><a href="#6-kafka-9092-D-kafka-kafka-txt" class="headerlink" title="6.kafka-9092(D:\kafka\kafka.txt)"></a>6.kafka-9092(D:\kafka\kafka.txt)</h2><p>cd /opt</p>
+<p>mkdir kafka</p>
+<p>1.解压到/opt/kafka使用kafka_2.12-0.10.2.1.tgz这个包</p>
+<p>tar -vxzf kafka_2.12-0.10.2.1.tgz</p>
+<p>2.开启9092tcp端口<br>firewall-cmd –zone=public –add-port=9092/tcp –permanent</p>
+<p>systemctl reload firewalld</p>
+<p>cd /opt/kafka/kafka_2.12-0.10.2.1/config</p>
+<h3 id="vim-server-properties"><a href="#vim-server-properties" class="headerlink" title="vim server.properties"></a>vim server.properties</h3><p><img src="/../img/image-20211022175625401-1639125434743.png" alt="image-20211022175625401"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#broler全局唯一编号，不能重复</span><br><span class="line">broker.id=0</span><br><span class="line">#打开删除topic功能</span><br><span class="line">delete.topic.enable=true</span><br><span class="line">#内网访问kafka的地址</span><br><span class="line">listeners=PLAINTEXT://ip:9092</span><br><span class="line">#kafka运行日志存放的路径</span><br><span class="line">log.dirs=/opt/kafka/logs</span><br><span class="line">#配置连接Zookeeper</span><br><span class="line">zookeeper.connect=192.168.214.130:2181</span><br><span class="line">#更改默认过期时间，可以不设置，默认7天168h</span><br><span class="line">log.retention.hours=24</span><br></pre></td></tr></table></figure>
+
+<p>如果想修改kafka端口号</p>
+<p>添加port即可，默认是没有的</p>
+<p><img src="/../img/image-20211215194509842.png" alt="image-20211215194509842"></p>
+<p>mkdir /opt/kafka/logs</p>
+<p>启动kafka bin目录下</p>
+<p>cd /opt/kafka/kafka_2.12-0.10.2.1/bin</p>
+<p>sh kafka-server-start.sh -daemon ../config/server.properties</p>
+<p>停止</p>
+<p>kafka-server-stop.sh stop 或者</p>
+<p>sh kafka-server-stop.sh</p>
+<p>#查看zookeeper<br>ps -ef|grep zookeeper</p>
+<p>验证Kafka是否启动成功：</p>
+<p>输入jps命令回车查看，有Kafka进程，说明启动成功</p>
+<p><img src="/../img/image-20211210164417297.png" alt="image-20211210164417297"></p>
+<p>注意kafka是在bin目录的外层，不是内层</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.查看主题列表</span><br><span class="line">bin/kafka-topics.sh --zookeeper localhost:2181 --list</span><br><span class="line"></span><br><span class="line">2.创建topic  test</span><br><span class="line">bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test</span><br><span class="line"></span><br><span class="line">5.启动生产者</span><br><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br><span class="line"></span><br><span class="line">6.启动消费者，新窗口</span><br><span class="line">./bin/kafka-console-consumer.sh --zookeeper localhost:2181 -topic test --from-beginning</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>发送</p>
+<p><img src="/../img/image-20211210165030872.png" alt="image-20211210165030872"></p>
+<p>新窗口接受</p>
+<p><img src="/../img/image-20211210165045375.png" alt="image-20211210165045375"></p>
+<p>QuorumPeerMain-zookeeper</p>
+<p>Kafka-kafka</p>
+<p><img src="/../img/image-20211210165135500.png" alt="image-20211210165135500"></p>
+<h2 id="7-nginx"><a href="#7-nginx" class="headerlink" title="7.nginx"></a>7.nginx</h2><p>mkdir -p /usr/local/nginx</p>
+<p>cd /usr/local/nginx</p>
+<p>把3下面的所有文件移动到/usr/local/nginx下</p>
+<p>把nginx的tar.gz包也移动到/usr/local/nginx下</p>
+<p>解压并安装pcre<br>cd /usr/local/nginx<br>tar -zxvf pcre-8.37.tar.gz<br>cd /usr/local/nginx/pcre-8.37<br>./configure<br>make<br>make install</p>
+<p>解压并安装zlib<br>cd /usr/local/nginx<br>tar -zxvf zlib-1.2.11.tar.gz<br>cd /usr/local/nginx/zlib-1.2.11<br>./configure<br>make<br>make install</p>
+<p>解压并安装openssl（需要perl5依赖）<br>cd /usr/local/nginx<br>tar -zxvf openssl-1.1.0i.tar.gz<br>cd /usr/local/nginx/openssl-1.1.0i<br>./config<br>make<br>make install</p>
+<p>解压并安装nginx<br>cd /usr/local/nginx<br>tar -zxvf nginx-1.18.0.tar.gz<br>cd /usr/local/nginx/nginx-1.18.0<br>./configure –prefix=/usr/local/nginx –with-http_ssl_module –with-pcre=/usr/local/nginx/pcre-8.37 –with-zlib=/usr/local/nginx/zlib-1.2.11 –with-openssl=/usr/local/nginx/openssl-1.1.0i</p>
+<p>make<br>make install</p>
+<p>最后开放指定端口</p>
+<p>开放指定端口<br>查看80端口是否开启<br>firewall-cmd –query-port=80/tcp</p>
+<p>如果没开启，开启80端口<br>firewall-cmd –zone=public –add-port=80/tcp –permanent</p>
+<p>最后刷新配置：systemctl reload firewalld</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>cd /usr/local/nginx/sbin</p>
+<p>./nginx</p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p><strong>ps -ef | grep nginx</strong></p>
+<p><img src="/../img/image-20211212152819121.png" alt="image-20211212152819121"></p>
+<p>或者</p>
+<p><strong>netstat -anp | grep :80</strong>命令来通过占用端口判断Nginx是否启动</p>
+<h3 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h3><p>./nginx -s reload</p>
+<h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><p>./nginx -s stop</p>
+<h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><h2 id="1-redis集群必须6个节点"><a href="#1-redis集群必须6个节点" class="headerlink" title="1.redis集群必须6个节点"></a>1.redis集群必须6个节点</h2><h3 id="Redis集群依赖安装"><a href="#Redis集群依赖安装" class="headerlink" title="Redis集群依赖安装"></a>Redis集群依赖安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">安装Ruby和gem安装和修改</span><br><span class="line">1、Ruby安装</span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line">本次安装ruby-2.2.2版本,将下载好的软件上传到服务器上/usr/local</span><br><span class="line">执行指令：</span><br><span class="line">cd /usr/local</span><br><span class="line">tar -zxvf ruby-2.2.2.tar.gz</span><br><span class="line">cd ruby-2.2.2</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">如果报错-bash: /usr/bin/ruby: 没有那个文件或目录</span><br><span class="line">ln -s /usr/local/ruby-2.2.2/ruby /usr/bin/ruby</span><br><span class="line"></span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2、安装redis的redis-3.3.5.gem，</span><br><span class="line">gem install -l redis-3.3.5.gem</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20211215200212651.png" alt="image-20211215200212651"></p>
+<p>yum -y install zlib zlib-devel</p>
+<p>cd /usr/local/ruby-2.2.2/ext/zlib/<br>ruby extconf.rb<br>sed -i s#$(top_srcdir)#../..# Makefile<br>make<br>make install</p>
+<p>再次 gem install -l redis-3.3.5.gem即可</p>
+<p>3)安装完毕，提示”1 gem installed”，并且输入：gem list，有红框提示，截图如下</p>
+<p><img src="/../img/image-20211212212510719.png" alt="image-20211212212510719"></p>
+<h3 id="开始安装伪集群"><a href="#开始安装伪集群" class="headerlink" title="开始安装伪集群"></a>开始安装伪集群</h3><p>cd /opt</p>
+<p>mkdir redis</p>
+<p>cd redis</p>
+<p>把redis-4.0.10.tar.gz移动到当前目录解压</p>
+<p>tar -zvxf redis-4.0.10.tar.gz</p>
+<p>cd redis-4.0.10</p>
+<p>make install PREFIX=/opt/redis/redis-4.0.10</p>
+<p>cd /opt/redis</p>
+<p>mkdir cluster-config</p>
+<p>cd cluster-config</p>
+<p>mkdir 7001</p>
+<p>mkdir 7002</p>
+<p>mkdir 7003</p>
+<p>mkdir 7004</p>
+<p>mkdir 7005</p>
+<p>mkdir 7006</p>
+<p>复制bin文件到700*中</p>
+<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7001</p>
+<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7002</p>
+<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7003</p>
+<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7004</p>
+<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7005</p>
+<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7006</p>
+<p>redis.conf文件先不全部复制过去，先只复制到7001，等改完7001在复制</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/redis.conf  /usr/local/redis/cluster-config/7001/</p>
+<h4 id="修改7001文件夹的配置信息，redis-conf"><a href="#修改7001文件夹的配置信息，redis-conf" class="headerlink" title="修改7001文件夹的配置信息，redis.conf"></a>修改7001文件夹的配置信息，redis.conf</h4><p>文件如下内容：</p>
+<p>vim /opt/redis/cluster-config/7001/redis.conf</p>
+<p>7001：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">port 7001</span><br><span class="line">protected-mode no</span><br><span class="line">daemonize yes</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes-7001.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">appendonly yes</span><br><span class="line">masterauth Boco123 这个找到以后在下面自己写</span><br><span class="line">requirepass Boco123</span><br><span class="line">bind 10.12.1.33</span><br><span class="line">logfile &quot;/opt/redis/cluster-config/7001/redis.log&quot;</span><br><span class="line">dir /opt/redis/cluster-config/7001/</span><br><span class="line">pidfile cluster-config/7001.pid/</span><br></pre></td></tr></table></figure>
+
+<p>把reds.conf复制 到另外5个文件夹</p>
+<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7002</p>
+<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7003</p>
+<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7004</p>
+<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7005</p>
+<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7006</p>
+<p>vim /opt/redis/cluster-config/7002/redis.conf</p>
+<p>vim /opt/redis/cluster-config/7003/redis.conf</p>
+<p>vim /opt/redis/cluster-config/7004/redis.conf</p>
+<p>vim /opt/redis/cluster-config/7005/redis.conf</p>
+<p>vim /opt/redis/cluster-config/7006/redis.conf</p>
+<p>替换每一个端口</p>
+<p>:%s/7001/7002/g</p>
+<p>:%s/7001/7003/g</p>
+<p>:%s/7001/7004/g</p>
+<p>:%s/7001/7005/g</p>
+<p>:%s/7001/7006/g</p>
+<h4 id="防火墙，每台机器都要改"><a href="#防火墙，每台机器都要改" class="headerlink" title="防火墙，每台机器都要改"></a>防火墙，每台机器都要改</h4><p>firewall-cmd –zone=public –add-port=700*/tcp –permanent</p>
+<p>注意也要开始1700*，这是一个问题因为集群端口时10000+</p>
+<p><img src="/../img/image-20211214104015438.png" alt="image-20211214104015438"></p>
+<p>firewall-cmd –zone=public –add-port=1700*/tcp –permanent</p>
+<p>systemctl reload firewalld</p>
+<p>把下图的三个文件粘到/opt/redis/cluster-config/下</p>
+<p><img src="/../img/image-20211213085657656.png" alt="image-20211213085657656"></p>
+<p>chmod +x start-all.sh<br>chmod +x stop-all.sh</p>
+<h4 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h4><p>find / -name “redis-trib.rb”</p>
+<p>vim /opt/redis/redis-4.0.10/src/redis-trib.rb</p>
+<p>第99行添加密码</p>
+<p>, :password =&gt; “Boco123”</p>
+<p><img src="/../img/image-20211213090142016.png" alt="image-20211213090142016"></p>
+<h4 id="集群启动和停止，"><a href="#集群启动和停止，" class="headerlink" title="集群启动和停止，"></a>集群启动和停止，</h4><p>sh start-all.sh</p>
+<p>ps -ef|grep redis     验证一下</p>
+<h4 id="stop-all-sh文件里有需要的话更改密码，并且更换ip地址"><a href="#stop-all-sh文件里有需要的话更改密码，并且更换ip地址" class="headerlink" title="stop-all.sh文件里有需要的话更改密码，并且更换ip地址"></a>stop-all.sh文件里有需要的话更改密码，并且更换ip地址</h4><p>sh stop-all.sh</p>
+<h4 id="创造节点"><a href="#创造节点" class="headerlink" title="创造节点"></a>创造节点</h4><p>cd /opt/redis/redis-4.0.10/src/</p>
+<p>./redis-trib.rb create –replicas 1 192.168.214.132:7001 192.168.214.132:7002 192.168.214.132:7003 192.168.214.132:7004 192.168.214.132:7005 192.168.214.132:7006 </p>
+<p>./redis-trib.rb create –replicas 1 10.12.1.50:7001 10.12.1.50:7002 10.12.1.50:7003 10.12.1.50:7004 10.12.1.50:7005 10.12.1.50:7006 </p>
+<p><img src="/../img/image-20211213090519363.png" alt="image-20211213090519363"></p>
+<h4 id="测试redis"><a href="#测试redis" class="headerlink" title="测试redis"></a><strong>测试redis</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">需要输入认证密码（Boco123），如下所示：</span><br><span class="line"></span><br><span class="line">cd /opt/redis/cluster-config/7001/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7001 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; set a 1</span><br><span class="line"></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">另开一个session</span><br><span class="line">cd /opt/redis/cluster-config/7002/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7002 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; get a 1</span><br><span class="line">&quot;1&quot;</span><br><span class="line"></span><br><span class="line">到这里，只要看到set进去的值能够get出来，这就说明redis已经安装成功了，测试结束。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20211213095757637.png" alt="image-20211213095757637"></p>
+<p><img src="/../img/image-20211213095803837.png" alt="image-20211213095803837"></p>
+<h3 id="真集群"><a href="#真集群" class="headerlink" title="真集群"></a>真集群</h3><p>每个机器都一样，只是没有7003~7006</p>
+<p>将文件复制到其他机器上，如果2个机器，那么每个机器3个，如果3个机器，那么每个机器2个</p>
+<p>cd /opt/redis</p>
+<p>scp -r cluster-config root@另一个服务器ip:/opt/redis/cluster-config</p>
+<p>scp -r cluster-config root@另一个服务器ip:/opt/redis/cluster-config</p>
+<p><img src="/../img/image-20211212185231903.png" alt="image-20211212185231903"></p>
+<h4 id="在第一个有redis-4-0-10的机器上，其余机器可能没有redis-4-0-10"><a href="#在第一个有redis-4-0-10的机器上，其余机器可能没有redis-4-0-10" class="headerlink" title="在第一个有redis-4.0.10的机器上，其余机器可能没有redis-4.0.10"></a>在第一个有redis-4.0.10的机器上，其余机器可能没有redis-4.0.10</h4><h5 id="设置密码-1"><a href="#设置密码-1" class="headerlink" title="设置密码"></a>设置密码</h5><p>find / -name “redis-trib.rb”</p>
+<p>vim /opt/redis/redis-4.0.10/src/redis-trib.rb</p>
+<p>第99行添加密码</p>
+<p><img src="/../img/image-20211213090142016.png" alt="image-20211213090142016"></p>
+<h5 id="集群启动和停止，在每一个机器上都复制start-all-sh和stop-all-sh分别启动"><a href="#集群启动和停止，在每一个机器上都复制start-all-sh和stop-all-sh分别启动" class="headerlink" title="集群启动和停止，在每一个机器上都复制start-all.sh和stop-all.sh分别启动"></a>集群启动和停止，在每一个机器上都复制start-all.sh和stop-all.sh分别启动</h5><p>sh start-all.sh</p>
+<p>停止</p>
+<p>sh stop-all.sh</p>
+<p>其中sh文件应该比伪集群的sh少了4行，只有7001,7002</p>
+<h5 id="创造节点-1"><a href="#创造节点-1" class="headerlink" title="创造节点"></a>创造节点</h5><p>cd /opt/redis/redis-4.0.10/src/</p>
+<p>./redis-trib.rb create –replicas 1 192.168.214.132:7001 192.168.214.132:7002 服务器1:7001 服务器1:7002 服务器2:7001 服务器2:7002</p>
+<p>选项–replicas 1 表示我们希望为集群中的每个主节点创建一个从节点。</p>
+<p>看到如下界面就证明启动成功了，看到I set the above configuration?时，输入yes即可</p>
+<p><img src="/../img/image-20211212215816226.png" alt="image-20211212215816226"></p>
+<h2 id="2-zk（最少需要三台服务器）"><a href="#2-zk（最少需要三台服务器）" class="headerlink" title="2.zk（最少需要三台服务器）"></a>2.zk（最少需要三台服务器）</h2><p>与单机其余都一样</p>
+<h3 id="vim-zoo-cfg-1"><a href="#vim-zoo-cfg-1" class="headerlink" title="vim zoo.cfg"></a>vim zoo.cfg</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/opt/zookeeper/zookeeper-3.4.9/data</span><br><span class="line">datalogDir=/opt/zookeeper/zookeeper-3.4.9/logs</span><br><span class="line">clientPort=2181</span><br><span class="line">#以下配置与单机不一致，注意ip，本机的ip用0.0.0.0</span><br><span class="line">server.1=10.12.1.50:2888:3888</span><br><span class="line">server.2=10.12.1.34:2888:3888</span><br><span class="line">server.3=10.12.1.33:2888:3888</span><br></pre></td></tr></table></figure>
+
+<p>mkdir /opt/zookeeper/zookeeper-3.4.9/data<br>mkdir /opt/zookeeper/zookeeper-3.4.9/logs</p>
+<p>firewall-cmd –zone=public –add-port=3888/tcp –permanent</p>
+<p>firewall-cmd –zone=public –add-port=2888/tcp –permanent</p>
+<p>firewall-cmd –zone=public –add-port=2181/tcp –permanent</p>
+<p>systemctl reload firewalld</p>
+<p>cd /opt/zookeeper/zookeeper-3.4.9/data</p>
+<p>vim myid     第一1，第二2，第三3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<h3 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h3><p>cd /opt/zookeeper/zookeeper-3.4.9/bin</p>
+<p>./zkServer.sh start<br>./zkServer.sh stop<br>./zkServer.sh restart<br>./zkServer.sh status</p>
+<p>第一个服务器</p>
+<p><img src="/../img/image-20211214205318046.png" alt="image-20211214205318046"></p>
+<p>第二个服务器</p>
+<p><img src="/../img/image-20211214205342980.png" alt="image-20211214205342980"></p>
+<p>第三个服务器</p>
+<p><img src="/../img/image-20211214205349339.png" alt="image-20211214205349339"></p>
+<h2 id="3-kafka"><a href="#3-kafka" class="headerlink" title="3.kafka"></a>3.kafka</h2><p>如果集群报错，看下是不是端口写错了，2181,9092</p>
+<p>cd /opt/kafka/kafka_2.12-0.10.2.1/config/</p>
+<p>vim server.properties</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#broler全局唯一编号，不能重复,1,2,3</span><br><span class="line">broker.id=1</span><br><span class="line">#打开删除topic功能</span><br><span class="line">delete.topic.enable=true</span><br><span class="line">#内网访问kafka的地址</span><br><span class="line">listeners=PLAINTEXT://ip:9092</span><br><span class="line">#kafka运行日志存放的路径</span><br><span class="line">log.dirs=/opt/kafka/logs</span><br><span class="line">#配置连接Zookeeper</span><br><span class="line">zookeeper.connect=10.12.1.50:2181,10.12.1.34:2181,10.12.1.33:2181</span><br><span class="line">#更改默认过期时间，可以不设置，默认7天168h</span><br><span class="line">log.retention.hours=24</span><br></pre></td></tr></table></figure>
+
+<p>mkdir /opt/kafka/logs</p>
+<h3 id="启动kafka-bin目录下"><a href="#启动kafka-bin目录下" class="headerlink" title="启动kafka bin目录下"></a>启动kafka bin目录下</h3><p>cd /opt/kafka/kafka_2.12-0.10.2.1/bin</p>
+<p>sh kafka-server-start.sh -daemon ../config/server.properties</p>
+<p>停止</p>
+<p>kafka-server-stop.sh stop 或者</p>
+<p>sh kafka-server-stop.sh</p>
+<p>#查看zookeeper<br>ps -ef|grep zookeeper</p>
+<p>验证Kafka是否启动成功：</p>
+<p>输入jps命令回车查看，有Kafka进程，说明启动成功</p>
+<p><img src="/../img/image-20211210164417297.png" alt="image-20211210164417297"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1.查看主题列表</span><br><span class="line">bin/kafka-topics.sh --zookeeper localhost:2181 --list</span><br><span class="line"></span><br><span class="line">2.创建topic  test</span><br><span class="line">bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test</span><br><span class="line"></span><br><span class="line">5.启动生产者</span><br><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br><span class="line"></span><br><span class="line">6.启动消费者，新窗口</span><br><span class="line">./bin/kafka-console-consumer.sh --zookeeper localhost:2181 -topic test --from-beginning</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>在131上创建了test</p>
+<p><img src="/../img/image-20211215094559262.png" alt="image-20211215094559262"></p>
+<p>在132上查，发现有test</p>
+<p><img src="/../img/image-20211215094627263.png" alt="image-20211215094627263"></p>
+<h2 id="4-nacos"><a href="#4-nacos" class="headerlink" title="4.nacos"></a>4.nacos</h2><p>进入nacos目录下conf目录，有配置文件cluster.conf.example，复制成cluster.conf</p>
+<p>mv cluster.conf.example cluster.conf</p>
+<p>vim cluster.conf</p>
+<p>设置三个端口ip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">192.168.214.131:8848</span><br><span class="line">192.168.214.132:8848</span><br><span class="line">192.168.214.133:8848</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-MySQL-数据库-与单机一致"><a href="#配置-MySQL-数据库-与单机一致" class="headerlink" title="配置 MySQL 数据库(与单机一致)"></a>配置 MySQL 数据库(与单机一致)</h3><h5 id="修改conf-application-properties-增加-mysql-数据源配置-1"><a href="#修改conf-application-properties-增加-mysql-数据源配置-1" class="headerlink" title="修改conf/application.properties,增加 mysql 数据源配置"></a>修改conf/application.properties,增加 mysql 数据源配置</h5><p>输入指令：vim /opt/nacos/nacos/conf/application.properties</p>
+<p>按住shift+g, 在文件末尾添加： 注意自己的ip地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.platform=mysql</span><br><span class="line">db.num=1</span><br><span class="line">db.url.0=jdbc:mysql://自己ip:3306/nacos_config?characterEncoding=utf8&amp;connectTimeout=10000&amp;socketTimeout=30000&amp;autoReconnect=true&amp;serverTimezone=Asia/Shanghai</span><br><span class="line">db.user=root</span><br><span class="line">db.password=Boco.123</span><br></pre></td></tr></table></figure>
+
+<h3 id="三台都启动"><a href="#三台都启动" class="headerlink" title="三台都启动"></a>三台都<strong>启动</strong></h3><ol>
+<li>进入nacos目录bin下：cd /opt/nacos/nacos/bin/</li>
+</ol>
+<p>启动命令：sh startup.sh</p>
+<p>查看运行日志： tail -500f /opt/nacos/nacos/logs/start.out</p>
+<p><img src="/../img/image-20211212145000748.png" alt="image-20211212145000748"></p>
+<p>2．界面控制台</p>
+<p>注意打开8848端口</p>
+<p>firewall-cmd –zone=public –add-port=8848/tcp –permanent</p>
+<p>systemctl reload firewalld</p>
+<p>启动完毕后。登录到界面控制台（用户名密码默认都是nacos）<a target="_blank" rel="noopener" href="http://ip:8848/nacos">http://ip:8848/nacos</a></p>
+<p>查看集群管理，发现成功了</p>
+<p><img src="/../img/image-20211215103115196.png" alt="image-20211215103115196"></p>
+<h3 id="三台都关闭"><a href="#三台都关闭" class="headerlink" title="三台都关闭"></a>三台都关闭</h3><p>进入 nacos/bin/目录下运行:  ./shutdown.sh</p>
+
+      
+    </div>
+    
+    
+    
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux%E5%8D%95%E6%9C%BA%E4%B8%8E%E9%9B%86%E7%BE%A4/" rel="tag"><i class="fa fa-at" aria-hidden="true"></i> linux单机与集群</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/30/java/" rel="prev" title="java">
+                java <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1430319727&auto=1&height=66"></iframe>
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/a.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jiangjiaxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6428447095" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://weibo.com/u/6428447095" title="小姜的微博" target="_blank">小姜的微博</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">前置安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ifconfig%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">1.ifconfig命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-vim"><span class="nav-number">2.2.</span> <span class="nav-text">2.vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E9%9D%99%E6%80%81IP"><span class="nav-number">2.3.</span> <span class="nav-text">3.修改静态IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%AE%89%E8%A3%85gcc%E4%B8%8Eg"><span class="nav-number">2.4.</span> <span class="nav-text">4.安装gcc与g++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">单机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-JDK"><span class="nav-number">3.1.</span> <span class="nav-text">1.JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-redis"><span class="nav-number">3.2.</span> <span class="nav-text">2.redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.1.</span> <span class="nav-text">修改redis配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-nacos"><span class="nav-number">3.3.</span> <span class="nav-text">3.nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEMySQL-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.3.1.</span> <span class="nav-text">配置MySQL 数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">3.1 初始化数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">3.2 配置数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9conf-application-properties-%E5%A2%9E%E5%8A%A0-mysql-%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE"><span class="nav-number">3.3.1.2.1.</span> <span class="nav-text">修改conf&#x2F;application.properties,增加 mysql 数据源配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%90%AF%E5%8A%A8"><span class="nav-number">3.3.2.</span> <span class="nav-text">4、启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Nacos%E5%85%B3%E9%97%AD"><span class="nav-number">3.3.3.</span> <span class="nav-text">5.Nacos关闭</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-mysql"><span class="nav-number">3.4.</span> <span class="nav-text">4.mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bmysql%E6%9C%8D%E5%8A%A1%E5%90%AF%E6%B2%A1%E5%90%AF%E5%8A%A8"><span class="nav-number">3.4.1.</span> <span class="nav-text">查看mysql服务启没启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8mysql"><span class="nav-number">3.4.2.</span> <span class="nav-text">启动mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2mysql"><span class="nav-number">3.4.3.</span> <span class="nav-text">停止mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E8%A7%A3%E5%86%B3%E5%B0%B1%E5%8D%B8%E8%BD%BD%E9%87%8D%E8%A3%85"><span class="nav-number">3.4.4.</span> <span class="nav-text">没有解决就卸载重装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D"><span class="nav-number">3.4.4.1.</span> <span class="nav-text">第一种</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D"><span class="nav-number">3.4.4.2.</span> <span class="nav-text">第二种</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.5.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">3.4.5.1.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-zk-2181"><span class="nav-number">3.5.</span> <span class="nav-text">5.zk-2181</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-zoo-cfg"><span class="nav-number">3.5.1.</span> <span class="nav-text">vim zoo.cfg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8bin%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="nav-number">3.5.2.</span> <span class="nav-text">启动bin目录下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-kafka-9092-D-kafka-kafka-txt"><span class="nav-number">3.6.</span> <span class="nav-text">6.kafka-9092(D:\kafka\kafka.txt)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-server-properties"><span class="nav-number">3.6.1.</span> <span class="nav-text">vim server.properties</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-nginx"><span class="nav-number">3.7.</span> <span class="nav-text">7.nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">3.7.1.</span> <span class="nav-text">启动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">3.7.1.1.</span> <span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%90%AF"><span class="nav-number">3.7.2.</span> <span class="nav-text">重启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2"><span class="nav-number">3.7.3.</span> <span class="nav-text">停止</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4"><span class="nav-number">4.</span> <span class="nav-text">集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-redis%E9%9B%86%E7%BE%A4%E5%BF%85%E9%A1%BB6%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">1.redis集群必须6个节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E9%9B%86%E7%BE%A4%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="nav-number">4.1.1.</span> <span class="nav-text">Redis集群依赖安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85%E4%BC%AA%E9%9B%86%E7%BE%A4"><span class="nav-number">4.1.2.</span> <span class="nav-text">开始安装伪集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B97001%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%EF%BC%8Credis-conf"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">修改7001文件夹的配置信息，redis.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%8C%E6%AF%8F%E5%8F%B0%E6%9C%BA%E5%99%A8%E9%83%BD%E8%A6%81%E6%94%B9"><span class="nav-number">4.1.2.2.</span> <span class="nav-text">防火墙，每台机器都要改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81"><span class="nav-number">4.1.2.3.</span> <span class="nav-text">设置密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2%EF%BC%8C"><span class="nav-number">4.1.2.4.</span> <span class="nav-text">集群启动和停止，</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stop-all-sh%E6%96%87%E4%BB%B6%E9%87%8C%E6%9C%89%E9%9C%80%E8%A6%81%E7%9A%84%E8%AF%9D%E6%9B%B4%E6%94%B9%E5%AF%86%E7%A0%81%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%9B%B4%E6%8D%A2ip%E5%9C%B0%E5%9D%80"><span class="nav-number">4.1.2.5.</span> <span class="nav-text">stop-all.sh文件里有需要的话更改密码，并且更换ip地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E9%80%A0%E8%8A%82%E7%82%B9"><span class="nav-number">4.1.2.6.</span> <span class="nav-text">创造节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95redis"><span class="nav-number">4.1.2.7.</span> <span class="nav-text">测试redis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E9%9B%86%E7%BE%A4"><span class="nav-number">4.1.3.</span> <span class="nav-text">真集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9C%89redis-4-0-10%E7%9A%84%E6%9C%BA%E5%99%A8%E4%B8%8A%EF%BC%8C%E5%85%B6%E4%BD%99%E6%9C%BA%E5%99%A8%E5%8F%AF%E8%83%BD%E6%B2%A1%E6%9C%89redis-4-0-10"><span class="nav-number">4.1.3.1.</span> <span class="nav-text">在第一个有redis-4.0.10的机器上，其余机器可能没有redis-4.0.10</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81-1"><span class="nav-number">4.1.3.1.1.</span> <span class="nav-text">设置密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2%EF%BC%8C%E5%9C%A8%E6%AF%8F%E4%B8%80%E4%B8%AA%E6%9C%BA%E5%99%A8%E4%B8%8A%E9%83%BD%E5%A4%8D%E5%88%B6start-all-sh%E5%92%8Cstop-all-sh%E5%88%86%E5%88%AB%E5%90%AF%E5%8A%A8"><span class="nav-number">4.1.3.1.2.</span> <span class="nav-text">集群启动和停止，在每一个机器上都复制start-all.sh和stop-all.sh分别启动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E9%80%A0%E8%8A%82%E7%82%B9-1"><span class="nav-number">4.1.3.1.3.</span> <span class="nav-text">创造节点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-zk%EF%BC%88%E6%9C%80%E5%B0%91%E9%9C%80%E8%A6%81%E4%B8%89%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">2.zk（最少需要三台服务器）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-zoo-cfg-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">vim zoo.cfg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E9%9B%86%E7%BE%A4"><span class="nav-number">4.2.2.</span> <span class="nav-text">启动集群</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-kafka"><span class="nav-number">4.3.</span> <span class="nav-text">3.kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8kafka-bin%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="nav-number">4.3.1.</span> <span class="nav-text">启动kafka bin目录下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">4.3.2.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-nacos"><span class="nav-number">4.4.</span> <span class="nav-text">4.nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%B8%8E%E5%8D%95%E6%9C%BA%E4%B8%80%E8%87%B4"><span class="nav-number">4.4.1.</span> <span class="nav-text">配置 MySQL 数据库(与单机一致)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9conf-application-properties-%E5%A2%9E%E5%8A%A0-mysql-%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE-1"><span class="nav-number">4.4.1.0.1.</span> <span class="nav-text">修改conf&#x2F;application.properties,增加 mysql 数据源配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%8F%B0%E9%83%BD%E5%90%AF%E5%8A%A8"><span class="nav-number">4.4.2.</span> <span class="nav-text">三台都启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%8F%B0%E9%83%BD%E5%85%B3%E9%97%AD"><span class="nav-number">4.4.3.</span> <span class="nav-text">三台都关闭</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.JIANG</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
