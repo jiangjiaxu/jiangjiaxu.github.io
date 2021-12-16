@@ -88,7 +88,7 @@
 
 <meta name="description" content="背景1.宁杭出差，发现同事安装软件是的厉害，自己啥都不会，所以决心安装单机和集群，但是也仅仅是安装，后续使用需要待定 2.用的虚拟机，centos7，最小安装，所以需要一些前置安装 前置安装1.ifconfig命令yum install net-tools.x86_64 2.vimyum -y install vim* 3.修改静态IPcd &#x2F;etc&#x2F;sysconfig&#x2F;network-scrip">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux命令">
+<meta property="og:title" content="linux单机与集群">
 <meta property="og:url" content="http://xiaojiangzbc.top/2021/11/30/linux%E5%8D%95%E6%9C%BA%E4%B8%8E%E9%9B%86%E7%BE%A4/index.html">
 <meta property="og:site_name" content="小姜的博客">
 <meta property="og:description" content="背景1.宁杭出差，发现同事安装软件是的厉害，自己啥都不会，所以决心安装单机和集群，但是也仅仅是安装，后续使用需要待定 2.用的虚拟机，centos7，最小安装，所以需要一些前置安装 前置安装1.ifconfig命令yum install net-tools.x86_64 2.vimyum -y install vim* 3.修改静态IPcd &#x2F;etc&#x2F;sysconfig&#x2F;network-scrip">
@@ -136,7 +136,7 @@
 <meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212145000748.png">
 <meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211215103115196.png">
 <meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
-<meta property="article:modified_time" content="2021-12-16T00:29:51.773Z">
+<meta property="article:modified_time" content="2021-12-16T07:34:07.662Z">
 <meta property="article:author" content="Mr.JIANG">
 <meta property="article:tag" content="linux单机与集群">
 <meta name="twitter:card" content="summary">
@@ -176,7 +176,7 @@
 
 
 
-  <title>linux命令 | 小姜的博客</title>
+  <title>linux单机与集群 | 小姜的博客</title>
   
 
 
@@ -355,7 +355,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">linux命令</h1>
+          <h1 class="post-title" itemprop="name headline">linux单机与集群</h1>
         
 
         <div class="post-meta">
@@ -684,14 +684,14 @@
 <p>再次 gem install -l redis-3.3.5.gem即可</p>
 <p>3)安装完毕，提示”1 gem installed”，并且输入：gem list，有红框提示，截图如下</p>
 <p><img src="/../img/image-20211212212510719.png" alt="image-20211212212510719"></p>
-<h3 id="开始安装伪集群"><a href="#开始安装伪集群" class="headerlink" title="开始安装伪集群"></a>开始安装伪集群</h3><p>cd /opt</p>
+<h3 id="开始安装伪集群"><a href="#开始安装伪集群" class="headerlink" title="开始安装伪集群"></a>开始安装伪集群</h3><p>cd /usr/local</p>
 <p>mkdir redis</p>
 <p>cd redis</p>
 <p>把redis-4.0.10.tar.gz移动到当前目录解压</p>
 <p>tar -zvxf redis-4.0.10.tar.gz</p>
 <p>cd redis-4.0.10</p>
-<p>make install PREFIX=/opt/redis/redis-4.0.10</p>
-<p>cd /opt/redis</p>
+<p>make install PREFIX=/usr/local/redis/redis-4.0.10</p>
+<p>cd /usr/local/redis</p>
 <p>mkdir cluster-config</p>
 <p>cd cluster-config</p>
 <p>mkdir 7001</p>
@@ -701,30 +701,30 @@
 <p>mkdir 7005</p>
 <p>mkdir 7006</p>
 <p>复制bin文件到700*中</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7001</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7002</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7003</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7004</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7005</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7006</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7001</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7002</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7003</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7004</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7005</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7006</p>
 <p>redis.conf文件先不全部复制过去，先只复制到7001，等改完7001在复制</p>
 <p>cp -r /usr/local/redis/redis-4.0.10/redis.conf  /usr/local/redis/cluster-config/7001/</p>
 <h4 id="修改7001文件夹的配置信息，redis-conf"><a href="#修改7001文件夹的配置信息，redis-conf" class="headerlink" title="修改7001文件夹的配置信息，redis.conf"></a>修改7001文件夹的配置信息，redis.conf</h4><p>文件如下内容：</p>
-<p>vim /opt/redis/cluster-config/7001/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7001/redis.conf</p>
 <p>7001：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">port 7001</span><br><span class="line">protected-mode no</span><br><span class="line">daemonize yes</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes-7001.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">appendonly yes</span><br><span class="line">masterauth Boco123 这个找到以后在下面自己写</span><br><span class="line">requirepass Boco123</span><br><span class="line">bind 10.12.1.33</span><br><span class="line">logfile &quot;/opt/redis/cluster-config/7001/redis.log&quot;</span><br><span class="line">dir /opt/redis/cluster-config/7001/</span><br><span class="line">pidfile cluster-config/7001.pid/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">port 7001</span><br><span class="line">protected-mode no</span><br><span class="line">daemonize yes</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes-7001.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">appendonly yes</span><br><span class="line">masterauth Boco123 这个找到以后在下面自己写</span><br><span class="line">requirepass Boco123</span><br><span class="line">bind 10.12.1.33</span><br><span class="line">logfile &quot;/usr/local/redis/cluster-config/7001/redis.log&quot;</span><br><span class="line">dir /usr/local/redis/cluster-config/7001/</span><br><span class="line">pidfile cluster-config/7001.pid/</span><br></pre></td></tr></table></figure>
 
 <p>把reds.conf复制 到另外5个文件夹</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7002</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7003</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7004</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7005</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7006</p>
-<p>vim /opt/redis/cluster-config/7002/redis.conf</p>
-<p>vim /opt/redis/cluster-config/7003/redis.conf</p>
-<p>vim /opt/redis/cluster-config/7004/redis.conf</p>
-<p>vim /opt/redis/cluster-config/7005/redis.conf</p>
-<p>vim /opt/redis/cluster-config/7006/redis.conf</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7002</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7003</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7004</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7005</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7006</p>
+<p>vim /usr/local/redis/cluster-config/7002/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7003/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7004/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7005/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7006/redis.conf</p>
 <p>替换每一个端口</p>
 <p>:%s/7001/7002/g</p>
 <p>:%s/7001/7003/g</p>
@@ -736,40 +736,40 @@
 <p><img src="/../img/image-20211214104015438.png" alt="image-20211214104015438"></p>
 <p>firewall-cmd –zone=public –add-port=1700*/tcp –permanent</p>
 <p>systemctl reload firewalld</p>
-<p>把下图的三个文件粘到/opt/redis/cluster-config/下</p>
+<p>把下图的三个文件粘到/usr/local/redis/cluster-config/下</p>
 <p><img src="/../img/image-20211213085657656.png" alt="image-20211213085657656"></p>
 <p>chmod +x start-all.sh<br>chmod +x stop-all.sh</p>
 <h4 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h4><p>find / -name “redis-trib.rb”</p>
-<p>vim /opt/redis/redis-4.0.10/src/redis-trib.rb</p>
+<p>vim /usr/local/redis/redis-4.0.10/src/redis-trib.rb</p>
 <p>第99行添加密码</p>
 <p>, :password =&gt; “Boco123”</p>
 <p><img src="/../img/image-20211213090142016.png" alt="image-20211213090142016"></p>
 <h4 id="集群启动和停止，"><a href="#集群启动和停止，" class="headerlink" title="集群启动和停止，"></a>集群启动和停止，</h4><p>sh start-all.sh</p>
 <p>ps -ef|grep redis     验证一下</p>
 <h4 id="stop-all-sh文件里有需要的话更改密码，并且更换ip地址"><a href="#stop-all-sh文件里有需要的话更改密码，并且更换ip地址" class="headerlink" title="stop-all.sh文件里有需要的话更改密码，并且更换ip地址"></a>stop-all.sh文件里有需要的话更改密码，并且更换ip地址</h4><p>sh stop-all.sh</p>
-<h4 id="创造节点"><a href="#创造节点" class="headerlink" title="创造节点"></a>创造节点</h4><p>cd /opt/redis/redis-4.0.10/src/</p>
+<h4 id="创造节点"><a href="#创造节点" class="headerlink" title="创造节点"></a>创造节点</h4><p>cd /usr/local/redis/redis-4.0.10/src/</p>
 <p>./redis-trib.rb create –replicas 1 192.168.214.132:7001 192.168.214.132:7002 192.168.214.132:7003 192.168.214.132:7004 192.168.214.132:7005 192.168.214.132:7006 </p>
 <p>./redis-trib.rb create –replicas 1 10.12.1.50:7001 10.12.1.50:7002 10.12.1.50:7003 10.12.1.50:7004 10.12.1.50:7005 10.12.1.50:7006 </p>
 <p><img src="/../img/image-20211213090519363.png" alt="image-20211213090519363"></p>
-<h4 id="测试redis"><a href="#测试redis" class="headerlink" title="测试redis"></a><strong>测试redis</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">需要输入认证密码（Boco123），如下所示：</span><br><span class="line"></span><br><span class="line">cd /opt/redis/cluster-config/7001/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7001 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; set a 1</span><br><span class="line"></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">另开一个session</span><br><span class="line">cd /opt/redis/cluster-config/7002/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7002 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; get a 1</span><br><span class="line">&quot;1&quot;</span><br><span class="line"></span><br><span class="line">到这里，只要看到set进去的值能够get出来，这就说明redis已经安装成功了，测试结束。</span><br></pre></td></tr></table></figure>
+<h4 id="测试redis"><a href="#测试redis" class="headerlink" title="测试redis"></a><strong>测试redis</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">需要输入认证密码（Boco123），如下所示：</span><br><span class="line"></span><br><span class="line">cd /usr/local/redis/cluster-config/7001/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7001 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; set a 1</span><br><span class="line"></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">另开一个session</span><br><span class="line">cd /usr/local/redis/cluster-config/7002/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7002 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; get a 1</span><br><span class="line">&quot;1&quot;</span><br><span class="line"></span><br><span class="line">到这里，只要看到set进去的值能够get出来，这就说明redis已经安装成功了，测试结束。</span><br></pre></td></tr></table></figure>
 
 <p><img src="/../img/image-20211213095757637.png" alt="image-20211213095757637"></p>
 <p><img src="/../img/image-20211213095803837.png" alt="image-20211213095803837"></p>
 <h3 id="真集群"><a href="#真集群" class="headerlink" title="真集群"></a>真集群</h3><p>每个机器都一样，只是没有7003~7006</p>
 <p>将文件复制到其他机器上，如果2个机器，那么每个机器3个，如果3个机器，那么每个机器2个</p>
-<p>cd /opt/redis</p>
-<p>scp -r cluster-config root@另一个服务器ip:/opt/redis/cluster-config</p>
-<p>scp -r cluster-config root@另一个服务器ip:/opt/redis/cluster-config</p>
+<p>cd /usr/local/redis</p>
+<p>scp -r cluster-config root@另一个服务器ip:/usr/local/redis/cluster-config</p>
+<p>scp -r cluster-config root@另一个服务器ip:/usr/local/redis/cluster-config</p>
 <p><img src="/../img/image-20211212185231903.png" alt="image-20211212185231903"></p>
 <h4 id="在第一个有redis-4-0-10的机器上，其余机器可能没有redis-4-0-10"><a href="#在第一个有redis-4-0-10的机器上，其余机器可能没有redis-4-0-10" class="headerlink" title="在第一个有redis-4.0.10的机器上，其余机器可能没有redis-4.0.10"></a>在第一个有redis-4.0.10的机器上，其余机器可能没有redis-4.0.10</h4><h5 id="设置密码-1"><a href="#设置密码-1" class="headerlink" title="设置密码"></a>设置密码</h5><p>find / -name “redis-trib.rb”</p>
-<p>vim /opt/redis/redis-4.0.10/src/redis-trib.rb</p>
+<p>vim /usr/local/redis/redis-4.0.10/src/redis-trib.rb</p>
 <p>第99行添加密码</p>
 <p><img src="/../img/image-20211213090142016.png" alt="image-20211213090142016"></p>
 <h5 id="集群启动和停止，在每一个机器上都复制start-all-sh和stop-all-sh分别启动"><a href="#集群启动和停止，在每一个机器上都复制start-all-sh和stop-all-sh分别启动" class="headerlink" title="集群启动和停止，在每一个机器上都复制start-all.sh和stop-all.sh分别启动"></a>集群启动和停止，在每一个机器上都复制start-all.sh和stop-all.sh分别启动</h5><p>sh start-all.sh</p>
 <p>停止</p>
 <p>sh stop-all.sh</p>
 <p>其中sh文件应该比伪集群的sh少了4行，只有7001,7002</p>
-<h5 id="创造节点-1"><a href="#创造节点-1" class="headerlink" title="创造节点"></a>创造节点</h5><p>cd /opt/redis/redis-4.0.10/src/</p>
+<h5 id="创造节点-1"><a href="#创造节点-1" class="headerlink" title="创造节点"></a>创造节点</h5><p>cd /usr/local/redis/redis-4.0.10/src/</p>
 <p>./redis-trib.rb create –replicas 1 192.168.214.132:7001 192.168.214.132:7002 服务器1:7001 服务器1:7002 服务器2:7001 服务器2:7002</p>
 <p>选项–replicas 1 表示我们希望为集群中的每个主节点创建一个从节点。</p>
 <p>看到如下界面就证明启动成功了，看到I set the above configuration?时，输入yes即可</p>
@@ -879,6 +879,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/30/spring-cloud-alibaba/" rel="next" title="springcloud-alibaba">
+                <i class="fa fa-chevron-left"></i> springcloud-alibaba
+              </a>
             
           </div>
 
@@ -994,7 +998,7 @@ var jiathis_config={
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1016,7 +1020,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

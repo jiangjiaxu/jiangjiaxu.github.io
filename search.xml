@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2021/12/09/Hutool/</url>
+    <title>hutool</title>
+    <url>/2021/11/30/Hutool/</url>
     <content><![CDATA[<h1 id="日期相关"><a href="#日期相关" class="headerlink" title="日期相关"></a>日期相关</h1><h2 id="当前时间"><a href="#当前时间" class="headerlink" title="当前时间"></a>当前时间</h2><p> Date date = DateUtil.date();</p>
 <h2 id="当前时间字符串，格式：yyyy-MM-dd-HH-mm-ss"><a href="#当前时间字符串，格式：yyyy-MM-dd-HH-mm-ss" class="headerlink" title="当前时间字符串，格式：yyyy-MM-dd HH:mm:ss"></a>当前时间字符串，格式：yyyy-MM-dd HH:mm:ss</h2><p>String now = DateUtil.now(); </p>
 <h2 id="当前日期字符串，格式：yyyy-MM-dd"><a href="#当前日期字符串，格式：yyyy-MM-dd" class="headerlink" title="当前日期字符串，格式：yyyy-MM-dd"></a>当前日期字符串，格式：yyyy-MM-dd</h2><p>String today= DateUtil.today();</p>
@@ -22,6 +22,12 @@
 <p>//获得月份枚举 </p>
 <p>DateUtil.monthEnum(date);</p>
 <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">转str</span><br><span class="line">Convert.toStr();</span><br><span class="line">为null为默认值</span><br><span class="line">Convert.toStr(null,&quot;aaa&quot;);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>hutool</tag>
+      </tags>
   </entry>
   <entry>
     <title>cookie-session-token</title>
@@ -330,6 +336,7 @@
 <h4 id="删除某个端口"><a href="#删除某个端口" class="headerlink" title="删除某个端口"></a>删除某个端口</h4><p>firewall-cmd –permanent –zone=public –remove-port=81/tcp</p>
 <h3 id="关闭指定进程号"><a href="#关闭指定进程号" class="headerlink" title="关闭指定进程号"></a>关闭指定进程号</h3><p>kill -9 进程号PID</p>
 <h3 id="查看端口有没有被占用"><a href="#查看端口有没有被占用" class="headerlink" title="查看端口有没有被占用"></a>查看端口有没有被占用</h3><p>netstat -tunlp|grep 端口号，有的话kill掉，或者改用其他端口</p>
+<p>netstat -lnp | grep 端口号</p>
 <p>netstat -anp | grep :端口号   也可以，注意有冒号</p>
 <h3 id="执行jar包，通用脚本文件"><a href="#执行jar包，通用脚本文件" class="headerlink" title="执行jar包，通用脚本文件"></a>执行jar包，通用脚本文件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">jar_pid=`ps -ef|grep -v grep | grep &#x27;example.jar&#x27;|awk &#x27;&#123; print $2 &#125;&#x27;`</span><br><span class="line">echo $jar_pid</span><br><span class="line">if [ ! -n &quot;$jar_pid&quot; ]; then</span><br><span class="line">echo &#x27;will redploy.&#x27;</span><br><span class="line"></span><br><span class="line">rm -rf nohup.out</span><br><span class="line">nohup java -Xms512m -Xmx2048m -Dspring.profiles.active=pro -jar example.jar &amp;</span><br><span class="line">echo &#x27;redploy success0.&#x27;</span><br><span class="line">else</span><br><span class="line">kill -9 $jar_pid</span><br><span class="line">echo &#x27;kill&#x27; $jar_pid</span><br><span class="line"></span><br><span class="line">rm -rf nohup.out</span><br><span class="line">nohup java -Xms512m -Xmx2048m -Dspring.profiles.active=pro -jar example.jar &amp;</span><br><span class="line">echo &#x27;redploy success1.&#x27;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
@@ -377,6 +384,7 @@
 <p>-c /etc/yum.conf                  表示指定yum配置文件地址</p>
 <p>–installroot=/usr/local        表示指定自定义的安装目录</p>
 <h2 id="需要签名"><a href="#需要签名" class="headerlink" title="需要签名"></a>需要签名</h2><p>后面加上  –nogpgcheck</p>
+<p>查看纽扣</p>
 ]]></content>
       <categories>
         <category>linux</category>
@@ -959,7 +967,7 @@ public class JSONUtils &#123;
       </tags>
   </entry>
   <entry>
-    <title>linux命令</title>
+    <title>linux单机与集群</title>
     <url>/2021/11/30/linux%E5%8D%95%E6%9C%BA%E4%B8%8E%E9%9B%86%E7%BE%A4/</url>
     <content><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>1.宁杭出差，发现同事安装软件是的厉害，自己啥都不会，所以决心安装单机和集群，但是也仅仅是安装，后续使用需要待定</p>
 <p>2.用的虚拟机，centos7，最小安装，所以需要一些前置安装</p>
@@ -1182,14 +1190,14 @@ public class JSONUtils &#123;
 <p>再次 gem install -l redis-3.3.5.gem即可</p>
 <p>3)安装完毕，提示”1 gem installed”，并且输入：gem list，有红框提示，截图如下</p>
 <p><img src="/../img/image-20211212212510719.png" alt="image-20211212212510719"></p>
-<h3 id="开始安装伪集群"><a href="#开始安装伪集群" class="headerlink" title="开始安装伪集群"></a>开始安装伪集群</h3><p>cd /opt</p>
+<h3 id="开始安装伪集群"><a href="#开始安装伪集群" class="headerlink" title="开始安装伪集群"></a>开始安装伪集群</h3><p>cd /usr/local</p>
 <p>mkdir redis</p>
 <p>cd redis</p>
 <p>把redis-4.0.10.tar.gz移动到当前目录解压</p>
 <p>tar -zvxf redis-4.0.10.tar.gz</p>
 <p>cd redis-4.0.10</p>
-<p>make install PREFIX=/opt/redis/redis-4.0.10</p>
-<p>cd /opt/redis</p>
+<p>make install PREFIX=/usr/local/redis/redis-4.0.10</p>
+<p>cd /usr/local/redis</p>
 <p>mkdir cluster-config</p>
 <p>cd cluster-config</p>
 <p>mkdir 7001</p>
@@ -1199,30 +1207,30 @@ public class JSONUtils &#123;
 <p>mkdir 7005</p>
 <p>mkdir 7006</p>
 <p>复制bin文件到700*中</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7001</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7002</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7003</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7004</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7005</p>
-<p>cp -r /opt/redis/redis-4.0.10/bin /opt/redis/cluster-config/7006</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7001</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7002</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7003</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7004</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7005</p>
+<p>cp -r /usr/local/redis/redis-4.0.10/bin /usr/local/redis/cluster-config/7006</p>
 <p>redis.conf文件先不全部复制过去，先只复制到7001，等改完7001在复制</p>
 <p>cp -r /usr/local/redis/redis-4.0.10/redis.conf  /usr/local/redis/cluster-config/7001/</p>
 <h4 id="修改7001文件夹的配置信息，redis-conf"><a href="#修改7001文件夹的配置信息，redis-conf" class="headerlink" title="修改7001文件夹的配置信息，redis.conf"></a>修改7001文件夹的配置信息，redis.conf</h4><p>文件如下内容：</p>
-<p>vim /opt/redis/cluster-config/7001/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7001/redis.conf</p>
 <p>7001：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">port 7001</span><br><span class="line">protected-mode no</span><br><span class="line">daemonize yes</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes-7001.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">appendonly yes</span><br><span class="line">masterauth Boco123 这个找到以后在下面自己写</span><br><span class="line">requirepass Boco123</span><br><span class="line">bind 10.12.1.33</span><br><span class="line">logfile &quot;/opt/redis/cluster-config/7001/redis.log&quot;</span><br><span class="line">dir /opt/redis/cluster-config/7001/</span><br><span class="line">pidfile cluster-config/7001.pid/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">port 7001</span><br><span class="line">protected-mode no</span><br><span class="line">daemonize yes</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes-7001.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">appendonly yes</span><br><span class="line">masterauth Boco123 这个找到以后在下面自己写</span><br><span class="line">requirepass Boco123</span><br><span class="line">bind 10.12.1.33</span><br><span class="line">logfile &quot;/usr/local/redis/cluster-config/7001/redis.log&quot;</span><br><span class="line">dir /usr/local/redis/cluster-config/7001/</span><br><span class="line">pidfile cluster-config/7001.pid/</span><br></pre></td></tr></table></figure>
 
 <p>把reds.conf复制 到另外5个文件夹</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7002</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7003</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7004</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7005</p>
-<p>cp -r /opt/redis/cluster-config/7001/redis.conf /opt/redis/cluster-config/7006</p>
-<p>vim /opt/redis/cluster-config/7002/redis.conf</p>
-<p>vim /opt/redis/cluster-config/7003/redis.conf</p>
-<p>vim /opt/redis/cluster-config/7004/redis.conf</p>
-<p>vim /opt/redis/cluster-config/7005/redis.conf</p>
-<p>vim /opt/redis/cluster-config/7006/redis.conf</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7002</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7003</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7004</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7005</p>
+<p>cp -r /usr/local/redis/cluster-config/7001/redis.conf /usr/local/redis/cluster-config/7006</p>
+<p>vim /usr/local/redis/cluster-config/7002/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7003/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7004/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7005/redis.conf</p>
+<p>vim /usr/local/redis/cluster-config/7006/redis.conf</p>
 <p>替换每一个端口</p>
 <p>:%s/7001/7002/g</p>
 <p>:%s/7001/7003/g</p>
@@ -1234,40 +1242,40 @@ public class JSONUtils &#123;
 <p><img src="/../img/image-20211214104015438.png" alt="image-20211214104015438"></p>
 <p>firewall-cmd –zone=public –add-port=1700*/tcp –permanent</p>
 <p>systemctl reload firewalld</p>
-<p>把下图的三个文件粘到/opt/redis/cluster-config/下</p>
+<p>把下图的三个文件粘到/usr/local/redis/cluster-config/下</p>
 <p><img src="/../img/image-20211213085657656.png" alt="image-20211213085657656"></p>
 <p>chmod +x start-all.sh<br>chmod +x stop-all.sh</p>
 <h4 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h4><p>find / -name “redis-trib.rb”</p>
-<p>vim /opt/redis/redis-4.0.10/src/redis-trib.rb</p>
+<p>vim /usr/local/redis/redis-4.0.10/src/redis-trib.rb</p>
 <p>第99行添加密码</p>
 <p>, :password =&gt; “Boco123”</p>
 <p><img src="/../img/image-20211213090142016.png" alt="image-20211213090142016"></p>
 <h4 id="集群启动和停止，"><a href="#集群启动和停止，" class="headerlink" title="集群启动和停止，"></a>集群启动和停止，</h4><p>sh start-all.sh</p>
 <p>ps -ef|grep redis     验证一下</p>
 <h4 id="stop-all-sh文件里有需要的话更改密码，并且更换ip地址"><a href="#stop-all-sh文件里有需要的话更改密码，并且更换ip地址" class="headerlink" title="stop-all.sh文件里有需要的话更改密码，并且更换ip地址"></a>stop-all.sh文件里有需要的话更改密码，并且更换ip地址</h4><p>sh stop-all.sh</p>
-<h4 id="创造节点"><a href="#创造节点" class="headerlink" title="创造节点"></a>创造节点</h4><p>cd /opt/redis/redis-4.0.10/src/</p>
+<h4 id="创造节点"><a href="#创造节点" class="headerlink" title="创造节点"></a>创造节点</h4><p>cd /usr/local/redis/redis-4.0.10/src/</p>
 <p>./redis-trib.rb create –replicas 1 192.168.214.132:7001 192.168.214.132:7002 192.168.214.132:7003 192.168.214.132:7004 192.168.214.132:7005 192.168.214.132:7006 </p>
 <p>./redis-trib.rb create –replicas 1 10.12.1.50:7001 10.12.1.50:7002 10.12.1.50:7003 10.12.1.50:7004 10.12.1.50:7005 10.12.1.50:7006 </p>
 <p><img src="/../img/image-20211213090519363.png" alt="image-20211213090519363"></p>
-<h4 id="测试redis"><a href="#测试redis" class="headerlink" title="测试redis"></a><strong>测试redis</strong></h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">需要输入认证密码（Boco123），如下所示：</span><br><span class="line"></span><br><span class="line">cd /opt/redis/cluster-config/7001/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7001 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; set a 1</span><br><span class="line"></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">另开一个session</span><br><span class="line">cd /opt/redis/cluster-config/7002/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7002 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; get a 1</span><br><span class="line">&quot;1&quot;</span><br><span class="line"></span><br><span class="line">到这里，只要看到set进去的值能够get出来，这就说明redis已经安装成功了，测试结束。</span><br></pre></td></tr></table></figure>
+<h4 id="测试redis"><a href="#测试redis" class="headerlink" title="测试redis"></a><strong>测试redis</strong></h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">需要输入认证密码（Boco123），如下所示：</span><br><span class="line"></span><br><span class="line">cd /usr/local/redis/cluster-config/7001/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7001 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; set a 1</span><br><span class="line"></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">另开一个session</span><br><span class="line">cd /usr/local/redis/cluster-config/7002/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7002 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; get a 1</span><br><span class="line">&quot;1&quot;</span><br><span class="line"></span><br><span class="line">到这里，只要看到set进去的值能够get出来，这就说明redis已经安装成功了，测试结束。</span><br></pre></td></tr></table></figure>
 
 <p><img src="/../img/image-20211213095757637.png" alt="image-20211213095757637"></p>
 <p><img src="/../img/image-20211213095803837.png" alt="image-20211213095803837"></p>
 <h3 id="真集群"><a href="#真集群" class="headerlink" title="真集群"></a>真集群</h3><p>每个机器都一样，只是没有7003~7006</p>
 <p>将文件复制到其他机器上，如果2个机器，那么每个机器3个，如果3个机器，那么每个机器2个</p>
-<p>cd /opt/redis</p>
-<p>scp -r cluster-config root@另一个服务器ip:/opt/redis/cluster-config</p>
-<p>scp -r cluster-config root@另一个服务器ip:/opt/redis/cluster-config</p>
+<p>cd /usr/local/redis</p>
+<p>scp -r cluster-config root@另一个服务器ip:/usr/local/redis/cluster-config</p>
+<p>scp -r cluster-config root@另一个服务器ip:/usr/local/redis/cluster-config</p>
 <p><img src="/../img/image-20211212185231903.png" alt="image-20211212185231903"></p>
 <h4 id="在第一个有redis-4-0-10的机器上，其余机器可能没有redis-4-0-10"><a href="#在第一个有redis-4-0-10的机器上，其余机器可能没有redis-4-0-10" class="headerlink" title="在第一个有redis-4.0.10的机器上，其余机器可能没有redis-4.0.10"></a>在第一个有redis-4.0.10的机器上，其余机器可能没有redis-4.0.10</h4><h5 id="设置密码-1"><a href="#设置密码-1" class="headerlink" title="设置密码"></a>设置密码</h5><p>find / -name “redis-trib.rb”</p>
-<p>vim /opt/redis/redis-4.0.10/src/redis-trib.rb</p>
+<p>vim /usr/local/redis/redis-4.0.10/src/redis-trib.rb</p>
 <p>第99行添加密码</p>
 <p><img src="/../img/image-20211213090142016.png" alt="image-20211213090142016"></p>
 <h5 id="集群启动和停止，在每一个机器上都复制start-all-sh和stop-all-sh分别启动"><a href="#集群启动和停止，在每一个机器上都复制start-all-sh和stop-all-sh分别启动" class="headerlink" title="集群启动和停止，在每一个机器上都复制start-all.sh和stop-all.sh分别启动"></a>集群启动和停止，在每一个机器上都复制start-all.sh和stop-all.sh分别启动</h5><p>sh start-all.sh</p>
 <p>停止</p>
 <p>sh stop-all.sh</p>
 <p>其中sh文件应该比伪集群的sh少了4行，只有7001,7002</p>
-<h5 id="创造节点-1"><a href="#创造节点-1" class="headerlink" title="创造节点"></a>创造节点</h5><p>cd /opt/redis/redis-4.0.10/src/</p>
+<h5 id="创造节点-1"><a href="#创造节点-1" class="headerlink" title="创造节点"></a>创造节点</h5><p>cd /usr/local/redis/redis-4.0.10/src/</p>
 <p>./redis-trib.rb create –replicas 1 192.168.214.132:7001 192.168.214.132:7002 服务器1:7001 服务器1:7002 服务器2:7001 服务器2:7002</p>
 <p>选项–replicas 1 表示我们希望为集群中的每个主节点创建一个从节点。</p>
 <p>看到如下界面就证明启动成功了，看到I set the above configuration?时，输入yes即可</p>
@@ -1344,6 +1352,243 @@ public class JSONUtils &#123;
       </categories>
       <tags>
         <tag>linux单机与集群</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>springcloud-alibaba</title>
+    <url>/2021/11/30/spring-cloud-alibaba/</url>
+    <content><![CDATA[<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211022105939305.png" alt="image-20211022105939305"></p>
+<p><a href="https://blog.csdn.net/zhongzk69/article/details/105095834/">https://blog.csdn.net/zhongzk69/article/details/105095834/</a></p>
+<h1 id="springcloud-alibaba"><a href="#springcloud-alibaba" class="headerlink" title="springcloud-alibaba"></a>springcloud-alibaba</h1><p>在公共依赖common里引入依赖</p>
+<p>注意版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-alibaba-dependencies&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.1.0.RELEASE&lt;/version&gt;</span><br><span class="line">            &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">            &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>中文文档</p>
+<p><a href="https://github.com/alibaba/spring-cloud-alibaba/blob/master/README-zh.md">https://github.com/alibaba/spring-cloud-alibaba/blob/master/README-zh.md</a></p>
+<p><a href="https://spring.io/projects/spring-cloud">https://spring.io/projects/spring-cloud</a></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025191043897.png" alt="image-20211025191043897"></p>
+<h1 id="1-nacos注册中心"><a href="#1-nacos注册中心" class="headerlink" title="1.nacos注册中心"></a>1.nacos注册中心</h1><h2 id="1-pom"><a href="#1-pom" class="headerlink" title="1.pom"></a>1.pom</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;</span><br><span class="line"> &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><p>在应用的 /src/main/resources/application.properties 配置文件中配置 Nacos Server 地址，以及spring名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848</span><br></pre></td></tr></table></figure>
+
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025195219412.png" alt="image-20211025195219412"></p>
+<h2 id="3-下载nacos-server"><a href="#3-下载nacos-server" class="headerlink" title="3.下载nacos server"></a>3.下载nacos server</h2><p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025193113285.png" alt="image-20211025193113285"></p>
+<h3 id="windos下zip"><a href="#windos下zip" class="headerlink" title="windos下zip"></a>windos下zip</h3><p>下载解压，bin双击startup.cmd</p>
+<p>如果报错</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025195934257.png" alt="image-20211025195934257"></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025195550728.png" alt="image-20211025195550728"></p>
+<h3 id="Linux下tar-gz"><a href="#Linux下tar-gz" class="headerlink" title="Linux下tar.gz"></a>Linux下tar.gz</h3><h2 id="4-使用-EnableDiscoveryClient"><a href="#4-使用-EnableDiscoveryClient" class="headerlink" title="4.使用 @EnableDiscoveryClient"></a>4.使用 @EnableDiscoveryClient</h2><p>注解开启服务注册与发现功能</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableDiscoveryClient</span><br><span class="line">public class ProviderApplication &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(ProviderApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-访问http-localhost-8848-nacos"><a href="#5-访问http-localhost-8848-nacos" class="headerlink" title="5.访问http://localhost:8848/nacos"></a>5.访问<a href="http://localhost:8848/nacos">http://localhost:8848/nacos</a></h2><p>账号密码</p>
+<p>nacos/nacos</p>
+<h1 id="2-openFegin远程调用"><a href="#2-openFegin远程调用" class="headerlink" title="2.openFegin远程调用"></a>2.openFegin远程调用</h1><h2 id="1-pom-1"><a href="#1-pom-1" class="headerlink" title="1.pom"></a>1.pom</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-远程调用步骤"><a href="#2-远程调用步骤" class="headerlink" title="2.远程调用步骤"></a>2.远程调用步骤</h2><p>编写一个接口，告诉springcloud这个接口需要调用远程服务，把这种接口都放在fegin包下</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025201021518.png" alt="image-20211025201021518"></p>
+<p>member想要远程调用coupon服务</p>
+<p>coupon在controller里有这样一个方法</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025201053269.png" alt="image-20211025201053269"></p>
+<p>而member想要调用，首先在fegin包下创建service</p>
+<p>加上@FeignClient()注解</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025201515603.png" alt="image-20211025201515603"></p>
+<p>方法mapping要是coupon在controller里全路径，返回值和方法名不变，</p>
+<p>注释是interface</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025201411302.png" alt="image-20211025201411302"></p>
+<h2 id="3-开启远程调用功能"><a href="#3-开启远程调用功能" class="headerlink" title="3.开启远程调用功能"></a>3.开启远程调用功能</h2><p>在member</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025201816108.png" alt="image-20211025201621844"></p>
+<h2 id="4-错误"><a href="#4-错误" class="headerlink" title="4.错误"></a>4.错误</h2><h3 id="No-Feign-Client-for-loadBalancing-defined-错误"><a href="#No-Feign-Client-for-loadBalancing-defined-错误" class="headerlink" title="No Feign Client for loadBalancing defined.错误"></a>No Feign Client for loadBalancing defined.错误</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">解决方法：</span><br><span class="line">加入spring-cloud-loadbalancer依赖 并且在nacos中排除ribbon依赖，不然loadbalancer无效</span><br><span class="line"></span><br><span class="line">排除ribbon依赖</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;com.netflix.ribbon&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;ribbon&lt;/artifactId&gt;</span><br><span class="line">        &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">添加依赖</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-loadbalancer&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>因为版本，可以</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">项目springboot 2.1.8.RELEASE</span><br><span class="line"></span><br><span class="line">springcloud  2.1.0.RELEASE</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-nacos配置中心"><a href="#3-nacos配置中心" class="headerlink" title="3.nacos配置中心"></a>3.nacos配置中心</h1><h2 id="1-pom-2"><a href="#1-pom-2" class="headerlink" title="1.pom"></a>1.pom</h2><p>首先，修改 pom.xml 文件，引入 Nacos Config Starter。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-config&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-bootstrap-yml"><a href="#2-bootstrap-yml" class="headerlink" title="2.bootstrap.yml"></a>2.bootstrap.yml</h2><p>优先于application.yml加载</p>
+<p>在应用的 /src/main/resources/bootstrap.properties 配置文件中配置 Nacos Config 元数据</p>
+<p><strong>需要配置spring.application.name=服务名，所以当有cloud的config配置时， spring.application.name配置在bootstrap中</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring.application.name=服务名</span><br><span class="line">spring.cloud.nacos.config.server-addr=127.0.0.1:8848</span><br></pre></td></tr></table></figure>
+
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211025205034397.png" alt="image-20211025205034397"></p>
+<p>现在自定义了两个属性</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026084030493.png" alt="image-20211026084030493"></p>
+<p>controller里获取</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026084153941.png" alt="image-20211026084153941"></p>
+<p>如果想更改值，只能修改yml，然后重新打包部署</p>
+<h3 id="but有了nacos！"><a href="#but有了nacos！" class="headerlink" title="but有了nacos！"></a>but有了nacos！</h3><p>可以修改配置中心动态修改，添加dataid，默认为应用名.properties</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026084437847.png" alt="image-20211026084437847"></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026084535844.png" alt="image-20211026084535844"></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026085753939.png" alt="image-20211026085753939"></p>
+<p>在属性的类上添加注解@RefreshScope</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026090142252.png" alt="image-20211026090142252"></p>
+<p>原来是zhangsan18</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026085900976.png" alt="image-20211026085900976"></p>
+<p>现在修改一下</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026085933419.png" alt="image-20211026085933419"></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026090001730.png" alt="image-20211026090001730"></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026090322799.png" alt="image-20211026090322799"></p>
+<h3 id="修改properties为yml"><a href="#修改properties为yml" class="headerlink" title="修改properties为yml"></a>修改properties为yml</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    nacos:</span><br><span class="line">      config:</span><br><span class="line">        file-extension: yml  #指定配置文件为服务名.yml格式</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-细节都在bootstrap-yml里配置"><a href="#3-细节都在bootstrap-yml里配置" class="headerlink" title="3.细节都在bootstrap.yml里配置"></a>3.细节都在bootstrap.yml里配置</h2><h3 id="1-命名空间"><a href="#1-命名空间" class="headerlink" title="1.命名空间"></a>1.命名空间</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">默认空间public，默认新增的所有配置都在public空间</span><br><span class="line">开发，测试，生产，不同环境需要不同配置，就可以创建多个空间</span><br></pre></td></tr></table></figure>
+
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026090946436.png" alt="image-20211026090946436"></p>
+<p>现在在public和prop里都创建dataid为gulimall.properties</p>
+<p>name：zhangsan</p>
+<p>public   age：22    prop  age：24</p>
+<p>发现最终获取为22，说明默认使用public空间</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026091233561.png" alt="image-20211026091233561"></p>
+<p>想要使用其他命名空间</p>
+<p>spring.cloud.nacos.config.namespace</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026091518002.png" alt="image-20211026091518002"></p>
+<p>值为prop下的类似uuid的字符串</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026091559011.png" alt="image-20211026091559011"></p>
+<p>每一个微服务之前互相隔离，都创建自己的命名空间，只加载自己的命名空间</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026091943440.png" alt="image-20211026091943440"></p>
+<p>可以克隆配置到别的命名空间</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026092052521.png" alt="image-20211026092052521"></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026092113919.png" alt="image-20211026092113919"></p>
+<h3 id="2-配置集"><a href="#2-配置集" class="headerlink" title="2.配置集"></a>2.配置集</h3><p>所有的配置集合</p>
+<h3 id="3-配置集id"><a href="#3-配置集id" class="headerlink" title="3.配置集id"></a>3.配置集id</h3><p>Data ID：默认服务名.properties</p>
+<h3 id="4-配置分组"><a href="#4-配置分组" class="headerlink" title="4.配置分组"></a>4.配置分组</h3><p>默认所有配置集都属于DEFULT_GROUP：</p>
+<p>使用别的组</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026092640401.png" alt="image-20211026092640401"></p>
+<p>每个微服务创建自己的命名空间，使用配置分组区别环境，dev，test，prod</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026093234345.png" alt="image-20211026093234345"></p>
+<p>想切换环境，更改bootstrap.yml里的group属性即可</p>
+<h2 id="4-同时加载多个配置集"><a href="#4-同时加载多个配置集" class="headerlink" title="4.同时加载多个配置集"></a>4.同时加载多个配置集</h2><p>现在application.yml</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">ROOT</span></span><br><span class="line">    <span class="attr">driverClassName:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.56.10:3306/gulimall_sms?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">gulimall-coupon</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:/mapper/**/*.xml</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">auto</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">7000</span></span><br></pre></td></tr></table></figure>
+
+<p>拆分成三个</p>
+<p>datasource.yml</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">ROOT</span></span><br><span class="line">    <span class="attr">driverClassName:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.56.10:3306/gulimall_sms?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai</span></span><br></pre></td></tr></table></figure>
+
+<p>mybatis.yml</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:/mapper/**/*.xml</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
+
+<p>other.yml</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">gulimall-coupon</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">7000</span></span><br></pre></td></tr></table></figure>
+
+<p>bootstrap不变</p>
+<p>再次注意</p>
+<p>application里的是服务注册与发现</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    nacos:</span><br><span class="line">      discovery:</span><br><span class="line">        server-addr: 127.0.0.1:8848</span><br></pre></td></tr></table></figure>
+
+<p>bootstrap里的是配置中心</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    nacos:</span><br><span class="line">      config:</span><br><span class="line">        server-addr: 127.0.0.1:8848</span><br><span class="line">        namespace: 5c2579c3-b6ad-406c-81b7-dbef6ee5142c</span><br><span class="line">        group:</span><br><span class="line">  application:</span><br><span class="line">    name: gulimall-coupon</span><br></pre></td></tr></table></figure>
+
+<p>回归</p>
+<p>现在拆分了三个到配置中心</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026094345791.png" alt="image-20211026094345791"></p>
+<p>修改bootstrap.yml</p>
+<p>添加数据集，refresh自动刷新true</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026094619239.png" alt="image-20211026094619239"></p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p>以前springboot从配置文件获取使用</p>
+<p>@value @configurationproperties</p>
+<p>现在都可以配置到配置中心，在bootstrap中指定id，group即可</p>
+<h1 id="4-gateway网关"><a href="#4-gateway网关" class="headerlink" title="4.gateway网关"></a>4.gateway网关</h1><p><a href="https://spring.io/projects/spring-cloud-gateway">https://spring.io/projects/spring-cloud-gateway</a></p>
+<p>请求到网关，网关先断言，是否符合某个路由规则，经过一系列的filter进行过滤，最终到达目标服务器，并且<strong>最终到达的地址一定是要可以访问的</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-开启服务注册发现并排除数据源自动配置"><a href="#1-开启服务注册发现并排除数据源自动配置" class="headerlink" title="1.开启服务注册发现并排除数据源自动配置"></a>1.开启服务注册发现并排除数据源自动配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package com.jiang.gulimall.gateway;</span><br><span class="line"></span><br><span class="line">        import org.springframework.boot.SpringApplication;</span><br><span class="line">        import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">        import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;</span><br><span class="line">        import org.springframework.cloud.client.discovery.EnableDiscoveryClient;</span><br><span class="line"></span><br><span class="line">@EnableDiscoveryClient</span><br><span class="line">@SpringBootApplication(exclude = &#123;DataSourceAutoConfiguration.class&#125;)</span><br><span class="line">public class GulimallGatewayApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(GulimallGatewayApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-添加配置"><a href="#2-添加配置" class="headerlink" title="2.添加配置"></a>2.添加配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    nacos:</span><br><span class="line">      discovery:</span><br><span class="line">        server-addr: 127.0.0.1:8848</span><br><span class="line">        locator:</span><br><span class="line">          enabled: true  # 让gateway可以发现nacos中的微服务</span><br><span class="line">    gateway:</span><br><span class="line">      routes:</span><br><span class="line">        - id: baidu_rout</span><br><span class="line">          uri: https://www.baidu.com</span><br><span class="line">          predicates:</span><br><span class="line">            - Query=url,baidu</span><br><span class="line">        - id: qq_route</span><br><span class="line">          uri: https://www.qq.com</span><br><span class="line">          predicates:</span><br><span class="line">            - Query=url,qq</span><br><span class="line">            #也可以写成path，只要以/brand开头都会跳转到这里</span><br><span class="line">            - Path=/brand**</span><br><span class="line">          filters:</span><br><span class="line">  			 - StripPrefix=2 </span><br><span class="line">server:</span><br><span class="line">  port: 88</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>断言</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Query=url  表示请求中待url参数即可，才会转到url</span><br><span class="line">Query=url,qq   请求中待url参数并必须等于qq才会转到url</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">配置转发路径：Path= /anji-open/user/**，但是controller中并没有以/anji-open/user/**开头，这样能找到具体接口吗，是可以的，原理是通过这个配置实现：</span><br><span class="line">filters:</span><br><span class="line">   - StripPrefix=2，</span><br><span class="line">转发到具体服务，自动去掉/anji-open/user，如下</span><br><span class="line">原始访问路径:</span><br><span class="line">http://www.aa.com/anji-open/user/jobuser/pageList?sort=id&amp;order=DESC&amp;pageNumber=1&amp;pageSize=10</span><br><span class="line"> </span><br><span class="line">处理后路径：</span><br><span class="line">http://www.aa.com/jobuser/pageList?sort=id&amp;order=DESC&amp;pageNumber=1&amp;pageSize=10</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>#webconfig<br>        - id: FRAMEWORK-WEBCONFIG-SERVER<br>          uri: lb://FRAMEWORK-WEBCONFIG-SERVER<br>          predicates:<br>            - Path=/api/webconfig/**<br>          filters:<br>            - StripPrefix=2</p>
+<pre><code>    #flow
+    - id: FRAMEWORK-FLOW-MICROSERVICE
+      uri: lb://FRAMEWORK-FLOW-MICROSERVICE
+      predicates:
+        - Path=/api/flow/**
+      filters: 
+        - StripPrefix=2
+
+    #component
+    - id: FRAMEWORK-COMPONENT-MICROSERVICE
+      uri: lb://FRAMEWORK-COMPONENT-MICROSERVICE
+      predicates:
+        - Path=/api/component/**
+      filters: 
+        - StripPrefix=2
+
+    #test
+    - id: SERVER-CONSUMER
+      uri: lb://SERVER-CONSUMER
+      predicates:
+        - Path=/cusumer/**
+      filters: 
+        - StripPrefix=1
+
+如果请求路径是/cusumer开头，就会找uri里SERVER-CONSUMER服务路径，并且- StripPrefix=1，去掉一层，也就是去掉/cusumer这一层
+比如，SERVER-CONSUMER的路径是1.1.1.1:3001,当请求/cusumer/a/b,路径不是1.1.1.1:3001/cusumer/a/b
+而是1.1.1.1:3001/a/b
+</code></pre>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>访问<a href="http://localhost:88/hello?url=qq">http://localhost:88/hello?url=qq</a></p>
+<p>参数中待url并且等于qq，就会转到<a href="https://www.qq.com/hello%EF%BC%8C%E6%B3%A8%E6%84%8F%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%8B%BC%E6%8E%A5%E4%B8%8Alocalhost:88/%E5%90%8E%E9%9D%A2%E7%9A%84%E8%B7%AF%E5%BE%84">https://www.qq.com/hello，注意会自动拼接上localhost:88/后面的路径</a></p>
+<p>访问<a href="http://localhost:88/?url=baidu">http://localhost:88/?url=baidu</a></p>
+<p>就不会待hello路径</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026111146862.png" alt="image-20211026111146862"></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026203254610.png" alt="image-20211026203254610"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- Path=/foo/&#123;segment&#125;,/bar/&#123;segment&#125;</span><br><span class="line">路径是/foo/1 or /foo/bar/ or /bar/22都会转到uri中</span><br></pre></td></tr></table></figure>
+
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026203427498.png" alt="image-20211026203427498"></p>
+<p>lb负载均衡策略</p>
+<h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- id: qq1_route</span><br><span class="line">  uri: https://www.baidu.com</span><br><span class="line">  predicates:</span><br><span class="line">    - Path=/more</span><br></pre></td></tr></table></figure>
+
+<p>访问localhost:88/more会转到<a href="http://www.baidu.com/more">www.baidu.com/more</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- id: qq2_route</span><br><span class="line">  uri: https://blog.csdn.net</span><br><span class="line">  predicates:</span><br><span class="line">    - Path=/jiang458572759/&#123;segment&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问localhost:88/jiang458572759/article</p>
+<p>转到<a href="https://blog.csdn.net/jiang458572759/article">https://blog.csdn.net/jiang458572759/article</a></p>
+<p>注意只能在jiang458572759/后添加一个/，不能有多级目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- id: qq2_route</span><br><span class="line">  uri: https://blog.csdn.net</span><br><span class="line">  predicates:</span><br><span class="line">    - Path=/jiang458572759/**</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以有多级目录了</p>
+<p>例子：访问<a href="http://localhost:88/jiang458572759/article/details/115283615?spm=1001.2014.3001.5502">http://localhost:88/jiang458572759/article/details/115283615?spm=1001.2014.3001.5502</a></p>
+<p>转到<a href="https://blog.csdn.net/jiang458572759/article/details/115283615?spm=1001.2014.3001.5502">https://blog.csdn.net/jiang458572759/article/details/115283615?spm=1001.2014.3001.5502</a></p>
+<h2 id="3-前端项目发送axios"><a href="#3-前端项目发送axios" class="headerlink" title="3.前端项目发送axios"></a>3.前端项目发送axios</h2><p>向网关发送的都带上api</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026204659897.png" alt="image-20211026204659897"></p>
+<p>后端，lb负载均衡到renren-fast</p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211026204730089.png" alt="image-20211026204730089"></p>
+<h2 id="4-路径重写"><a href="#4-路径重写" class="headerlink" title="4.路径重写"></a>4.路径重写</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">id: qq2_route</span><br><span class="line"> uri: https://blog.csdn.net</span><br><span class="line"> predicates:</span><br><span class="line">   - Path=/jiang458572759/**</span><br><span class="line"> filters:</span><br><span class="line">   - RewritePath=/jiang458572759/(?&lt;segment&gt;.*),/$\&#123;segment&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当访问<a href="http://localhost:88/jiang458572759/hh%E6%97%B6">http://localhost:88/jiang458572759/hh时</a></p>
+<p>会转到<a href="https://blog.csdn.net/hh,%E8%87%AA%E5%8A%A8%E5%8E%BB%E6%8E%89/jiang458572759">https://blog.csdn.net/hh,自动去掉/jiang458572759</a></p>
+<h2 id="5-在网关里统一配置跨域问题"><a href="#5-在网关里统一配置跨域问题" class="headerlink" title="5.在网关里统一配置跨域问题"></a>5.在网关里统一配置跨域问题</h2><p>创建config文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class GulimallCorsConfiguration &#123;</span><br><span class="line">	@Bean</span><br><span class="line">    public CorsWebFilter corsWebFilter()&#123;</span><br><span class="line">        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();</span><br><span class="line">        CorsConfiguration config=new CorsConfiguration();</span><br><span class="line">        //配置跨域</span><br><span class="line">        //允许所有域名进行跨域调用</span><br><span class="line">        config.addAllowedOrigin(&quot;*&quot;);</span><br><span class="line">        //允许跨越发送cookie</span><br><span class="line">        config.setAllowCredentials(true);</span><br><span class="line">        //放行全部原始头信息</span><br><span class="line">        config.addAllowedHeader(&quot;*&quot;);</span><br><span class="line">        //允许所有请求方法跨域调用</span><br><span class="line">        config.addAllowedMethod(&quot;*&quot;);</span><br><span class="line">        source.registerCorsConfiguration(&quot;/**&quot;,config);</span><br><span class="line">        return new CorsWebFilter(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-精确的网关应该放在模糊的网关上面"><a href="#6-精确的网关应该放在模糊的网关上面" class="headerlink" title="6.精确的网关应该放在模糊的网关上面"></a>6.精确的网关应该放在模糊的网关上面</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- id: admin_route</span><br><span class="line">  uri: lb://gulimall-product</span><br><span class="line">  predicates:</span><br><span class="line">    - Path=/api/product/**</span><br><span class="line">  filters:</span><br><span class="line">    - RewritePath=/api/(?&lt;segment&gt;.*),/$\&#123;segment&#125;</span><br><span class="line"></span><br><span class="line">- id: admin_route</span><br><span class="line">  uri: lb://renren-fast</span><br><span class="line">  predicates:</span><br><span class="line">    - Path=/api/**</span><br><span class="line">  filters:</span><br><span class="line">    - RewritePath=/api/(?&lt;segment&gt;.*),/renren-fast/$\&#123;segment&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="5-springcloud-alibaba-oss"><a href="#5-springcloud-alibaba-oss" class="headerlink" title="5.springcloud-alibaba-oss"></a>5.springcloud-alibaba-oss</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-alicloud-oss&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">    alicloud:</span><br><span class="line">      access-key: LTAI5t6Tc8civonnHH6QpHQh</span><br><span class="line">      secret-key: 3iIUKRaiwYyx51p0BfmvBCBMpJDb1y</span><br><span class="line">      oss:</span><br><span class="line">        endpoint: oss-cn-beijing.aliyuncs.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试简单上传"><a href="#测试简单上传" class="headerlink" title="测试简单上传"></a>测试简单上传</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class GulimallThirdPartyApplicationTests &#123;</span><br><span class="line">    public GulimallThirdPartyApplicationTests()&#123;&#125;</span><br><span class="line">    @Autowired</span><br><span class="line">    OSSClient ossClient;</span><br><span class="line">    @Test</span><br><span class="line">    public void contextLoads() throws FileNotFoundException &#123;</span><br><span class="line">        InputStream inputStream = new FileInputStream(&quot;D:/a.jpg&quot;);</span><br><span class="line">        SimpleDateFormat sdf=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">        String date = sdf.format(new Date());</span><br><span class="line">        // 依次填写Bucket名称（例如examplebucket）和Object完整路径（例如exampledir/exampleobject.txt）。Object完整路径中不能包含Bucket名称。</span><br><span class="line">        ossClient.putObject(&quot;jiang-oss&quot;, date+&quot;/a.jpg&quot;, inputStream);</span><br><span class="line"></span><br><span class="line">        // 关闭OSSClient。</span><br><span class="line">        ossClient.shutdown();</span><br><span class="line">        System.out.println(&quot;上传成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="整合controller"><a href="#整合controller" class="headerlink" title="整合controller"></a>整合controller</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    alicloud:</span><br><span class="line">      access-key: LTAI5t6Tc8civonnHH6QpHQh</span><br><span class="line">      secret-key: 3iIUKRaiwYyx51p0BfmvBCBMpJDb1y</span><br><span class="line">      oss:</span><br><span class="line">        endpoint: oss-cn-beijing.aliyuncs.com</span><br><span class="line">        bucket: jiang-oss</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package com.jiang.gulimall.thirdparty.controller;</span><br><span class="line"></span><br><span class="line">import com.aliyun.oss.OSS;</span><br><span class="line">import com.aliyun.oss.OSSClient;</span><br><span class="line">import com.aliyun.oss.OSSClientBuilder;</span><br><span class="line">import com.aliyun.oss.common.utils.BinaryUtil;</span><br><span class="line">import com.aliyun.oss.model.MatchMode;</span><br><span class="line">import com.aliyun.oss.model.PolicyConditions;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author:jiangjiaxu</span><br><span class="line"> * @date 2021/10/28  20:09</span><br><span class="line"> * @version:V1.0</span><br><span class="line"> * @description:</span><br><span class="line"> */</span><br><span class="line">@RestController</span><br><span class="line">public class OssController &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.cloud.alicloud.oss.endpoint&#125;&quot;)</span><br><span class="line">    private String endpoint;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.cloud.alicloud.oss.bucket&#125;&quot;)</span><br><span class="line">    private String bucket;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.cloud.alicloud.access-key&#125;&quot;)</span><br><span class="line">    private String accessId;</span><br><span class="line"></span><br><span class="line">    //@Autowired</span><br><span class="line">    //OSSClient ossClient;</span><br><span class="line">    @Autowired</span><br><span class="line">    OSS ossClient;</span><br><span class="line">    @RequestMapping(&quot;/oss/policy&quot;)</span><br><span class="line">    public Map&lt;String, String&gt; policy()&#123;</span><br><span class="line">        String host = &quot;https://&quot; + bucket + &quot;.&quot; + endpoint; // host的格式为 bucketname.endpoint</span><br><span class="line">        SimpleDateFormat sdf=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">        String date = sdf.format(new Date());</span><br><span class="line">        //上传服务器回调的URL</span><br><span class="line">        //String callbackUrl=&quot;http://&quot;;</span><br><span class="line">        String dir = date+&quot;/&quot;; // 用户上传文件时指定的前缀。</span><br><span class="line">        Map&lt;String, String&gt; respMap =null;</span><br><span class="line">        // 创建OSSClient实例。</span><br><span class="line">        try &#123;</span><br><span class="line">            long expireTime = 30;</span><br><span class="line">            long expireEndTime = System.currentTimeMillis() + expireTime * 1000;</span><br><span class="line">            Date expiration = new Date(expireEndTime);</span><br><span class="line">            // PostObject请求最大可支持的文件大小为5 GB，即CONTENT_LENGTH_RANGE为5*1024*1024*1024。</span><br><span class="line">            PolicyConditions policyConds = new PolicyConditions();</span><br><span class="line">            policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, 1048576000);</span><br><span class="line">            policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);</span><br><span class="line"></span><br><span class="line">            String postPolicy = ossClient.generatePostPolicy(expiration, policyConds);</span><br><span class="line">            byte[] binaryData = postPolicy.getBytes(&quot;utf-8&quot;);</span><br><span class="line">            String encodedPolicy = BinaryUtil.toBase64String(binaryData);</span><br><span class="line">            String postSignature = ossClient.calculatePostSignature(postPolicy);</span><br><span class="line"></span><br><span class="line">             respMap = new LinkedHashMap&lt;String, String&gt;();</span><br><span class="line">            respMap.put(&quot;accessid&quot;, accessId);</span><br><span class="line">            respMap.put(&quot;policy&quot;, encodedPolicy);</span><br><span class="line">            respMap.put(&quot;signature&quot;, postSignature);</span><br><span class="line">            respMap.put(&quot;dir&quot;, dir);</span><br><span class="line">            respMap.put(&quot;host&quot;, host);</span><br><span class="line">            respMap.put(&quot;expire&quot;, String.valueOf(expireEndTime / 1000));</span><br><span class="line">            // respMap.put(&quot;expire&quot;, formatISO8601Date(expiration));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            // Assert.fail(e.getMessage());</span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            ossClient.shutdown();</span><br><span class="line">        &#125;</span><br><span class="line">        return respMap;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211028202853057.png" alt="image-20211028202853057"></p>
+<p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211028203706082.png" alt="image-20211028203706082"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>springcloud-alibaba</tag>
       </tags>
   </entry>
 </search>
