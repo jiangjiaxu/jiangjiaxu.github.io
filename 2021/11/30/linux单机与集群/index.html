@@ -136,7 +136,7 @@
 <meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211212145000748.png">
 <meta property="og:image" content="http://xiaojiangzbc.top/img/image-20211215103115196.png">
 <meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
-<meta property="article:modified_time" content="2021-12-16T07:34:07.662Z">
+<meta property="article:modified_time" content="2021-12-17T04:38:39.689Z">
 <meta property="article:author" content="Mr.JIANG">
 <meta property="article:tag" content="linux单机与集群">
 <meta name="twitter:card" content="summary">
@@ -662,6 +662,7 @@
 <p>解压并安装pcre<br>cd /usr/local/nginx<br>tar -zxvf pcre-8.37.tar.gz<br>cd /usr/local/nginx/pcre-8.37<br>./configure<br>make<br>make install</p>
 <p>解压并安装zlib<br>cd /usr/local/nginx<br>tar -zxvf zlib-1.2.11.tar.gz<br>cd /usr/local/nginx/zlib-1.2.11<br>./configure<br>make<br>make install</p>
 <p>解压并安装openssl（需要perl5依赖）<br>cd /usr/local/nginx<br>tar -zxvf openssl-1.1.0i.tar.gz<br>cd /usr/local/nginx/openssl-1.1.0i<br>./config<br>make<br>make install</p>
+<p>编译完成后，使用 openssl version 来查看一下当前 openssl 版本号时<br>echo “/usr/local/lib64/“ &gt;&gt; /etc/ld.so.conf<br>ldconfig<br>再次使用 openssl version 验证版本就可以了</p>
 <p>解压并安装nginx<br>cd /usr/local/nginx<br>tar -zxvf nginx-1.18.0.tar.gz<br>cd /usr/local/nginx/nginx-1.18.0<br>./configure –prefix=/usr/local/nginx –with-http_ssl_module –with-pcre=/usr/local/nginx/pcre-8.37 –with-zlib=/usr/local/nginx/zlib-1.2.11 –with-openssl=/usr/local/nginx/openssl-1.1.0i</p>
 <p>make<br>make install</p>
 <p>最后开放指定端口</p>
@@ -676,8 +677,10 @@
 <p><strong>netstat -anp | grep :80</strong>命令来通过占用端口判断Nginx是否启动</p>
 <h3 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h3><p>./nginx -s reload</p>
 <h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><p>./nginx -s stop</p>
-<h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><h2 id="1-redis集群必须6个节点"><a href="#1-redis集群必须6个节点" class="headerlink" title="1.redis集群必须6个节点"></a>1.redis集群必须6个节点</h2><h3 id="Redis集群依赖安装"><a href="#Redis集群依赖安装" class="headerlink" title="Redis集群依赖安装"></a>Redis集群依赖安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">安装Ruby和gem安装和修改</span><br><span class="line">1、Ruby安装</span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line">本次安装ruby-2.2.2版本,将下载好的软件上传到服务器上/usr/local</span><br><span class="line">执行指令：</span><br><span class="line">cd /usr/local</span><br><span class="line">tar -zxvf ruby-2.2.2.tar.gz</span><br><span class="line">cd ruby-2.2.2</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">如果报错-bash: /usr/bin/ruby: 没有那个文件或目录</span><br><span class="line">ln -s /usr/local/ruby-2.2.2/ruby /usr/bin/ruby</span><br><span class="line"></span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2、安装redis的redis-3.3.5.gem，</span><br><span class="line">gem install -l redis-3.3.5.gem</span><br></pre></td></tr></table></figure>
+<h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><h2 id="1-redis集群必须6个节点"><a href="#1-redis集群必须6个节点" class="headerlink" title="1.redis集群必须6个节点"></a>1.redis集群必须6个节点</h2><p>注意redis与nginx都需要openssl，安装一个即可</p>
+<h3 id="Redis集群依赖安装"><a href="#Redis集群依赖安装" class="headerlink" title="Redis集群依赖安装"></a>Redis集群依赖安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">安装Ruby和gem安装和修改</span><br><span class="line">1、Ruby安装</span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line">本次安装ruby-2.2.2版本,将下载好的软件上传到服务器上/usr/local</span><br><span class="line">执行指令：</span><br><span class="line">cd /usr/local</span><br><span class="line">tar -zxvf ruby-2.2.2.tar.gz</span><br><span class="line">cd ruby-2.2.2</span><br><span class="line">./configure</span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">如果报错-bash: /usr/bin/ruby: 没有那个文件或目录</span><br><span class="line">ln -s /usr/local/ruby-2.2.2/ruby /usr/bin/ruby</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2、安装redis的redis-3.3.5.gem，</span><br><span class="line">gem install -l redis-3.3.5.gem</span><br></pre></td></tr></table></figure>
 
+<p>如果报错</p>
 <p><img src="/../img/image-20211215200212651.png" alt="image-20211215200212651"></p>
 <p>yum -y install zlib zlib-devel</p>
 <p>cd /usr/local/ruby-2.2.2/ext/zlib/<br>ruby extconf.rb<br>sed -i s#$(top_srcdir)#../..# Makefile<br>make<br>make install</p>
@@ -749,7 +752,6 @@
 <h4 id="stop-all-sh文件里有需要的话更改密码，并且更换ip地址"><a href="#stop-all-sh文件里有需要的话更改密码，并且更换ip地址" class="headerlink" title="stop-all.sh文件里有需要的话更改密码，并且更换ip地址"></a>stop-all.sh文件里有需要的话更改密码，并且更换ip地址</h4><p>sh stop-all.sh</p>
 <h4 id="创造节点"><a href="#创造节点" class="headerlink" title="创造节点"></a>创造节点</h4><p>cd /usr/local/redis/redis-4.0.10/src/</p>
 <p>./redis-trib.rb create –replicas 1 192.168.214.132:7001 192.168.214.132:7002 192.168.214.132:7003 192.168.214.132:7004 192.168.214.132:7005 192.168.214.132:7006 </p>
-<p>./redis-trib.rb create –replicas 1 10.12.1.50:7001 10.12.1.50:7002 10.12.1.50:7003 10.12.1.50:7004 10.12.1.50:7005 10.12.1.50:7006 </p>
 <p><img src="/../img/image-20211213090519363.png" alt="image-20211213090519363"></p>
 <h4 id="测试redis"><a href="#测试redis" class="headerlink" title="测试redis"></a><strong>测试redis</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">需要输入认证密码（Boco123），如下所示：</span><br><span class="line"></span><br><span class="line">cd /usr/local/redis/cluster-config/7001/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7001 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; set a 1</span><br><span class="line"></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">另开一个session</span><br><span class="line">cd /usr/local/redis/cluster-config/7002/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7002 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; get a 1</span><br><span class="line">&quot;1&quot;</span><br><span class="line"></span><br><span class="line">到这里，只要看到set进去的值能够get出来，这就说明redis已经安装成功了，测试结束。</span><br></pre></td></tr></table></figure>
 
@@ -998,7 +1000,7 @@ var jiathis_config={
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1020,7 +1022,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

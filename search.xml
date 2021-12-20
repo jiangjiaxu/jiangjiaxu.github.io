@@ -348,6 +348,7 @@
 <p>:nohl  取消高亮</p>
 <h2 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h2><p>:%s/a/b/g 对所有行的内容进行替换,a替换为b。</p>
 <h2 id="放弃修改"><a href="#放弃修改" class="headerlink" title="放弃修改"></a>放弃修改</h2><p>:e! -放弃所有修改，从上次保存文件开始再编辑</p>
+<h2 id="回退"><a href="#回退" class="headerlink" title="回退"></a>回退</h2><p>u  撤销上一步的操作<br>Ctrl+r 恢复上一步被撤销的操作</p>
 <h2 id="跳转到最后一行"><a href="#跳转到最后一行" class="headerlink" title="跳转到最后一行"></a>跳转到最后一行</h2><p>shift+g</p>
 <h3 id="跳到行首"><a href="#跳到行首" class="headerlink" title="跳到行首"></a>跳到行首</h3><p>home</p>
 <h3 id="跳到行尾"><a href="#跳到行尾" class="headerlink" title="跳到行尾"></a>跳到行尾</h3><p>end</p>
@@ -385,6 +386,10 @@
 <p>–installroot=/usr/local        表示指定自定义的安装目录</p>
 <h2 id="需要签名"><a href="#需要签名" class="headerlink" title="需要签名"></a>需要签名</h2><p>后面加上  –nogpgcheck</p>
 <p>查看纽扣</p>
+<h1 id="运行jar包sh文件"><a href="#运行jar包sh文件" class="headerlink" title="运行jar包sh文件"></a>运行jar包sh文件</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">jar_pid=`ps -ef|grep -v grep | grep &#x27;你的jar包.jar&#x27;|awk &#x27;&#123; print $2 &#125;&#x27;`</span><br><span class="line">echo $jar_pid</span><br><span class="line">if [ ! -n &quot;$jar_pid&quot; ]; then</span><br><span class="line">echo &#x27;will redploy.&#x27;</span><br><span class="line"></span><br><span class="line">rm -rf nohup.out</span><br><span class="line">nohup java -Xms512m -Xmx2048m -Dspring.profiles.active=dev -jar 你的jar包.jar &amp;</span><br><span class="line">echo &#x27;redploy success0.&#x27;</span><br><span class="line">else</span><br><span class="line">kill -9 $jar_pid</span><br><span class="line">echo &#x27;kill&#x27; $jar_pid</span><br><span class="line"></span><br><span class="line">rm -rf nohup.out</span><br><span class="line">nohup java -Xms512m -Xmx2048m -Dspring.profiles.active=dev -jar 你的jar包.jar &amp;</span><br><span class="line">echo &#x27;redploy success1.&#x27;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出500行</p>
+<p>tail -f 500 nohup.out</p>
 ]]></content>
       <categories>
         <category>linux</category>
@@ -1168,6 +1173,7 @@ public class JSONUtils &#123;
 <p>解压并安装pcre<br>cd /usr/local/nginx<br>tar -zxvf pcre-8.37.tar.gz<br>cd /usr/local/nginx/pcre-8.37<br>./configure<br>make<br>make install</p>
 <p>解压并安装zlib<br>cd /usr/local/nginx<br>tar -zxvf zlib-1.2.11.tar.gz<br>cd /usr/local/nginx/zlib-1.2.11<br>./configure<br>make<br>make install</p>
 <p>解压并安装openssl（需要perl5依赖）<br>cd /usr/local/nginx<br>tar -zxvf openssl-1.1.0i.tar.gz<br>cd /usr/local/nginx/openssl-1.1.0i<br>./config<br>make<br>make install</p>
+<p>编译完成后，使用 openssl version 来查看一下当前 openssl 版本号时<br>echo “/usr/local/lib64/“ &gt;&gt; /etc/ld.so.conf<br>ldconfig<br>再次使用 openssl version 验证版本就可以了</p>
 <p>解压并安装nginx<br>cd /usr/local/nginx<br>tar -zxvf nginx-1.18.0.tar.gz<br>cd /usr/local/nginx/nginx-1.18.0<br>./configure –prefix=/usr/local/nginx –with-http_ssl_module –with-pcre=/usr/local/nginx/pcre-8.37 –with-zlib=/usr/local/nginx/zlib-1.2.11 –with-openssl=/usr/local/nginx/openssl-1.1.0i</p>
 <p>make<br>make install</p>
 <p>最后开放指定端口</p>
@@ -1182,8 +1188,10 @@ public class JSONUtils &#123;
 <p><strong>netstat -anp | grep :80</strong>命令来通过占用端口判断Nginx是否启动</p>
 <h3 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h3><p>./nginx -s reload</p>
 <h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><p>./nginx -s stop</p>
-<h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><h2 id="1-redis集群必须6个节点"><a href="#1-redis集群必须6个节点" class="headerlink" title="1.redis集群必须6个节点"></a>1.redis集群必须6个节点</h2><h3 id="Redis集群依赖安装"><a href="#Redis集群依赖安装" class="headerlink" title="Redis集群依赖安装"></a>Redis集群依赖安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">安装Ruby和gem安装和修改</span><br><span class="line">1、Ruby安装</span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line">本次安装ruby-2.2.2版本,将下载好的软件上传到服务器上/usr/local</span><br><span class="line">执行指令：</span><br><span class="line">cd /usr/local</span><br><span class="line">tar -zxvf ruby-2.2.2.tar.gz</span><br><span class="line">cd ruby-2.2.2</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">如果报错-bash: /usr/bin/ruby: 没有那个文件或目录</span><br><span class="line">ln -s /usr/local/ruby-2.2.2/ruby /usr/bin/ruby</span><br><span class="line"></span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2、安装redis的redis-3.3.5.gem，</span><br><span class="line">gem install -l redis-3.3.5.gem</span><br></pre></td></tr></table></figure>
+<h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><h2 id="1-redis集群必须6个节点"><a href="#1-redis集群必须6个节点" class="headerlink" title="1.redis集群必须6个节点"></a>1.redis集群必须6个节点</h2><p>注意redis与nginx都需要openssl，安装一个即可</p>
+<h3 id="Redis集群依赖安装"><a href="#Redis集群依赖安装" class="headerlink" title="Redis集群依赖安装"></a>Redis集群依赖安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">安装Ruby和gem安装和修改</span><br><span class="line">1、Ruby安装</span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line">本次安装ruby-2.2.2版本,将下载好的软件上传到服务器上/usr/local</span><br><span class="line">执行指令：</span><br><span class="line">cd /usr/local</span><br><span class="line">tar -zxvf ruby-2.2.2.tar.gz</span><br><span class="line">cd ruby-2.2.2</span><br><span class="line">./configure</span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">如果报错-bash: /usr/bin/ruby: 没有那个文件或目录</span><br><span class="line">ln -s /usr/local/ruby-2.2.2/ruby /usr/bin/ruby</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">检查ruby的版本</span><br><span class="line">ruby -v </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2、安装redis的redis-3.3.5.gem，</span><br><span class="line">gem install -l redis-3.3.5.gem</span><br></pre></td></tr></table></figure>
 
+<p>如果报错</p>
 <p><img src="/../img/image-20211215200212651.png" alt="image-20211215200212651"></p>
 <p>yum -y install zlib zlib-devel</p>
 <p>cd /usr/local/ruby-2.2.2/ext/zlib/<br>ruby extconf.rb<br>sed -i s#$(top_srcdir)#../..# Makefile<br>make<br>make install</p>
@@ -1255,7 +1263,6 @@ public class JSONUtils &#123;
 <h4 id="stop-all-sh文件里有需要的话更改密码，并且更换ip地址"><a href="#stop-all-sh文件里有需要的话更改密码，并且更换ip地址" class="headerlink" title="stop-all.sh文件里有需要的话更改密码，并且更换ip地址"></a>stop-all.sh文件里有需要的话更改密码，并且更换ip地址</h4><p>sh stop-all.sh</p>
 <h4 id="创造节点"><a href="#创造节点" class="headerlink" title="创造节点"></a>创造节点</h4><p>cd /usr/local/redis/redis-4.0.10/src/</p>
 <p>./redis-trib.rb create –replicas 1 192.168.214.132:7001 192.168.214.132:7002 192.168.214.132:7003 192.168.214.132:7004 192.168.214.132:7005 192.168.214.132:7006 </p>
-<p>./redis-trib.rb create –replicas 1 10.12.1.50:7001 10.12.1.50:7002 10.12.1.50:7003 10.12.1.50:7004 10.12.1.50:7005 10.12.1.50:7006 </p>
 <p><img src="/../img/image-20211213090519363.png" alt="image-20211213090519363"></p>
 <h4 id="测试redis"><a href="#测试redis" class="headerlink" title="测试redis"></a><strong>测试redis</strong></h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">需要输入认证密码（Boco123），如下所示：</span><br><span class="line"></span><br><span class="line">cd /usr/local/redis/cluster-config/7001/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7001 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; set a 1</span><br><span class="line"></span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">另开一个session</span><br><span class="line">cd /usr/local/redis/cluster-config/7002/bin</span><br><span class="line"></span><br><span class="line">./redis-cli -c -h 192.168.214.132 -p 7002 -a Boco123</span><br><span class="line"></span><br><span class="line">192.168.214.132:7001&gt; get a 1</span><br><span class="line">&quot;1&quot;</span><br><span class="line"></span><br><span class="line">到这里，只要看到set进去的值能够get出来，这就说明redis已经安装成功了，测试结束。</span><br></pre></td></tr></table></figure>
 
@@ -1589,6 +1596,27 @@ public class JSONUtils &#123;
       </categories>
       <tags>
         <tag>springcloud-alibaba</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx与gateway</title>
+    <url>/2021/11/30/nginx%E4%B8%8Egateway/</url>
+    <content><![CDATA[<p>前端页面都放在nginx的html下，并且每一个前端项目都需要配置nginx</p>
+<p><img src="/D:/hexo博客/blog/source/img/image-20211217175446376.png" alt="image-20211217175446376"></p>
+<p>但是不一定每个项目都会配置网关</p>
+<p>如果配置了</p>
+<p>那么就不用改前端项目的environment.json，或者config.json</p>
+<p>前端发的请求都是带上api的，走nacos的网关服务，从nacos找其他服务</p>
+<p>如果没配置</p>
+<p>需要改前端项目的environment.json，或者config.json</p>
+<p>说明前端访问路径是不带api的</p>
+<p>gateway具体操作请看alibaba-springcloud博客</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>nginx与gateway</tag>
       </tags>
   </entry>
 </search>
