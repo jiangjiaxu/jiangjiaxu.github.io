@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CAS单点登录," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.搭建tomcat的HTTPS支持1.下载安装tomcat9https:&#x2F;&#x2F;blog.csdn.net&#x2F;ELaXiaoSi&#x2F;article&#x2F;details&#x2F;84190648?ops_request_misc&#x3D;%257B%2522request%255Fid%2522%253A%2522164445787016780265450662%2522%252C%2522scm%2522%253A%25">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CAS单点登录">
+<meta property="og:url" content="http://xiaojiangzbc.top/2021/11/30/CAS%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/index.html">
+<meta property="og:site_name" content="小姜的博客">
+<meta property="og:description" content="1.搭建tomcat的HTTPS支持1.下载安装tomcat9https:&#x2F;&#x2F;blog.csdn.net&#x2F;ELaXiaoSi&#x2F;article&#x2F;details&#x2F;84190648?ops_request_misc&#x3D;%257B%2522request%255Fid%2522%253A%2522164445787016780265450662%2522%252C%2522scm%2522%253A%25">
+<meta property="og:locale">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210141403511.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210100933281.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210101357591.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210101845118.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210102011138.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210102613324.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210103038596.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210103423069.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210103633290.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210103624560.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210103759606.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210103807366.png">
+<meta property="og:image" content="data:image/png;base64,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">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210115615285.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210140934201.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210141010649.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210141527789.png">
+<meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
+<meta property="article:modified_time" content="2022-02-10T06:37:12.058Z">
+<meta property="article:author" content="Mr.JIANG">
+<meta property="article:tag" content="CAS单点登录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiaojiangzbc.top/img/image-20220210141403511.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiaojiangzbc.top/2021/11/30/CAS单点登录/"/>
+
+
+
+
+
+  <title>CAS单点登录 | 小姜的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	<header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小姜的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaojiangzbc.top/2021/11/30/CAS%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小姜的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CAS单点登录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-30T17:45:46+08:00">
+                2021-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本站总阅读数 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  966
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/../img/image-20220210141403511.png" alt="image-20220210141403511"></p>
+<h1 id="1-搭建tomcat的HTTPS支持"><a href="#1-搭建tomcat的HTTPS支持" class="headerlink" title="1.搭建tomcat的HTTPS支持"></a>1.搭建tomcat的HTTPS支持</h1><h2 id="1-下载安装tomcat9"><a href="#1-下载安装tomcat9" class="headerlink" title="1.下载安装tomcat9"></a>1.下载安装tomcat9</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ELaXiaoSi/article/details/84190648?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164445787016780265450662%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=164445787016780265450662&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-84190648.first_rank_v2_pc_rank_v29&amp;utm_term=tomcat9%E4%B8%8B%E8%BD%BD&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/ELaXiaoSi/article/details/84190648?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164445787016780265450662%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=164445787016780265450662&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-84190648.first_rank_v2_pc_rank_v29&amp;utm_term=tomcat9%E4%B8%8B%E8%BD%BD&amp;spm=1018.2226.3001.4187</a></p>
+<h2 id="2-生成秘钥库"><a href="#2-生成秘钥库" class="headerlink" title="2.生成秘钥库"></a>2.生成秘钥库</h2><p>采用java自带的keytool工具</p>
+<p>别名jiang 存储路径D:\CAS\keystore</p>
+<p>keytool -genkey -v -alias jiangcas -keyalg RSA  -keystore D:\CAS\keystore\jiangcas.keystore</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-genkey 生成密钥</span><br><span class="line">-keyalg 指定密钥算法，这时指定RSA,</span><br><span class="line">-keysize 指定密钥长度，默认是1024位,这里指定2048，长一点，比较难破解,</span><br><span class="line">-validity 指定证书有效期，这里指定36500天.</span><br><span class="line">-alias 指定别名，这里是wolfcode</span><br><span class="line">-keystore 指定密钥库存储位置，这里存在 D:\CAS\keystore目录下</span><br><span class="line">注意：您的名字与姓氏www.sso.com是CAS服务器使用的域名,不是随便乱定的，其他的随意.</span><br></pre></td></tr></table></figure>
+
+<p>密钥库口令：jiangcas</p>
+<p><img src="/../img/image-20220210100933281.png" alt="image-20220210100933281"></p>
+<h2 id="3-导出证书"><a href="#3-导出证书" class="headerlink" title="3.导出证书"></a>3.导出证书</h2><p>keytool -export -trustcacerts -alias jiangcas -storepass jiangcas -file D:/CAS/keystore/jiangcas.cer -keystore D:/CAS/keystore/jiangcas.keystore</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-alias指定别名为wolfcode ;</span><br><span class="line">-storepass指定私钥为123456;</span><br><span class="line">-file指定导出证书的文件名为wolfcode.cer;</span><br><span class="line">-keystore指定之前生成的密钥文件的文件名。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220210101357591.png" alt="image-20220210101357591"></p>
+<h2 id="3-导入证书导入到jdk信任库"><a href="#3-导入证书导入到jdk信任库" class="headerlink" title="3.导入证书导入到jdk信任库"></a>3.导入证书导入到jdk信任库</h2><p>keytool -import -trustcacerts -alias jiangcas -keystore “D:/javajdk/jdk1.8.0_131/jre/lib/security/cacerts” -file D:/CAS/keystore/jiangcas.cer</p>
+<p>jdk证书库密码： changeit</p>
+<p><img src="/../img/image-20220210101845118.png" alt="image-20220210101845118"></p>
+<h2 id="4-配置https支持"><a href="#4-配置https支持" class="headerlink" title="4.配置https支持"></a>4.配置https支持</h2><p>修改<img src="/../img/image-20220210102011138.png" alt="image-20220210102011138"></p>
+<p>添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;8443&quot; protocol=&quot;org.apache.coyote.http11.Http11AprProtocol&quot;</span><br><span class="line">               maxThreads=&quot;150&quot; SSLEnabled=&quot;true&quot; scheme=&quot;https&quot; secure=&quot;true&quot; </span><br><span class="line">clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot; keystoreFile=&quot;D:\CAS\keystore\jiangcas.keystore&quot; keystorePass=&quot;jiangcas&quot;			   </span><br><span class="line">               /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>启动tomcat乱码</p>
+<p><img src="/../img/image-20220210102613324.png" alt="image-20220210102613324"></p>
+<p>找到第51行把UTF-8改为GBK</p>
+<p>java.util.logging.ConsoleHandler.encoding = GBK</p>
+<p>启动start.bat</p>
+<p>访问http的<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
+<p>https的<a target="_blank" rel="noopener" href="https://localhost:8443/">https://localhost:8443/</a></p>
+<h1 id="2-下载cas服务端包"><a href="#2-下载cas服务端包" class="headerlink" title="2.下载cas服务端包"></a>2.下载cas服务端包</h1><p><a target="_blank" rel="noopener" href="https://repo1.maven.org/maven2/org/apereo/cas/cas-server-webapp-tomcat/5.3.14/">https://repo1.maven.org/maven2/org/apereo/cas/cas-server-webapp-tomcat/5.3.14/</a></p>
+<p>下载这个包cas-server-webapp-tomcat-5.3.14.war </p>
+<h1 id="3-cas的war包发布到tomcat下"><a href="#3-cas的war包发布到tomcat下" class="headerlink" title="3.cas的war包发布到tomcat下"></a>3.cas的war包发布到tomcat下</h1><p><img src="/../img/image-20220210103038596.png" alt="image-20220210103038596"></p>
+<p>启动tomcat自动解压</p>
+<p>删除war包，修改名称为cas</p>
+<p>再次启动tomcat访问<a target="_blank" rel="noopener" href="https://localhost:8443/cas">https://localhost:8443/cas</a></p>
+<p><img src="/../img/image-20220210103423069.png" alt="image-20220210103423069"></p>
+<p>默认用户名密码</p>
+<p><img src="/../img/image-20220210103633290.png" alt="image-20220210103633290"></p>
+<p><img src="/../img/image-20220210103624560.png" alt="image-20220210103624560"></p>
+<p>修改日志位置</p>
+<p><img src="/../img/image-20220210103759606.png" alt="image-20220210103759606"></p>
+<p><img src="/../img/image-20220210103807366.png" alt="image-20220210103807366"></p>
+<p>改为D:\CAS\log</p>
+<h1 id="4-修改域名方便访问"><a href="#4-修改域名方便访问" class="headerlink" title="4.修改域名方便访问"></a>4.修改域名方便访问</h1><p>C:\Windows\System32\drivers\etc下的hosts文件</p>
+<p>添加127.0.0.1 <a target="_blank" rel="noopener" href="http://www.jiangcas.com/">www.jiangcas.com</a></p>
+<p>就可以通过域名访问，首先找本地hosts然后才是dns解析</p>
+<h1 id="5-配置数据源"><a href="#5-配置数据源" class="headerlink" title="5.配置数据源"></a>5.配置数据源</h1><p><strong>第一步：新建数据和表：</strong></p>
+<p>CREATE DATABASE /<em>!32312 IF NOT EXISTS</em>/<code>db_sso</code> /*!40100 DEFAULT CHARACTER SET utf8 */;</p>
+<p>USE <code>db_sso</code>;</p>
+<p>/*Table structure for table <code>t_cas</code> */</p>
+<p>DROP TABLE IF EXISTS <code>t_cas</code>;</p>
+<p>CREATE TABLE <code>t_cas</code> (</p>
+<p> <code>id</code> int(11) NOT NULL AUTO_INCREMENT,</p>
+<p> <code>username</code> varchar(30) DEFAULT NULL,</p>
+<p> <code>password</code> varchar(100) DEFAULT NULL,</p>
+<p> PRIMARY KEY (<code>id</code>)</p>
+<p>) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;</p>
+<p>/*Data for the table <code>t_cas</code> */</p>
+<p>insert into <code>t_cas</code>(<code>id</code>,<code>username</code>,<code>password</code>) values (1,’java1234’,’123456’);</p>
+<p><strong>第二步：修改application.properties配置文件</strong> </p>
+<p>注释掉写死的认证用户</p>
+<p>加上jdbc数据源配置</p>
+<p># cas.authn.accept.users=casuser::Mellon</p>
+<p># cas.authn.jdbc.query[0].dialect=org.hibernate.dialect.MySQL5Dialect</p>
+<p>cas.authn.jdbc.query[0].url=jdbc:mysql://localhost:3306/school?serverTimezone=GMT</p>
+<p>cas.authn.jdbc.query[0].user=root</p>
+<p>cas.authn.jdbc.query[0].password=root</p>
+<p>cas.authn.jdbc.query[0].sql=select * from t_cas where username=?</p>
+<p>cas.authn.jdbc.query[0].fieldPassword=password</p>
+<p>cas.authn.jdbc.query[0].driverClass=com.mysql.jdbc.Driver</p>
+<p><strong>第三步：加上jdbc驱动包以及支持jar</strong></p>
+<p><img src="data:image/png;base64,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" alt="graphic"></p>
+<p>从网盘下载jar包</p>
+<p>移动到这个lib下</p>
+<p><img src="/../img/image-20220210115615285.png" alt="image-20220210115615285"></p>
+<p><strong>第四步：测试OK</strong></p>
+<h1 id="6-md5加密"><a href="#6-md5加密" class="headerlink" title="6.md5加密"></a>6.md5加密</h1><p><strong>第一步：数据库生成下md5密码</strong></p>
+<p>SELECT MD5(‘jiang’);</p>
+<p><strong>第二步：修改application.properties配置文件</strong></p>
+<p>cas.authn.jdbc.query[0].passwordEncoder.type=DEFAULT</p>
+<p>cas.authn.jdbc.query[0].passwordEncoder.characterEncoding=UTF-8</p>
+<p>#MD5加密策略</p>
+<p>cas.authn.jdbc.query[0].passwordEncoder.encodingAlgorithm=MD5</p>
+<p><strong>第三步：测试OK</strong></p>
+<h1 id="7-客户端-springboot整合"><a href="#7-客户端-springboot整合" class="headerlink" title="7.客户端+springboot整合"></a>7.客户端+springboot整合</h1><p>pom</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.jasig.cas.client/cas-client-core --&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line"></span><br><span class="line">  &lt;groupId&gt;org.jasig.cas.client&lt;/groupId&gt;</span><br><span class="line"></span><br><span class="line">  &lt;artifactId&gt;cas-client-core&lt;/artifactId&gt;</span><br><span class="line"></span><br><span class="line">  &lt;version&gt;3.6.1&lt;/version&gt;</span><br><span class="line"></span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>去webapps\cas\WEB-INF\classes\services\HTTPSandIMAPS-10000001</p>
+<p>添加http</p>
+<p><img src="/../img/image-20220210140934201.png" alt="image-20220210140934201"></p>
+<p>在application中添加下两行</p>
+<p>cas.tgc.secure=false</p>
+<p>cas.serviceRegistry.initFromJson=true</p>
+<p><img src="/../img/image-20220210141010649.png" alt="image-20220210141010649"></p>
+<h1 id="8-获取用户名"><a href="#8-获取用户名" class="headerlink" title="8.获取用户名"></a>8.获取用户名</h1><p>源码里，session.<em>const_cas_assertion</em>.principal.name</p>
+<p><img src="/../img/image-20220210141527789.png" alt="image-20220210141527789"></p>
+<h1 id="9-cas服务端初始化页面修改"><a href="#9-cas服务端初始化页面修改" class="headerlink" title="9.cas服务端初始化页面修改"></a>9.cas服务端初始化页面修改</h1><p>前端知识，不看了</p>
+
+      
+    </div>
+    
+    
+    
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CAS%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/" rel="tag"><i class="fa fa-at" aria-hidden="true"></i> CAS单点登录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/30/docker/" rel="next" title="docker">
+                <i class="fa fa-chevron-left"></i> docker
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/30/cookie%EF%BC%8Csession%EF%BC%8Ctoken/" rel="prev" title="cookie-session-token">
+                cookie-session-token <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1430319727&auto=1&height=66"></iframe>
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/a.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jiangjiaxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6428447095" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://weibo.com/u/6428447095" title="小姜的微博" target="_blank">小姜的微博</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%90%AD%E5%BB%BAtomcat%E7%9A%84HTTPS%E6%94%AF%E6%8C%81"><span class="nav-number">1.</span> <span class="nav-text">1.搭建tomcat的HTTPS支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85tomcat9"><span class="nav-number">1.1.</span> <span class="nav-text">1.下载安装tomcat9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%94%9F%E6%88%90%E7%A7%98%E9%92%A5%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">2.生成秘钥库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AF%BC%E5%87%BA%E8%AF%81%E4%B9%A6"><span class="nav-number">1.3.</span> <span class="nav-text">3.导出证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AF%BC%E5%85%A5%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5%E5%88%B0jdk%E4%BF%A1%E4%BB%BB%E5%BA%93"><span class="nav-number">1.4.</span> <span class="nav-text">3.导入证书导入到jdk信任库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AEhttps%E6%94%AF%E6%8C%81"><span class="nav-number">1.5.</span> <span class="nav-text">4.配置https支持</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%B8%8B%E8%BD%BDcas%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">2.下载cas服务端包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-cas%E7%9A%84war%E5%8C%85%E5%8F%91%E5%B8%83%E5%88%B0tomcat%E4%B8%8B"><span class="nav-number">3.</span> <span class="nav-text">3.cas的war包发布到tomcat下</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D%E6%96%B9%E4%BE%BF%E8%AE%BF%E9%97%AE"><span class="nav-number">4.</span> <span class="nav-text">4.修改域名方便访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="nav-number">5.</span> <span class="nav-text">5.配置数据源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-md5%E5%8A%A0%E5%AF%86"><span class="nav-number">6.</span> <span class="nav-text">6.md5加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E5%AE%A2%E6%88%B7%E7%AB%AF-springboot%E6%95%B4%E5%90%88"><span class="nav-number">7.</span> <span class="nav-text">7.客户端+springboot整合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E5%90%8D"><span class="nav-number">8.</span> <span class="nav-text">8.获取用户名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-cas%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B5%E9%9D%A2%E4%BF%AE%E6%94%B9"><span class="nav-number">9.</span> <span class="nav-text">9.cas服务端初始化页面修改</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.JIANG</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
