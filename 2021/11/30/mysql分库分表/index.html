@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="shardingjdbc分库分表," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.主从复制（数据层面） 1.原理主库的增删改的命令，记录到一个二进制文件Binary log中，通过tcp连接启动一个io线程读取二进制文件的命令，把命令写入到从库的终止日志Relay log中，从库启动一个sql线程，执行sql命令  2.搭建123456789101112131415161718Master节点配置&#x2F;etc&#x2F;my.cnf (master节点执行)&gt; vim &#x2F;etc&#x2F;m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shardingjdbc分库分表">
+<meta property="og:url" content="http://xiaojiangzbc.top/2021/11/30/mysql%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/index.html">
+<meta property="og:site_name" content="小姜的博客">
+<meta property="og:description" content="1.主从复制（数据层面） 1.原理主库的增删改的命令，记录到一个二进制文件Binary log中，通过tcp连接启动一个io线程读取二进制文件的命令，把命令写入到从库的终止日志Relay log中，从库启动一个sql线程，执行sql命令  2.搭建123456789101112131415161718Master节点配置&#x2F;etc&#x2F;my.cnf (master节点执行)&gt; vim &#x2F;etc&#x2F;m">
+<meta property="og:locale">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310083056231.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310083549865.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310093526229.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/94a6664c9053f2f16702a1e9d83c8da9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/5b2419b1d7977056090b2a4da7aeba4c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/1b8d7d93979c9a134f8745f73455e383.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310094647394.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310094706685.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310094916926.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310094933859.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310134124639.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310135755968.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310135949433.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310140006091.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310151003219.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310151903213.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310152440658.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310161452405.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310155411875.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310155524018.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310163642677.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310164919622.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310165125478.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310170041828.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310170342668.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310171558935.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220310171608313.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311081607591.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311082321296.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311091957208.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311092149258.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311092338539.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311093543586.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311093621405.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311094323025.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311095138616.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311095151810.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311100646559.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311100859870.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311101323597.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311104639825.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311104700029.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311104728342.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311104736449.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311110726123.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311110854729.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311112239798.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311112301749.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311112312440.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311113009106.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220311113021958.png">
+<meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
+<meta property="article:modified_time" content="2022-03-11T03:33:13.501Z">
+<meta property="article:author" content="Mr.JIANG">
+<meta property="article:tag" content="shardingjdbc分库分表">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiaojiangzbc.top/img/image-20220310083056231.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiaojiangzbc.top/2021/11/30/mysql分库分表/"/>
+
+
+
+
+
+  <title>shardingjdbc分库分表 | 小姜的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	<header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小姜的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaojiangzbc.top/2021/11/30/mysql%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小姜的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">shardingjdbc分库分表</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-30T17:45:46+08:00">
+                2021-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本站总阅读数 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  23
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-主从复制（数据层面）"><a href="#1-主从复制（数据层面）" class="headerlink" title="1.主从复制（数据层面）"></a>1.主从复制（数据层面）</h1><p><img src="/../img/image-20220310083056231.png" alt="image-20220310083056231"></p>
+<h2 id="1-原理"><a href="#1-原理" class="headerlink" title="1.原理"></a>1.原理</h2><p>主库的增删改的命令，记录到一个二进制文件Binary log中，通过tcp连接启动一个io线程读取二进制文件的命令，把命令写入到从库的终止日志Relay log中，从库启动一个sql线程，执行sql命令</p>
+<p><img src="/../img/image-20220310083549865.png" alt="image-20220310083549865"></p>
+<h2 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2.搭建"></a>2.搭建</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Master节点配置/etc/my.cnf (master节点执行)</span><br><span class="line"></span><br><span class="line">&gt; vim /etc/my.cnf  直接复制粘贴</span><br><span class="line">[mysqld]</span><br><span class="line">## 同一局域网内注意要唯一</span><br><span class="line">server-id=100  </span><br><span class="line">## 开启二进制日志功能，可以随便取（关键）</span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">## 复制过滤：不需要备份的数据库，不输出（mysql库一般不同步）</span><br><span class="line">binlog-ignore-db=mysql</span><br><span class="line">## 为每个session 分配的内存，在事务过程中用来存储二进制日志的缓存</span><br><span class="line">binlog_cache_size=1M</span><br><span class="line">## 主从复制的格式（mixed,statement,row，默认格式是statement）</span><br><span class="line">binlog_format=mixed</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">重启mysql</span><br><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Slave节点配置/etc/my.cnf (slave节点执行)</span><br><span class="line"></span><br><span class="line">&gt; vim /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">## 设置server_id,注意要唯一</span><br><span class="line">server-id=102</span><br><span class="line">## 开启二进制日志功能，以备Slave作为其它Slave的Master时使用</span><br><span class="line">log-bin=mysql-slave-bin</span><br><span class="line">## relay_log配置中继日志</span><br><span class="line">relay_log=edu-mysql-relay-bin</span><br><span class="line">##复制过滤：不需要备份的数据库，不输出（mysql库一般不同步）</span><br><span class="line">binlog-ignore-db=mysql</span><br><span class="line">## 如果需要同步函数或者存储过程</span><br><span class="line">log_bin_trust_function_creators=true</span><br><span class="line">## 为每个session 分配的内存，在事务过程中用来存储二进制日志的缓存</span><br><span class="line">binlog_cache_size=1M</span><br><span class="line">## 主从复制的格式（mixed,statement,row，默认格式是statement）</span><br><span class="line">binlog_format=mixed</span><br><span class="line">## 跳过主从复制中遇到的所有错误或指定类型的错误，避免slave端复制中断。</span><br><span class="line">## 如：1062错误是指一些主键重复，1032错误是因为主从数据库数据不一致</span><br><span class="line">slave_skip_errors=1062</span><br><span class="line"></span><br><span class="line">重启mysql</span><br><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">在master服务器授权slave服务器可以同步权限(master节点执行)</span><br><span class="line"></span><br><span class="line">注意：在master服务器上执行</span><br><span class="line"></span><br><span class="line">mysql -uroot -p主master的密码</span><br><span class="line"># 授予slave服务器可以同步master服务</span><br><span class="line">mysql &gt; grant replication slave, replication client on *.* to &#x27;root&#x27;@&#x27;slave服务的ip&#x27; identified by &#x27;slave服务器的密码&#x27;;</span><br><span class="line">mysql &gt; flush privileges;</span><br><span class="line"># 查看MySQL现在有哪些用户及对应的IP权限(可以不执行，只是一个查看)</span><br><span class="line">mysql &gt; select user,host from mysql.user;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220310093526229.png" alt="image-20220310093526229"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查询master服务的binlog文件名和位置(master节点执行)</span><br><span class="line"></span><br><span class="line">mysql &gt; show master status;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/94a6664c9053f2f16702a1e9d83c8da9.png" alt="img"></p>
+<ul>
+<li><p>日志文件名：mysql-bin.000002</p>
+</li>
+<li><p>复制的位置：2079</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">slave进行关联master节点(slave节点执行)</span><br><span class="line"></span><br><span class="line">进入到slave节点：</span><br><span class="line"></span><br><span class="line">mysql &gt; mysql -uroot -p你slave的密码</span><br><span class="line"></span><br><span class="line">开始绑定</span><br><span class="line"></span><br><span class="line">mysql&gt; change master to master_host=&#x27;master服务器ip&#x27;, master_user=&#x27;root&#x27;, master_password=&#x27;master密码&#x27;, master_port=3306, master_log_file=&#x27;mysql-bin.000002&#x27;,master_log_pos=2079;</span><br><span class="line"></span><br><span class="line">这里注意一下 master_log_file 和 master_log_pos 都是通过 master服务器通过show master status获得。</span><br><span class="line"></span><br><span class="line">在slave节点上查看主从同步状态(slave节点执行)</span><br><span class="line"></span><br><span class="line">启动主从复制</span><br><span class="line"></span><br><span class="line">mysql&gt; start slave;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">再查看主从同步状态</span><br><span class="line"></span><br><span class="line">mysql&gt; show slave status\G;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/5b2419b1d7977056090b2a4da7aeba4c.png" alt="img"></p>
+<p>其他命令 (slave节点执行)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 停止复制</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> stop slave;</span></span><br></pre></td></tr></table></figure>
+
+<p>主从复制测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在master下创建数据库和表，或者修改和新增，删除记录都会进行同步(master节点执行)</span><br><span class="line">点击查看slave节点信息(slave节点执行)</span><br><span class="line">切记</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在主从复制操作的时候，不要基于去创建数据库或者相关操作。然后又去删除。这样会造成主从复制的pos改变，而造成复制失败，如果出现此类问题，查看04-03的常见问题排查。</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-主从复制相关问题排查"><a href="#3-主从复制相关问题排查" class="headerlink" title="3.主从复制相关问题排查"></a>3.主从复制相关问题排查</h2><h3 id="1、主从复制Connecting问题"><a href="#1、主从复制Connecting问题" class="headerlink" title="1、主从复制Connecting问题"></a>1、主从复制Connecting问题</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/1b8d7d93979c9a134f8745f73455e383.png" alt="img"></p>
+<p>使用start slave开启主从复制过程后，如果SlaveIORunning一直是Connecting，则说明主从复制一直处于连接状态，这种情况一般是下面几种原因造成的，我们可以根据 Last_IO_Error提示予以排除。</p>
+<p>网络不通<br>检查ip,端口<br>密码不对<br>检查是否创建用于同步的用户和用户密码是否正确<br>pos不对<br>检查Master的 Position</p>
+<h3 id="2、MYSQL镜像服务器因错误停止的恢复-—Slave-SQL-Running-No"><a href="#2、MYSQL镜像服务器因错误停止的恢复-—Slave-SQL-Running-No" class="headerlink" title="2、MYSQL镜像服务器因错误停止的恢复 —Slave_SQL_Running: No"></a>2、MYSQL镜像服务器因错误停止的恢复 —Slave_SQL_Running: No</h3><p>先stop slave，然后执行了一下提示的语句，再</p>
+<blockquote>
+<p>stop slave;<br>set global sql_slave_skip_counter=1;<br>start slave;<br>show slave status\G ;</p>
+</blockquote>
+<h3 id="3、从MYSQL服务器Slave-IO-Running-No的解决"><a href="#3、从MYSQL服务器Slave-IO-Running-No的解决" class="headerlink" title="3、从MYSQL服务器Slave_IO_Running: No的解决"></a>3、从MYSQL服务器Slave_IO_Running: No的解决</h3><p>master节点执行，获取日志文件和post</p>
+<p>mysql &gt; show master status;</p>
+<p>slave节点进行重新绑定</p>
+<p>mysql &gt; stop slave;<br>mysql &gt; CHANGE MASTER TO MASTER_LOG_FILE=’文件名’, MASTER_LOG_POS=文件位置;<br>mysql &gt; start slave;</p>
+<p>造成这类问题的原因一般是在主从复制的时候，基于创建表，然后又去删除和操作了数据表或者表。</p>
+<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><p>主库新建一个test库</p>
+<p><img src="/../img/image-20220310094647394.png" alt="image-20220310094647394"></p>
+<p>从库也有test库了</p>
+<p><img src="/../img/image-20220310094706685.png" alt="image-20220310094706685"></p>
+<p>主库新建test表，并写入一条数据</p>
+<p><img src="/../img/image-20220310094916926.png" alt="image-20220310094916926"></p>
+<p>从库也有</p>
+<p><img src="/../img/image-20220310094933859.png" alt="image-20220310094933859"></p>
+<h1 id="2-读写分离（业务层面）"><a href="#2-读写分离（业务层面）" class="headerlink" title="2.读写分离（业务层面）"></a>2.读写分离（业务层面）</h1><p>想要读写分离必须要用主从复制。就是两个库必须完全一致</p>
+<h2 id="1-项目"><a href="#1-项目" class="headerlink" title="1.项目"></a>1.项目</h2><h3 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 依赖mybatis和mysql驱动 --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.1.4&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       &lt;!--依赖sharding--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.apache.shardingsphere&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;sharding-jdbc-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;4.0.0-RC1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.apache.shardingsphere&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;sharding-core-common&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;4.0.0-RC1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!--依赖数据源druid--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.1.21&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="application-yml"><a href="#application-yml" class="headerlink" title="application.yml"></a>application.yml</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8085</span><br><span class="line">spring:</span><br><span class="line">  main:</span><br><span class="line">    allow-bean-definition-overriding: true</span><br><span class="line">  shardingsphere:</span><br><span class="line">    # 参数配置，显示sql</span><br><span class="line">    props:</span><br><span class="line">      sql:</span><br><span class="line">        show: true</span><br><span class="line">    # 配置数据源</span><br><span class="line">    datasource:</span><br><span class="line">      # 给每个数据源取别名，下面的ds1,ds2任意取名字</span><br><span class="line">      names: ds1,ds2</span><br><span class="line">      # 给master-ds1每个数据源配置数据库连接信息</span><br><span class="line">      ds1:</span><br><span class="line">        # 配置druid数据源</span><br><span class="line">        type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">        driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">        url: jdbc:mysql://192.168.214.131:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT</span><br><span class="line">        username: root</span><br><span class="line">        password: Boco.123</span><br><span class="line">        maxPoolSize: 100</span><br><span class="line">        minPoolSize: 5</span><br><span class="line">      # 配置ds2-slave</span><br><span class="line">      ds2:</span><br><span class="line">        type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">        driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">        url: jdbc:mysql://192.168.214.132:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT</span><br><span class="line">        username: root</span><br><span class="line">        password: Boco.123</span><br><span class="line">        maxPoolSize: 100</span><br><span class="line">        minPoolSize: 5</span><br><span class="line"></span><br><span class="line">    # 配置默认数据源ds1</span><br><span class="line">    sharding:</span><br><span class="line">      # 默认数据源，主要用于写，注意一定要配置读写分离 ,注意：如果不配置，那么就会把三个节点都当做从slave节点，新增，修改和删除会出错。</span><br><span class="line">      default-data-source-name: ds1</span><br><span class="line">    # 配置数据源的读写分离，但是数据库一定要做主从复制</span><br><span class="line">    masterslave:</span><br><span class="line">      # 配置主从名称，可以任意取名字</span><br><span class="line">      name: ms</span><br><span class="line">      # 配置主库master，负责数据的写入</span><br><span class="line">      master-data-source-name: ds1</span><br><span class="line">      # 配置从库slave节点</span><br><span class="line">      slave-data-source-names: ds2</span><br><span class="line">      # 配置slave节点的负载均衡均衡策略，采用轮询机制</span><br><span class="line">      load-balance-algorithm-type: round_robin</span><br><span class="line"># 整合mybatis的配置XXXXX</span><br><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  type-aliases-package: com.jiang.websocket.entity</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动类上加MapperScan</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@MapperScan(&#123;&quot;com.jiang.websocket.mapper&quot;&#125;)</span><br><span class="line">public class WebsocketApplication &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">      SpringApplication.run(WebsocketApplication.class, args);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p><img src="/../img/image-20220310134124639.png" alt="image-20220310134124639"></p>
+<h1 id="3-分库分表-表提前自己建"><a href="#3-分库分表-表提前自己建" class="headerlink" title="3.分库分表(表提前自己建)"></a>3.分库分表(表提前自己建)</h1><h2 id="1-分库分表的目的"><a href="#1-分库分表的目的" class="headerlink" title="1.分库分表的目的"></a>1.分库分表的目的</h2><p>是将一个表拆成N个表，就是让每个表的数据量控制在一定范围内，保证SQL的性能。</p>
+<p><img src="/../img/image-20220310135755968.png" alt="image-20220310135755968"></p>
+<h2 id="2-垂直拆分和水平拆分"><a href="#2-垂直拆分和水平拆分" class="headerlink" title="2.垂直拆分和水平拆分"></a>2.垂直拆分和水平拆分</h2><p><img src="/../img/image-20220310135949433.png" alt="image-20220310135949433"></p>
+<p><img src="/../img/image-20220310140006091.png" alt="image-20220310140006091"></p>
+<p>垂直拆分：业务模块拆分、商品库，用户库，订单库</p>
+<p>水平拆分：对表进行水平拆分（也就是我们说的：分表）</p>
+<p>表进行垂直拆分：表的字段过多，字段使用的频率不一。（可以拆分两个表建立1:1关系）</p>
+<h2 id="3-shardingjdbc分库分表操作"><a href="#3-shardingjdbc分库分表操作" class="headerlink" title="3.shardingjdbc分库分表操作"></a>3.shardingjdbc分库分表操作</h2><h3 id="1-逻辑表"><a href="#1-逻辑表" class="headerlink" title="1.逻辑表"></a>1.逻辑表</h3><p>逻辑表是指：水平拆分的数据库或者数据表的相同路基和数据结构表的总称。比如用户数据根据用户id%2拆分为2个表，分别是：ksd_user0和ksd_user1。他们的逻辑表名是：ksd_user。</p>
+<p>在shardingjdbc中的定义方式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  shardingsphere:</span><br><span class="line">    sharding:</span><br><span class="line">      tables:</span><br><span class="line">        # ksd_user 逻辑表名</span><br><span class="line">        ksd_user:</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-分库分表数据节点-actual-data-nodes"><a href="#2-分库分表数据节点-actual-data-nodes" class="headerlink" title="2.分库分表数据节点 - actual-data-nodes"></a>2.分库分表数据节点 - actual-data-nodes</h3><p>紧接着上面的，可以有四种方法指定有哪些库哪些表，常用1,2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># ksd_user 逻辑表名</span><br><span class="line">   ksd_user:</span><br><span class="line">     #1 数据节点：多数据源$-&gt;&#123;0..N&#125;.逻辑表名$-&gt;&#123;0..N&#125; 相同表</span><br><span class="line">     actual-data-nodes: ds$-&gt;&#123;0..2&#125;.ksd_user$-&gt;&#123;0..1&#125;</span><br><span class="line">      #2 数据节点：多数据源$-&gt;&#123;0..N&#125;.逻辑表名$-&gt;&#123;0..N&#125; 不同表</span><br><span class="line">     actual-data-nodes: ds0.ksd_user$-&gt;&#123;0..1&#125;,ds1.ksd_user$-&gt;&#123;2..4&#125;</span><br><span class="line">     #3 指定单数据源的配置方式</span><br><span class="line">     actual-data-nodes: ds0.ksd_user$-&gt;&#123;0..4&#125;</span><br><span class="line">     #4 全部手动指定</span><br><span class="line">     actual-data-nodes: ds0.ksd_user0,ds1.ksd_user0,ds0.ksd_user1,ds1.ksd_user1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220310151003219.png" alt="image-20220310151003219"></p>
+<h3 id="3-分库分表5种分片策略"><a href="#3-分库分表5种分片策略" class="headerlink" title="3.分库分表5种分片策略"></a>3.分库分表5种分片策略</h3><p><strong>是在上一步指定数据源以后，如果是上一步中写死了数据库，那么久不用数据源分片策略</strong></p>
+<p>如果没有指定，就两种分片策略都要写</p>
+<p><img src="/../img/image-20220310151903213.png" alt="image-20220310151903213"></p>
+<p>举例</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8085</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">main:</span></span><br><span class="line">    <span class="attr">allow-bean-definition-overriding:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="comment"># 参数配置，显示sql</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">sharding:</span></span><br><span class="line">      <span class="comment"># 默认数据源，主要用于写，注意一定要配置读写分离 ,注意：如果不配置，那么就会把三个节点都当做从slave节点，新增，修改和删除会出错。</span></span><br><span class="line">      <span class="attr">default-data-source-name:</span> <span class="string">ds0</span></span><br><span class="line">      <span class="comment"># 配置分表的规则</span></span><br><span class="line">      <span class="attr">tables:</span></span><br><span class="line">        <span class="comment"># ksd_user 逻辑表名</span></span><br><span class="line">        <span class="attr">ksd_user:</span></span><br><span class="line">          <span class="comment"># 数据节点：数据源$-&gt;&#123;0..N&#125;.逻辑表名$-&gt;&#123;0..N&#125;,一共四个表</span></span><br><span class="line">          <span class="attr">actual-data-nodes:</span> <span class="string">ds$-&gt;&#123;0..1&#125;.ksd_user$-&gt;&#123;0..1&#125;</span></span><br><span class="line">          <span class="comment"># 拆分库策略，也就是什么样子的数据放入放到哪个数据库中。根据性别放两个库</span></span><br><span class="line">          <span class="attr">database-strategy:</span></span><br><span class="line">            <span class="attr">inline:</span></span><br><span class="line">              <span class="attr">sharding-column:</span> <span class="string">sex</span>    <span class="comment"># 分片字段（分片键）</span></span><br><span class="line">              <span class="attr">algorithm-expression:</span> <span class="string">ds$-&gt;&#123;sex</span> <span class="string">%</span> <span class="number">2</span><span class="string">&#125;</span> <span class="comment"># 分片算法表达式</span></span><br><span class="line">          <span class="comment"># 拆分表策略，也就是什么样子的数据放入放到哪个数据表中。根据年级放两个表</span></span><br><span class="line">          <span class="attr">table-strategy:</span></span><br><span class="line">            <span class="attr">inline:</span></span><br><span class="line">              <span class="attr">sharding-column:</span> <span class="string">age</span>    <span class="comment"># 分片字段（分片键）</span></span><br><span class="line">              <span class="attr">algorithm-expression:</span> <span class="string">ksd_user$-&gt;&#123;age</span> <span class="string">%</span> <span class="number">2</span><span class="string">&#125;</span> <span class="comment"># 分片算法表达式</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220310152440658.png" alt="image-20220310152440658"></p>
+<h3 id="4-根据实时间日期-按照标准规则分库分表"><a href="#4-根据实时间日期-按照标准规则分库分表" class="headerlink" title="4.根据实时间日期 - 按照标准规则分库分表"></a>4.根据实时间日期 - 按照标准规则分库分表</h3><p>1.对应StrandardShardingStrategy.提供对SQL语句中的=，in和恶between and 的分片操作支持。<br>2.StrandardShardingStrategy只支持但分片键。提供PreciseShardingAlgorithm和RangeShardingAlgorithm两个分片算法。<br>3.PreciseShardingAlgorithm是必选的呃，用于处理=和IN的分片<br>4.RangeShardingAlgorithm是可选的，是用于处理Betwwen and分片，如果不配置                     RangeShardingAlgorithm,SQL的Between AND 将按照全库路由处理。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">ksd_user:</span></span><br><span class="line">  <span class="comment"># 数据节点：数据源$-&gt;&#123;0..N&#125;.逻辑表名$-&gt;&#123;0..N&#125;</span></span><br><span class="line">  <span class="attr">actual-data-nodes:</span> <span class="string">ds$-&gt;&#123;0..1&#125;.ksd_user$-&gt;&#123;0..1&#125;</span></span><br><span class="line">  <span class="comment"># 拆分库策略，也就是什么样子的数据放入放到哪个数据库中。</span></span><br><span class="line">  <span class="attr">database-strategy:</span></span><br><span class="line">    <span class="attr">standard:</span></span><br><span class="line">      <span class="attr">shardingColumn:</span> <span class="string">birthday</span></span><br><span class="line">      <span class="attr">preciseAlgorithmClassName:</span> <span class="string">com.xuexiangban.shardingjdbc.algorithm.BirthdayAlgorithm</span></span><br><span class="line">  <span class="attr">table-strategy:</span></span><br><span class="line">    <span class="attr">inline:</span></span><br><span class="line">      <span class="attr">sharding-column:</span> <span class="string">age</span>    <span class="comment"># 分片字段（分片键）</span></span><br><span class="line">      <span class="attr">algorithm-expression:</span> <span class="string">ksd_user$-&gt;&#123;age</span> <span class="string">%</span> <span class="number">2</span><span class="string">&#125;</span> <span class="comment"># 分片算法表达式</span></span><br></pre></td></tr></table></figure>
+
+
+<p>定义分片的日期规则</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xuexiangban.shardingjdbc.algorithm;</span><br><span class="line"><span class="keyword">import</span> org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;</span><br><span class="line"><span class="keyword">import</span> org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;</span><br><span class="line"><span class="keyword">import</span> sun.util.resources.cldr.CalendarData;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: 学相伴-飞哥</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: BirthdayAlgorithm</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> : 2021/3/11</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BirthdayAlgorithm</span> <span class="keyword">implements</span> <span class="title">PreciseShardingAlgorithm</span>&lt;<span class="title">Date</span>&gt; </span>&#123;</span><br><span class="line">   List&lt;Date&gt; dateList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">   &#123;</span><br><span class="line">       Calendar calendar1 = Calendar.getInstance();</span><br><span class="line">       calendar1.set(<span class="number">2020</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">       Calendar calendar2 = Calendar.getInstance();</span><br><span class="line">       calendar2.set(<span class="number">2021</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">       Calendar calendar3 = Calendar.getInstance();</span><br><span class="line">       calendar3.set(<span class="number">2022</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">       dateList.add(calendar1.getTime());</span><br><span class="line">       dateList.add(calendar2.getTime());</span><br><span class="line">       dateList.add(calendar3.getTime());</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *collection表示两个数据源ds0和ds1</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">doSharding</span><span class="params">(Collection&lt;String&gt; collection, PreciseShardingValue&lt;Date&gt; preciseShardingValue)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 获取属性数据库的值</span></span><br><span class="line">       Date date = preciseShardingValue.getValue();</span><br><span class="line">       <span class="comment">// 获取数据源的名称信息列表</span></span><br><span class="line">       Iterator&lt;String&gt; iterator = collection.iterator();</span><br><span class="line">       String target = <span class="keyword">null</span>;</span><br><span class="line">       <span class="keyword">for</span> (Date s : dateList) &#123;</span><br><span class="line">           target = iterator.next();</span><br><span class="line">           <span class="comment">// 如果数据晚于指定的日期直接返回</span></span><br><span class="line">           <span class="keyword">if</span> (date.before(s)) &#123;</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> target;</span><br><span class="line">   &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220310161452405.png" alt="image-20220310161452405"><br>4、测试查看结果</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8085/user/save?sex=3&amp;age=3&amp;birthday=2020-03-09">http://localhost:8085/user/save?sex=3&amp;age=3&amp;birthday=2020-03-09</a> —- ds1<br><a target="_blank" rel="noopener" href="http://localhost:8085/user/save?sex=3&amp;age=3&amp;birthday=2021-03-09">http://localhost:8085/user/save?sex=3&amp;age=3&amp;birthday=2021-03-09</a> —- ds0</p>
+<h1 id="4-注意"><a href="#4-注意" class="headerlink" title="4.注意"></a>4.注意</h1><p>（分库分表）与（主从复制+读写分离）没有关系</p>
+<p>因为，（主从复制+读写分离）所有的库，表都是一样的</p>
+<p>而（分库分表）是不同库不同表，存放不同数据</p>
+<h2 id="（主从复制-读写分离）的yml"><a href="#（主从复制-读写分离）的yml" class="headerlink" title="（主从复制+读写分离）的yml"></a>（主从复制+读写分离）的yml</h2><p><img src="/../img/image-20220310155411875.png" alt="image-20220310155411875"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8085</span><br><span class="line">spring:</span><br><span class="line">  servlet:</span><br><span class="line">    multipart:</span><br><span class="line">      enabled: true</span><br><span class="line">      max-file-size: 200MB</span><br><span class="line">      max-request-size: 200MB</span><br><span class="line">  main:</span><br><span class="line">    allow-bean-definition-overriding: true</span><br><span class="line">  shardingsphere:</span><br><span class="line">    # 参数配置，显示sql</span><br><span class="line">    props:</span><br><span class="line">      sql:</span><br><span class="line">        show: true</span><br><span class="line">    # 配置数据源</span><br><span class="line">    datasource:</span><br><span class="line">      # 给每个数据源取别名，下面的ds1,ds2任意取名字</span><br><span class="line">      names: ds1,ds2</span><br><span class="line">      # 给master-ds1每个数据源配置数据库连接信息</span><br><span class="line">      ds1:</span><br><span class="line">        # 配置druid数据源</span><br><span class="line">        type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">        driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">        url: jdbc:mysql://192.168.214.131:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT</span><br><span class="line">        username: root</span><br><span class="line">        password: Boco.123</span><br><span class="line">        maxPoolSize: 100</span><br><span class="line">        minPoolSize: 5</span><br><span class="line">      # 配置ds2-slave</span><br><span class="line">      ds2:</span><br><span class="line">        type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">        driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">        url: jdbc:mysql://192.168.214.132:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT</span><br><span class="line">        username: root</span><br><span class="line">        password: Boco.123</span><br><span class="line">        maxPoolSize: 100</span><br><span class="line">        minPoolSize: 5</span><br><span class="line">    # 配置默认数据源ds1</span><br><span class="line">    sharding:</span><br><span class="line">      # 默认数据源，主要用于写，注意一定要配置读写分离 ,注意：如果不配置，那么就会把三个节点都当做从slave节点，新增，修改和删除会出错。</span><br><span class="line">      default-data-source-name: ds1</span><br><span class="line">    # 配置数据源的读写分离，但是数据库一定要做主从复制</span><br><span class="line">    masterslave:</span><br><span class="line">      # 配置主从名称，可以任意取名字</span><br><span class="line">      name: ms</span><br><span class="line">      # 配置主库master，负责数据的写入</span><br><span class="line">      master-data-source-name: ds1</span><br><span class="line">      # 配置从库slave节点</span><br><span class="line">      slave-data-source-names: ds2</span><br><span class="line">      # 配置slave节点的负载均衡均衡策略，采用轮询机制</span><br><span class="line">      load-balance-algorithm-type: round_robin</span><br><span class="line"># 整合mybatis的配置XXXXX</span><br><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  type-aliases-package: com.jiang.websocket.entity.shardingsphere</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="（分库分表）的yml"><a href="#（分库分表）的yml" class="headerlink" title="（分库分表）的yml"></a>（分库分表）的yml</h2><p><img src="/../img/image-20220310155524018.png" alt="image-20220310155524018"></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8085</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">servlet:</span></span><br><span class="line">    <span class="attr">multipart:</span></span><br><span class="line">      <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">max-file-size:</span> <span class="string">200MB</span></span><br><span class="line">      <span class="attr">max-request-size:</span> <span class="string">200MB</span></span><br><span class="line">  <span class="attr">main:</span></span><br><span class="line">    <span class="attr">allow-bean-definition-overriding:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="comment"># 参数配置，显示sql</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 配置数据源</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="comment"># 给每个数据源取别名，下面的ds1,ds2任意取名字</span></span><br><span class="line">      <span class="attr">names:</span> <span class="string">ds1,ds2</span></span><br><span class="line">      <span class="comment"># 给master-ds1每个数据源配置数据库连接信息</span></span><br><span class="line">      <span class="attr">ds1:</span></span><br><span class="line">        <span class="comment"># 配置druid数据源</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.214.131:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">Boco.123</span></span><br><span class="line">        <span class="attr">maxPoolSize:</span> <span class="number">100</span></span><br><span class="line">        <span class="attr">minPoolSize:</span> <span class="number">5</span></span><br><span class="line">      <span class="comment"># 配置ds2-slave</span></span><br><span class="line">      <span class="attr">ds2:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.214.132:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">Boco.123</span></span><br><span class="line">        <span class="attr">maxPoolSize:</span> <span class="number">100</span></span><br><span class="line">        <span class="attr">minPoolSize:</span> <span class="number">5</span></span><br><span class="line">    <span class="comment"># 配置默认数据源ds1</span></span><br><span class="line">    <span class="attr">sharding:</span></span><br><span class="line">      <span class="comment"># 默认数据源，主要用于写，注意一定要配置读写分离 ,注意：如果不配置，那么就会把三个节点都当做从slave节点，新增，修改和删除会出错。</span></span><br><span class="line">      <span class="attr">default-data-source-name:</span> <span class="string">ds1</span></span><br><span class="line">      <span class="attr">tables:</span></span><br><span class="line">        <span class="comment"># ksd_user 逻辑表名</span></span><br><span class="line">        <span class="attr">ksd_user:</span></span><br><span class="line">          <span class="comment"># 数据节点：数据源$-&gt;&#123;0..N&#125;.逻辑表名$-&gt;&#123;0..N&#125;,一共四个表</span></span><br><span class="line">          <span class="attr">actual-data-nodes:</span> <span class="string">ds$-&gt;&#123;1..2&#125;.ksd_user$-&gt;&#123;0..1&#125;</span></span><br><span class="line">          <span class="comment"># 拆分库策略，也就是什么样子的数据放入放到哪个数据库中。根据性别放两个库</span></span><br><span class="line">          <span class="attr">database-strategy:</span></span><br><span class="line">            <span class="attr">inline:</span></span><br><span class="line">              <span class="attr">sharding-column:</span> <span class="string">sex</span>    <span class="comment"># 分片字段（分片键）</span></span><br><span class="line">              <span class="attr">algorithm-expression:</span> <span class="string">ds$-&gt;&#123;sex</span> <span class="string">%</span> <span class="number">2</span><span class="string">&#125;</span> <span class="comment"># 分片算法表达式</span></span><br><span class="line">          <span class="comment"># 拆分表策略，也就是什么样子的数据放入放到哪个数据表中。根据年级放两个表</span></span><br><span class="line">          <span class="attr">table-strategy:</span></span><br><span class="line">            <span class="attr">inline:</span></span><br><span class="line">              <span class="attr">sharding-column:</span> <span class="string">age</span>    <span class="comment"># 分片字段（分片键）</span></span><br><span class="line">              <span class="attr">algorithm-expression:</span> <span class="string">ksd_user$-&gt;&#123;sex</span> <span class="string">%</span> <span class="number">2</span><span class="string">&#125;</span> <span class="comment"># 分片算法表达式</span></span><br><span class="line"><span class="comment"># 整合mybatis的配置XXXXX</span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*.xml</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.jiang.websocket.entity.shardingsphere</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="5-分布式主键配置"><a href="#5-分布式主键配置" class="headerlink" title="5.分布式主键配置"></a>5.分布式主键配置</h1><p>ShardingSphere提供灵活的配置分布式主键生成策略方式。在分片规则配置模块克配置每个表的主键生成策略。默认使用雪花算法。（snowflake）生成64bit的长整型数据。支持两种方式配置</p>
+<p>SNOWFLAKE  Long<br>UUID    varchar2<br>这里切记：主键列不能自增长。数据类型是：bigint(20)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  shardingsphere:</span><br><span class="line">    sharding:</span><br><span class="line">      tables:</span><br><span class="line">        # ksd_user 逻辑表名</span><br><span class="line">        ksd_user:</span><br><span class="line">          key-generator:</span><br><span class="line">              # 主键的列明，</span><br><span class="line">            column: userid</span><br><span class="line">            type: SNOWFLAKE</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220310163642677.png" alt="image-20220310163642677"></p>
+<h1 id="6-以年月分库分表"><a href="#6-以年月分库分表" class="headerlink" title="6.以年月分库分表"></a>6.以年月分库分表</h1><p>仅指定了一个ds0库，但是此库有6个表，collect表示 ：${1..3}不足两位前面补0</p>
+<p><img src="/../img/image-20220310164919622.png" alt="image-20220310164919622"></p>
+<p><img src="/../img/image-20220310165125478.png" alt="image-20220310165125478"></p>
+<p>也可以不用…，直接指定</p>
+<p><img src="/../img/image-20220310170041828.png" alt="image-20220310170041828"></p>
+<p>如果不插入分片建字段，那么就会去插入所有的表</p>
+<p><img src="/../img/image-20220310170342668.png" alt="image-20220310170342668"></p>
+<p>也可以</p>
+<p><img src="/../img/image-20220310171558935.png" alt="image-20220310171558935"></p>
+<p><img src="/../img/image-20220310171608313.png" alt="image-20220310171608313"></p>
+<h1 id="7-ShardingJdbc的事务管理"><a href="#7-ShardingJdbc的事务管理" class="headerlink" title="7.ShardingJdbc的事务管理"></a>7.ShardingJdbc的事务管理</h1><h2 id="1-本地事务"><a href="#1-本地事务" class="headerlink" title="1.本地事务"></a>1.本地事务</h2><p>指的单库，分表不分库，直接加@Transactional注解即可</p>
+<p><img src="/../img/image-20220311081607591.png" alt="image-20220311081607591"></p>
+<h2 id="2-两阶段提交，柔性事务，分布式事务"><a href="#2-两阶段提交，柔性事务，分布式事务" class="headerlink" title="2.两阶段提交，柔性事务，分布式事务"></a>2.两阶段提交，柔性事务，分布式事务</h2><p>导包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--依赖sharding--&gt;</span><br><span class="line"> &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;io.shardingsphere&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;sharding-transaction-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;3.1.0&lt;/version&gt;</span><br><span class="line"> &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>再加上@ShardingTransactionType(TransactionType.XA)注解</p>
+<p><img src="/../img/image-20220311082321296.png" alt="image-20220311082321296"></p>
+<h1 id="8-shardingjdb分库分表）-（主从复制-读写分离）"><a href="#8-shardingjdb分库分表）-（主从复制-读写分离）" class="headerlink" title="8.shardingjdb分库分表）+（主从复制+读写分离）"></a>8.shardingjdb分库分表）+（主从复制+读写分离）</h1><p><img src="/../img/image-20220311091957208.png" alt="image-20220311091957208"></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8001</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  main:</span></span><br><span class="line"><span class="comment">#    allow-bean-definition-overriding: true</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">sharding-jdbc-example</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 数据源配置，可配置多个</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span> <span class="string">master0,master1,slave0,slave1</span></span><br><span class="line">      <span class="attr">master0:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3310/user?useUnicode=true&amp;useSSL=false</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">      <span class="attr">slave0:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3311/user?useUnicode=true&amp;useSSL=false</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">      <span class="attr">master1:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3312/user?useUnicode=true&amp;useSSL=false</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">      <span class="attr">slave1:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3313/user?useUnicode=true&amp;useSSL=false</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">&#x27;123456&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">sharding:</span></span><br><span class="line">      <span class="attr">master-slave-rules:</span></span><br><span class="line">        <span class="attr">ms0:</span></span><br><span class="line">          <span class="attr">master-data-source-name:</span> <span class="string">master0</span></span><br><span class="line">          <span class="attr">slave-data-source-names:</span> <span class="string">slave0</span></span><br><span class="line">        <span class="attr">ms1:</span></span><br><span class="line">          <span class="attr">master-data-source-name:</span> <span class="string">master1</span></span><br><span class="line">          <span class="attr">slave-data-source-names:</span> <span class="string">slave1</span></span><br><span class="line">      <span class="attr">tables:</span></span><br><span class="line">        <span class="attr">user:</span></span><br><span class="line">          <span class="attr">key-generator:</span></span><br><span class="line">            <span class="attr">column:</span> <span class="string">id</span></span><br><span class="line">            <span class="attr">type:</span> <span class="string">SNOWFLAKE</span></span><br><span class="line">          <span class="attr">actual-data-nodes:</span> <span class="string">ms$-&gt;&#123;0..1&#125;.user_tb_$-&gt;&#123;0..2&#125;</span></span><br><span class="line">          <span class="attr">database-strategy:</span></span><br><span class="line">            <span class="attr">inline:</span></span><br><span class="line">              <span class="attr">sharding-column:</span> <span class="string">id</span></span><br><span class="line">              <span class="attr">algorithm-expression:</span> <span class="string">ms$-&gt;&#123;(id</span> <span class="string">/</span> <span class="number">10</span><span class="string">).toBigInteger()</span> <span class="string">%</span> <span class="number">2</span><span class="string">&#125;</span></span><br><span class="line"><span class="comment">#              algorithm-expression: ms$-&gt;&#123;id % 2&#125;</span></span><br><span class="line">          <span class="attr">table-strategy:</span></span><br><span class="line">            <span class="attr">inline:</span></span><br><span class="line">              <span class="attr">sharding-column:</span> <span class="string">id</span></span><br><span class="line">              <span class="attr">algorithm-expression:</span> <span class="string">user_tb_$-&gt;&#123;id</span> <span class="string">%</span> <span class="number">3</span><span class="string">&#125;</span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.cunzaizhe.entity</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:mapper/*Mapper.xml</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>分库分表原理</strong>：先根据id的十位上的数%2被平均分到master0和master1数据库上，然后再根据id个位上的数%3被平均分到user_tb_0,user_tb_1,user_tb_2上</li>
+<li>举例：先定位到哪个ms</li>
+</ul>
+<p><img src="/../img/image-20220311092149258.png" alt="image-20220311092149258"></p>
+<p>增删改操作，修改master，查询操作，查slave</p>
+<h2 id="？当没有分库分表时"><a href="#？当没有分库分表时" class="headerlink" title="？当没有分库分表时"></a>？当没有分库分表时</h2><p><img src="/../img/image-20220311092338539.png" alt="image-20220311092338539"></p>
+<h1 id="9-sharding-proxy"><a href="#9-sharding-proxy" class="headerlink" title="9.sharding-proxy"></a>9.sharding-proxy</h1><h2 id="1解压"><a href="#1解压" class="headerlink" title="1解压"></a>1解压</h2><p><img src="/../img/image-20220311093543586.png" alt="image-20220311093543586"></p>
+<h2 id="2修改配置文件"><a href="#2修改配置文件" class="headerlink" title="2修改配置文件"></a>2修改配置文件</h2><p><img src="/../img/image-20220311093621405.png" alt="image-20220311093621405"></p>
+<h3 id="1server-yaml"><a href="#1server-yaml" class="headerlink" title="1server.yaml"></a>1server.yaml</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">authentication:</span></span><br><span class="line"><span class="comment">#配置数据库用户名密码</span></span><br><span class="line">  <span class="attr">users:</span></span><br><span class="line">    <span class="attr">root:</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment">#一个sharding_db的数据库</span></span><br><span class="line">    <span class="attr">sharding:</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">sharding</span> </span><br><span class="line">      <span class="attr">authorizedSchemas:</span> <span class="string">sharding_db</span></span><br><span class="line"></span><br><span class="line"><span class="attr">props:</span></span><br><span class="line">  <span class="attr">max.connections.size.per.query:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">acceptor.size:</span> <span class="number">16</span>  <span class="comment"># The default value is available processors count * 2.</span></span><br><span class="line">  <span class="attr">executor.size:</span> <span class="number">16</span>  <span class="comment"># Infinite by default.</span></span><br><span class="line">  <span class="attr">proxy.frontend.flush.threshold:</span> <span class="number">128</span>  <span class="comment"># The default value is 128.</span></span><br><span class="line">    <span class="comment"># LOCAL: Proxy will run with LOCAL transaction.</span></span><br><span class="line">    <span class="comment"># XA: Proxy will run with XA transaction.</span></span><br><span class="line">    <span class="comment"># BASE: Proxy will run with B.A.S.E transaction.</span></span><br><span class="line">  <span class="attr">proxy.transaction.type:</span> <span class="string">LOCAL</span></span><br><span class="line">  <span class="attr">proxy.opentracing.enabled:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">query.with.cipher.column:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">sql.show:</span> <span class="literal">false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、分库分表-修改-config-sharding-yaml"><a href="#3、分库分表-修改-config-sharding-yaml" class="headerlink" title="3、分库分表 修改 config-sharding.yaml"></a>3、分库分表 修改 config-sharding.yaml</h2><p>复制mysql包到lib中，这个解压包里已经有了，当新下载可以使用这个mysql包</p>
+<p><img src="/../img/image-20220311094323025.png" alt="image-20220311094323025"></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上一步的数据库</span></span><br><span class="line"><span class="attr">schemaName:</span> <span class="string">sharding_db</span></span><br><span class="line"></span><br><span class="line"><span class="attr">dataSources:</span></span><br><span class="line">  <span class="attr">ds_0:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/edu_db_1?serverTimezone=UTC&amp;useSSL=false</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">connectionTimeoutMilliseconds:</span> <span class="number">30000</span></span><br><span class="line">    <span class="attr">idleTimeoutMilliseconds:</span> <span class="number">60000</span></span><br><span class="line">    <span class="attr">maxLifetimeMilliseconds:</span> <span class="number">1800000</span></span><br><span class="line">    <span class="attr">maxPoolSize:</span> <span class="number">50</span></span><br><span class="line">  <span class="attr">ds_1:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/edu_db_2?serverTimezone=UTC&amp;useSSL=false</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">connectionTimeoutMilliseconds:</span> <span class="number">30000</span></span><br><span class="line">    <span class="attr">idleTimeoutMilliseconds:</span> <span class="number">60000</span></span><br><span class="line">    <span class="attr">maxLifetimeMilliseconds:</span> <span class="number">1800000</span></span><br><span class="line">    <span class="attr">maxPoolSize:</span> <span class="number">50</span></span><br><span class="line"></span><br><span class="line"><span class="attr">shardingRule:</span></span><br><span class="line">  <span class="attr">tables:</span></span><br><span class="line">    <span class="attr">t_order:</span></span><br><span class="line">      <span class="attr">actualDataNodes:</span> <span class="string">ds_$&#123;0..1&#125;.t_order_$&#123;1..2&#125;</span></span><br><span class="line">      <span class="attr">tableStrategy:</span></span><br><span class="line">        <span class="attr">inline:</span></span><br><span class="line">          <span class="attr">shardingColumn:</span> <span class="string">order_id</span></span><br><span class="line">          <span class="attr">algorithmExpression:</span> <span class="string">t_order_$&#123;order_id</span> <span class="string">%</span> <span class="number">2</span> <span class="string">+</span> <span class="number">1</span><span class="string">&#125;</span></span><br><span class="line">      <span class="attr">keyGenerator:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">SNOWFLAKE</span></span><br><span class="line">        <span class="attr">column:</span> <span class="string">order_id</span></span><br><span class="line">  <span class="comment">#绑定上方tables下的所有表名</span></span><br><span class="line">  <span class="attr">bindingTables:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">t_order</span></span><br><span class="line">  <span class="comment">#全局指定数据库分片设置，可以在每个tables下自定义设置</span></span><br><span class="line">  <span class="attr">defaultDatabaseStrategy:</span></span><br><span class="line">    <span class="attr">inline:</span></span><br><span class="line">      <span class="attr">shardingColumn:</span> <span class="string">user_id</span></span><br><span class="line">      <span class="attr">algorithmExpression:</span> <span class="string">ds_$&#123;user_id</span> <span class="string">%</span> <span class="number">2</span><span class="string">&#125;</span></span><br><span class="line">  <span class="attr">defaultTableStrategy:</span></span><br><span class="line">    <span class="attr">none:</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>测试启动</p>
+<p><img src="/../img/image-20220311095138616.png" alt="image-20220311095138616"></p>
+<p><img src="/../img/image-20220311095151810.png" alt="image-20220311095151810"></p>
+<p><img src="/../img/image-20220311100646559.png" alt="image-20220311100646559"></p>
+<p><img src="/../img/image-20220311100859870.png" alt="image-20220311100859870"></p>
+<p>在这个3307的库里，创建指定的user表，那么3306的库里就会自动创建user1和user2这两个表，添加一条数据，会根据路由判断插入到哪个表</p>
+<p><img src="/../img/image-20220311101323597.png" alt="image-20220311101323597"></p>
+<p>其中proxy的表结构的id要是bigint类型，因为使用雪花算法生成的</p>
+<p><img src="/../img/image-20220311104639825.png" alt="image-20220311104639825"></p>
+<p>3307 proxy表</p>
+<p><img src="/../img/image-20220311104700029.png" alt="image-20220311104700029"></p>
+<p>3306 user1表</p>
+<p><img src="/../img/image-20220311104728342.png" alt="image-20220311104728342"></p>
+<p>3306  user2表</p>
+<p><img src="/../img/image-20220311104736449.png" alt="image-20220311104736449"></p>
+<p>发现一个表各一条</p>
+<h2 id="4-读写分离config-master-slave-yaml"><a href="#4-读写分离config-master-slave-yaml" class="headerlink" title="4.读写分离config-master_slave.yaml"></a>4.读写分离config-master_slave.yaml</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">schemaName:</span> <span class="string">master_slave_db</span></span><br><span class="line"></span><br><span class="line"><span class="attr">dataSources:</span></span><br><span class="line">  <span class="attr">master_ds:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/master?serverTimezone=UTC&amp;useSSL=false</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">connectionTimeoutMilliseconds:</span> <span class="number">30000</span></span><br><span class="line">    <span class="attr">idleTimeoutMilliseconds:</span> <span class="number">60000</span></span><br><span class="line">    <span class="attr">maxLifetimeMilliseconds:</span> <span class="number">1800000</span></span><br><span class="line">    <span class="attr">maxPoolSize:</span> <span class="number">50</span></span><br><span class="line">  <span class="attr">slave_ds_0:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/slave_0?serverTimezone=UTC&amp;useSSL=false</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">connectionTimeoutMilliseconds:</span> <span class="number">30000</span></span><br><span class="line">    <span class="attr">idleTimeoutMilliseconds:</span> <span class="number">60000</span></span><br><span class="line">    <span class="attr">maxLifetimeMilliseconds:</span> <span class="number">1800000</span></span><br><span class="line">    <span class="attr">maxPoolSize:</span> <span class="number">50</span></span><br><span class="line">  <span class="attr">slave_ds_1:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/slave_1?serverTimezone=UTC&amp;useSSL=false</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">connectionTimeoutMilliseconds:</span> <span class="number">30000</span></span><br><span class="line">    <span class="attr">idleTimeoutMilliseconds:</span> <span class="number">60000</span></span><br><span class="line">    <span class="attr">maxLifetimeMilliseconds:</span> <span class="number">1800000</span></span><br><span class="line">    <span class="attr">maxPoolSize:</span> <span class="number">50</span></span><br><span class="line"></span><br><span class="line"><span class="attr">masterSlaveRule:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">ms_ds</span></span><br><span class="line">  <span class="attr">masterDataSourceName:</span> <span class="string">master_ds</span></span><br><span class="line">  <span class="attr">slaveDataSourceNames:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">slave_ds_0</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">slave_ds_1</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220311110726123.png" alt="image-20220311110726123"></p>
+<p>注意，shardingproxy只会进行读写分离，主从复制还是需要从mysql手动配置，再次测试，手动同步数据，创建表等操作</p>
+<p><img src="/../img/image-20220311110854729.png" alt="image-20220311110854729"></p>
+<p>insert走主库</p>
+<p><img src="/../img/image-20220311112239798.png" alt="image-20220311112239798"></p>
+<p>select轮训走从库</p>
+<p><img src="/../img/image-20220311112301749.png" alt="image-20220311112301749"></p>
+<p><img src="/../img/image-20220311112312440.png" alt="image-20220311112312440"></p>
+<p>navicat看</p>
+<p>主库（1,1）</p>
+<p>从库1（2,1）</p>
+<p>从库2 （3，1）</p>
+<p><img src="/../img/image-20220311113009106.png" alt="image-20220311113009106"></p>
+<p>再查一次</p>
+<p><img src="/../img/image-20220311113021958.png" alt="image-20220311113021958"></p>
+<p>说明查询是从从库查询的</p>
+<h2 id="5-项目里数据库"><a href="#5-项目里数据库" class="headerlink" title="5.项目里数据库"></a>5.项目里数据库</h2><p>配置为一个数据源3307</p>
+
+      
+    </div>
+    
+    
+    
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shardingjdbc%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/" rel="tag"><i class="fa fa-at" aria-hidden="true"></i> shardingjdbc分库分表</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/30/restTemplate&&fegin/" rel="next" title="restTemplate&&fegin">
+                <i class="fa fa-chevron-left"></i> restTemplate&&fegin
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/30/mysql/" rel="prev" title="mysql">
+                mysql <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1430319727&auto=1&height=66"></iframe>
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/a.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jiangjiaxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6428447095" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://weibo.com/u/6428447095" title="小姜的微博" target="_blank">小姜的微博</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%EF%BC%88%E6%95%B0%E6%8D%AE%E5%B1%82%E9%9D%A2%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">1.主从复制（数据层面）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">1.原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%90%AD%E5%BB%BA"><span class="nav-number">1.2.</span> <span class="nav-text">2.搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">1.3.</span> <span class="nav-text">3.主从复制相关问题排查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6Connecting%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">1、主从复制Connecting问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81MYSQL%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9B%A0%E9%94%99%E8%AF%AF%E5%81%9C%E6%AD%A2%E7%9A%84%E6%81%A2%E5%A4%8D-%E2%80%94Slave-SQL-Running-No"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、MYSQL镜像服务器因错误停止的恢复 —Slave_SQL_Running: No</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E4%BB%8EMYSQL%E6%9C%8D%E5%8A%A1%E5%99%A8Slave-IO-Running-No%E7%9A%84%E8%A7%A3%E5%86%B3"><span class="nav-number">1.3.3.</span> <span class="nav-text">3、从MYSQL服务器Slave_IO_Running: No的解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B5%8B%E8%AF%95"><span class="nav-number">1.4.</span> <span class="nav-text">4.测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%88%E4%B8%9A%E5%8A%A1%E5%B1%82%E9%9D%A2%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">2.读写分离（业务层面）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.1.</span> <span class="nav-text">1.项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pom"><span class="nav-number">2.1.1.</span> <span class="nav-text">pom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application-yml"><span class="nav-number">2.1.2.</span> <span class="nav-text">application.yml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test"><span class="nav-number">2.2.</span> <span class="nav-text">test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8-%E8%A1%A8%E6%8F%90%E5%89%8D%E8%87%AA%E5%B7%B1%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">3.分库分表(表提前自己建)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">1.分库分表的目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9E%82%E7%9B%B4%E6%8B%86%E5%88%86%E5%92%8C%E6%B0%B4%E5%B9%B3%E6%8B%86%E5%88%86"><span class="nav-number">3.2.</span> <span class="nav-text">2.垂直拆分和水平拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-shardingjdbc%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.</span> <span class="nav-text">3.shardingjdbc分库分表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%80%BB%E8%BE%91%E8%A1%A8"><span class="nav-number">3.3.1.</span> <span class="nav-text">1.逻辑表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%95%B0%E6%8D%AE%E8%8A%82%E7%82%B9-actual-data-nodes"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.分库分表数据节点 - actual-data-nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A85%E7%A7%8D%E5%88%86%E7%89%87%E7%AD%96%E7%95%A5"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.分库分表5种分片策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%A0%B9%E6%8D%AE%E5%AE%9E%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F-%E6%8C%89%E7%85%A7%E6%A0%87%E5%87%86%E8%A7%84%E5%88%99%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="nav-number">3.3.4.</span> <span class="nav-text">4.根据实时间日期 - 按照标准规则分库分表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%B3%A8%E6%84%8F"><span class="nav-number">4.</span> <span class="nav-text">4.注意</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%89%E7%9A%84yml"><span class="nav-number">4.1.</span> <span class="nav-text">（主从复制+读写分离）的yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%EF%BC%89%E7%9A%84yml"><span class="nav-number">4.2.</span> <span class="nav-text">（分库分表）的yml</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">5.分布式主键配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E4%BB%A5%E5%B9%B4%E6%9C%88%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="nav-number">6.</span> <span class="nav-text">6.以年月分库分表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-ShardingJdbc%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">7.ShardingJdbc的事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1"><span class="nav-number">7.1.</span> <span class="nav-text">1.本地事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%EF%BC%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%EF%BC%8C%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">7.2.</span> <span class="nav-text">2.两阶段提交，柔性事务，分布式事务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-shardingjdb%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%EF%BC%89-%EF%BC%88%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">8.shardingjdb分库分表）+（主从复制+读写分离）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%9F%E5%BD%93%E6%B2%A1%E6%9C%89%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%97%B6"><span class="nav-number">8.1.</span> <span class="nav-text">？当没有分库分表时</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-sharding-proxy"><span class="nav-number">9.</span> <span class="nav-text">9.sharding-proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E8%A7%A3%E5%8E%8B"><span class="nav-number">9.1.</span> <span class="nav-text">1解压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">9.2.</span> <span class="nav-text">2修改配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1server-yaml"><span class="nav-number">9.2.1.</span> <span class="nav-text">1server.yaml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8-%E4%BF%AE%E6%94%B9-config-sharding-yaml"><span class="nav-number">9.3.</span> <span class="nav-text">3、分库分表 修改 config-sharding.yaml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BBconfig-master-slave-yaml"><span class="nav-number">9.4.</span> <span class="nav-text">4.读写分离config-master_slave.yaml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%A1%B9%E7%9B%AE%E9%87%8C%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">9.5.</span> <span class="nav-text">5.项目里数据库</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.JIANG</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

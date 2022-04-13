@@ -93,17 +93,18 @@
 <meta property="og:site_name" content="小姜的博客">
 <meta property="og:description" content="12345678910111213141516171819202122第一种方法package com.jiang.websocket.filter;import org.springframework.context.annotation.Configuration;import org.springframework.web.servlet.config.annotation.CorsRegi">
 <meta property="og:locale">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220402134201157.png">
 <meta property="og:image" content="http://xiaojiangzbc.top/C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20210830173643434.png">
 <meta property="og:image" content="http://xiaojiangzbc.top/C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20211027095032025.png">
 <meta property="og:image" content="http://xiaojiangzbc.top/C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20211027095233337.png">
 <meta property="og:image" content="http://xiaojiangzbc.top/C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20211027095611534.png">
 <meta property="og:image" content="http://xiaojiangzbc.top/C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20211027095636395.png">
 <meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
-<meta property="article:modified_time" content="2022-01-25T09:08:37.676Z">
+<meta property="article:modified_time" content="2022-04-02T05:42:01.771Z">
 <meta property="article:author" content="Mr.JIANG">
 <meta property="article:tag" content="跨域问题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xiaojiangzbc.top/C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20210830173643434.png">
+<meta name="twitter:image" content="http://xiaojiangzbc.top/img/image-20220402134201157.png">
 
 
 
@@ -389,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  424
+                  513
                 </span>
               
 
@@ -432,11 +433,16 @@
 
 
 
-<p>第二种</p>
-<p>在controller的方法上+@CrossOrigin</p>
+<h1 id="第一种好用"><a href="#第一种好用" class="headerlink" title="第一种好用"></a>第一种好用</h1><p>nginx配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add_header Access-Control-Allow-Origin &#x27;*&#x27;;</span><br><span class="line">            add_header Access-Control-Allow-Methods &#x27;GET, POST, OPTIONS&#x27;;</span><br><span class="line">            add_header Access-Control-Allow-Headers &#x27;Authorization,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#x27;;</span><br><span class="line"></span><br><span class="line">            if ($request_method = &#x27;OPTIONS&#x27;) &#123;</span><br><span class="line">                return 204;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add_header &#x27;Access-Control-Allow-Origin&#x27; &#x27;*&#x27;;</span><br><span class="line">           add_header Access-Control-Allow-Credentials false;</span><br><span class="line">           add_header &#x27;Access-Control-Allow-Methods&#x27; &#x27;GET, POST, OPTIONS&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220402134201157.png" alt="image-20220402134201157"></p>
+<h1 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h1><p>在controller的方法上+@CrossOrigin</p>
 <p><img src="/C:/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210830173643434.png" alt="image-20210830173643434"></p>
-<p>第三种</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tulingxueyuan.mall.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.annotation.Order;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.filter.CorsFilter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 全局跨域配置</span></span><br><span class="line"><span class="comment"> * Created by macro on 2019/7/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalCorsConfig</span>  </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 允许跨域调用的过滤器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        CorsConfiguration config = <span class="keyword">new</span> CorsConfiguration();</span><br><span class="line">        <span class="comment">//允许所有域名进行跨域调用</span></span><br><span class="line">        config.addAllowedOrigin(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">//允许跨越发送cookie</span></span><br><span class="line">        config.setAllowCredentials(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//放行全部原始头信息</span></span><br><span class="line">        config.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">//允许所有请求方法跨域调用</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</span><br><span class="line">        source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>, config);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="第三种，好用"><a href="#第三种，好用" class="headerlink" title="第三种，好用"></a>第三种，好用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tulingxueyuan.mall.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.annotation.Order;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.filter.CorsFilter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 全局跨域配置</span></span><br><span class="line"><span class="comment"> * Created by macro on 2019/7/27.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalCorsConfig</span>  </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 允许跨域调用的过滤器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        CorsConfiguration config = <span class="keyword">new</span> CorsConfiguration();</span><br><span class="line">        <span class="comment">//允许所有域名进行跨域调用</span></span><br><span class="line">        config.addAllowedOrigin(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">//允许跨越发送cookie</span></span><br><span class="line">        config.setAllowCredentials(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//放行全部原始头信息</span></span><br><span class="line">        config.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">//允许所有请求方法跨域调用</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</span><br><span class="line">        source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>, config);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="谷粒商城项目"><a href="#谷粒商城项目" class="headerlink" title="谷粒商城项目"></a>谷粒商城项目</h1><h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>域名，端口，ip，有一个不一样即为跨域</p>
 <p><strong>简单请求</strong>（get，post，head）</p>
@@ -491,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/11/30/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/" rel="next" title="阿里巴巴开发手册">
-                <i class="fa fa-chevron-left"></i> 阿里巴巴开发手册
+              <a href="/2021/11/30/%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/" rel="next" title="问题整理">
+                <i class="fa fa-chevron-left"></i> 问题整理
               </a>
             
           </div>
@@ -501,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/11/30/%E6%8B%A6%E6%88%AA%E5%99%A8%E4%B8%8E%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="prev" title="拦截器与过滤器">
-                拦截器与过滤器 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/11/30/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/" rel="prev" title="阿里巴巴开发手册">
+                阿里巴巴开发手册 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -609,7 +615,7 @@ var jiathis_config={
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -620,7 +626,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -631,7 +637,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -700,7 +706,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">谷粒商城项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.0.1.</span> <span class="nav-text">跨域</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E5%A5%BD%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">第一种好用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D"><span class="nav-number">2.</span> <span class="nav-text">第二种</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%A7%8D%EF%BC%8C%E5%A5%BD%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">第三种，好用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">谷粒商城项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">4.0.1.</span> <span class="nav-text">跨域</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">5.</span> <span class="nav-text">解决</span></a></li></ol></div>
             
 
           </div>

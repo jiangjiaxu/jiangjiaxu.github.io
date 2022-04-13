@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="23中设计模式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.单例模式（重点）工具类都可以 1.饿汉式12345678910111213141516171819202122232425262728293031323334package com.jiang.test;&#x2F;** * 优点：从它的实现中我们可以看到，这种方式的实现比较简单，在类加载的时候就完成了实例化，避免了线程的同步问题。 * 缺点：由于在类加载的时候就实例化了，所以没有达到Lazy Load">
+<meta property="og:type" content="article">
+<meta property="og:title" content="23中设计模式">
+<meta property="og:url" content="http://xiaojiangzbc.top/2021/11/30/23%E4%B8%AD%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="小姜的博客">
+<meta property="og:description" content="1.单例模式（重点）工具类都可以 1.饿汉式12345678910111213141516171819202122232425262728293031323334package com.jiang.test;&#x2F;** * 优点：从它的实现中我们可以看到，这种方式的实现比较简单，在类加载的时候就完成了实例化，避免了线程的同步问题。 * 缺点：由于在类加载的时候就实例化了，所以没有达到Lazy Load">
+<meta property="og:locale">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220412145913609.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220412150017361.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220412160116859.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220412160511171.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220412164118097.png">
+<meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
+<meta property="article:modified_time" content="2022-04-12T09:27:21.885Z">
+<meta property="article:author" content="Mr.JIANG">
+<meta property="article:tag" content="23中设计模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiaojiangzbc.top/img/image-20220412145913609.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiaojiangzbc.top/2021/11/30/23中设计模式/"/>
+
+
+
+
+
+  <title>23中设计模式 | 小姜的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	<header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小姜的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaojiangzbc.top/2021/11/30/23%E4%B8%AD%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小姜的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">23中设计模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-30T17:45:46+08:00">
+                2021-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本站总阅读数 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-单例模式（重点）"><a href="#1-单例模式（重点）" class="headerlink" title="1.单例模式（重点）"></a>1.单例模式（重点）</h1><p>工具类都可以</p>
+<h2 id="1-饿汉式"><a href="#1-饿汉式" class="headerlink" title="1.饿汉式"></a>1.饿汉式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.jiang.test;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 优点：从它的实现中我们可以看到，这种方式的实现比较简单，在类加载的时候就完成了实例化，避免了线程的同步问题。</span><br><span class="line"> * 缺点：由于在类加载的时候就实例化了，所以没有达到Lazy Loading(懒加载)的效果，也就是说可能我没有用到这个实例，但是它</span><br><span class="line"> * 也会加载，会造成内存的浪费(但是这个浪费可以忽略，所以这种方式也是推荐使用的)。</span><br><span class="line"> */</span><br><span class="line">public class SingletonEHan &#123;</span><br><span class="line">    private SingletonEHan() &#123;&#125;</span><br><span class="line">    /**</span><br><span class="line">     * 1.单例模式的饿汉式[可用]</span><br><span class="line">     */</span><br><span class="line">    private static SingletonEHan singletonEHan = new SingletonEHan();</span><br><span class="line">    public static SingletonEHan getInstance() &#123;</span><br><span class="line">        return singletonEHan;</span><br><span class="line">    &#125;</span><br><span class="line">    //使用  SingletonEHan instance= SingletonEHan.getInstance();</span><br><span class="line">    /**</span><br><span class="line">     * 2. 单例模式的饿汉式变换写法[可用]</span><br><span class="line">     * 基本没区别</span><br><span class="line">     */</span><br><span class="line">    private static SingletonEHan singletonEHanTwo = null;</span><br><span class="line">    static &#123;</span><br><span class="line">        singletonEHanTwo = new SingletonEHan();</span><br><span class="line">    &#125;</span><br><span class="line">    public static SingletonEHan getSingletonEHan() &#123;</span><br><span class="line">        if (singletonEHanTwo == null) &#123;</span><br><span class="line">            singletonEHanTwo = new SingletonEHan();</span><br><span class="line">        &#125;</span><br><span class="line">        return singletonEHanTwo;</span><br><span class="line">    &#125;</span><br><span class="line">    //使用     SingletonEHan instance= SingletonEHan.getSingletonEHan();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-懒汉式-最好"><a href="#2-懒汉式-最好" class="headerlink" title="2.懒汉式(最好)"></a>2.懒汉式(最好)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     * 1.单例模式懒汉式双重校验锁[推荐用]</span><br><span class="line">     * 懒汉式变种,属于懒汉式的最好写法,保证了:延迟加载和线程安全</span><br><span class="line">     */</span><br><span class="line">    private static SingletonLanHan singletonLanHanFour;</span><br><span class="line"></span><br><span class="line">    public static SingletonLanHan getSingletonLanHanFour() &#123;</span><br><span class="line">        if (singletonLanHanFour == null) &#123;</span><br><span class="line">            synchronized (SingletonLanHan.class) &#123;</span><br><span class="line">                if (singletonLanHanFour == null) &#123;</span><br><span class="line">                    singletonLanHanFour = new SingletonLanHan();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singletonLanHanFour;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-观察者模式（重点）"><a href="#2-观察者模式（重点）" class="headerlink" title="2.观察者模式（重点）"></a>2.观察者模式（重点）</h1><p>一对多，一改变时，多个也要改变（或者接收到通知）</p>
+<h2 id="1-subject"><a href="#1-subject" class="headerlink" title="1.subject"></a>1.subject</h2><p>这是总的接口，来一个主题就继承这个接口</p>
+<p>主题：比如A事是1对多，那么这个A事就要实现</p>
+<p>​                   B事是1对多，那么这个B事就要实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.jiang.test.demo;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by jingbin on 2016/10/21.</span></span><br><span class="line"><span class="comment"> * 专题接口,所有的主题必须实现此接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注册一个观察者</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer observer)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 移除一个观察者</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通知所有观察者</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-ObjectFor3D"><a href="#2-ObjectFor3D" class="headerlink" title="2.ObjectFor3D"></a>2.ObjectFor3D</h2><p>就是主题，也就是A事或者B事</p>
+<p>主题要实现subject</p>
+<p>除了主题更新信息方法，其他的方法基本不用多，大同小异</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.jiang.test.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by jingbin on 2016/10/21.</span></span><br><span class="line"><span class="comment"> * 接下来3D服务号的实现类：</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObjectFor3D</span> <span class="keyword">implements</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;Observer&gt; observers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 3D 彩票的号码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer observer)</span> </span>&#123;</span><br><span class="line">        observers.add(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = observers.indexOf(observer);</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            observers.remove(index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Observer observer : observers) &#123;</span><br><span class="line">            observer.update(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 主题更新信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMsg</span><span class="params">(String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">        notifyObservers();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Observer"><a href="#3-Observer" class="headerlink" title="3.Observer"></a>3.Observer</h2><p>所有观察者需要实现此接口</p>
+<p>其中观察者的方法对应主题的notifyObservers方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">package com.jiang.test.demo;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by jingbin on 2016/10/21.</span><br><span class="line"> * 所有观察者需要实现此接口</span><br><span class="line"> */</span><br><span class="line">public interface Observer &#123;</span><br><span class="line"></span><br><span class="line">    public void update(String msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-ObserverUser1-ObserverUser2"><a href="#4-ObserverUser1-ObserverUser2" class="headerlink" title="4.ObserverUser1 ObserverUser2"></a>4.ObserverUser1 ObserverUser2</h2><p>真实观察者，要实现方法</p>
+<p>并且构造方法要传总接口对象，这样任何主题都可以实现！！</p>
+<p>this指的本类对象</p>
+<p><img src="/../img/image-20220412145913609.png" alt="image-20220412145913609"></p>
+<h2 id="5-Test测试"><a href="#5-Test测试" class="headerlink" title="5.Test测试"></a>5.Test测试</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//1.新建主题对象</span><br><span class="line">ObjectFor3D objectFor3D = new ObjectFor3D();</span><br><span class="line">// 创建两个订阅者</span><br><span class="line">new ObserverUser1(objectFor3D);</span><br><span class="line">new ObserverUser2(objectFor3D);</span><br><span class="line">// 主题对象发送两条信息</span><br><span class="line">objectFor3D.setMsg(&quot;201610121 的3D号为:127&quot;);</span><br><span class="line">objectFor3D.setMsg(&quot;201610222 的3D号为:128&quot;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220412150017361.png" alt="image-20220412150017361"></p>
+<p>发现每个观察者都接收到了信息</p>
+<h1 id="3-工厂模式（重点）"><a href="#3-工厂模式（重点）" class="headerlink" title="3.工厂模式（重点）"></a>3.工厂模式（重点）</h1><h2 id="1-静态工厂模式"><a href="#1-静态工厂模式" class="headerlink" title="1.静态工厂模式"></a>1.静态工厂模式</h2><p>这个最常见了，项目中的辅助类，TextUtil.isEmpty等，类+静态方法</p>
+<h2 id="2-简单工厂模式"><a href="#2-简单工厂模式" class="headerlink" title="2.简单工厂模式"></a>2.简单工厂模式</h2><p>通过专门定义一个类来负责创建其他类的实例，被创建的实例必须具有共同的父类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class SimpleRoujiaMoFactory &#123;</span><br><span class="line">    public RoujiaMo creatRoujiaMo(String type) &#123;</span><br><span class="line">        //创建父类对象</span><br><span class="line">         RoujiaMo roujiaMo = null;</span><br><span class="line">         switch (type) &#123;</span><br><span class="line">             case &quot;Suan&quot;:</span><br><span class="line">                 roujiaMo = new ZSuanRoujiaMo();</span><br><span class="line">                 break;</span><br><span class="line">             case &quot;La&quot;:</span><br><span class="line">                 roujiaMo = new ZLaRoujiaMo();</span><br><span class="line">                 break;</span><br><span class="line">             case &quot;Tian&quot;:</span><br><span class="line">                 roujiaMo = new ZTianRoujiaMo();</span><br><span class="line">                 break;</span><br><span class="line">             default:// 默认为酸肉夹馍</span><br><span class="line">                 roujiaMo = new ZSuanRoujiaMo();</span><br><span class="line">                 break;</span><br><span class="line">         &#125;</span><br><span class="line">         return roujiaMo;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-普通工厂"><a href="#3-普通工厂" class="headerlink" title="3.普通工厂"></a>3.普通工厂</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//定义一个总工厂</span><br><span class="line">public Interface  RoujiaMoYLFactory &#123;</span><br><span class="line">    public Meet creatMeet();</span><br><span class="line">    public YuanLiao creatYuanLiao();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class XianRoujiaMoYLFoctory implements RoujiaMoYLFactory &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Meet creatMeet() &#123;</span><br><span class="line">    	//其中XianFreshMeet要继承Meet，Meet也是一个接口</span><br><span class="line">        return new XianFreshMeet();</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public YuanLiao creatYuanLiao() &#123;</span><br><span class="line">  	  //其中XianTeSeYuanLiao要继承YuanLiao，YuanLiao也是一个接口</span><br><span class="line">        return new XianTeSeYuanLiao();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用,参数传RoujiaMoYLFactory的某一个接口实现类即可，此方法放在哪里都行，没有依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void prepare(RoujiaMoYLFactory roujiaMoYLFactory) &#123;</span><br><span class="line">    	Meet meet = roujiaMoYLFactory.creatMeet();</span><br><span class="line">    	YuanLiao yuanLiao = roujiaMoYLFactory.creatYuanLiao();</span><br><span class="line">    	Log.e(&quot;揉面-剁肉-完成准备工作 yuanLiao:&quot;+meet+&quot;yuanLiao:&quot;+yuanLiao);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-策略模式"><a href="#4-策略模式" class="headerlink" title="4. 策略模式"></a>4. 策略模式</h1><p>不同角色有四个不同的属性</p>
+<h2 id="1-不是策略模式代码"><a href="#1-不是策略模式代码" class="headerlink" title="1.不是策略模式代码"></a>1.不是策略模式代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Role &#123;</span><br><span class="line">    protected String name;</span><br><span class="line">    // 着装</span><br><span class="line">    protected abstract void display();</span><br><span class="line">    // 逃跑</span><br><span class="line">    protected abstract void run();</span><br><span class="line">    // 攻击</span><br><span class="line">    protected abstract void attack();</span><br><span class="line">    // 防御</span><br><span class="line">    protected abstract void defend();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样每一个new Role都需要重写这四个方法</p>
+<h2 id="2-使用策略"><a href="#2-使用策略" class="headerlink" title="2.使用策略"></a>2.使用策略</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Role1 &#123;</span><br><span class="line"></span><br><span class="line">    protected String name;</span><br><span class="line"></span><br><span class="line">    private IDisplayBehavior iDisplayBehavior;</span><br><span class="line">    private IDefendBehavior iDefendBehavior;</span><br><span class="line">    private IRunBehavior iRunBehavior;</span><br><span class="line">    private IAttackBehavior iAttackBehavior;</span><br><span class="line"></span><br><span class="line">    public Role1 setiDisplayBehavior(IDisplayBehavior iDisplayBehavior) &#123;</span><br><span class="line">        this.iDisplayBehavior = iDisplayBehavior;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Role1 setiDefendBehavior(IDefendBehavior iDefendBehavior) &#123;</span><br><span class="line">        this.iDefendBehavior = iDefendBehavior;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Role1 setiRunBehavior(IRunBehavior iRunBehavior) &#123;</span><br><span class="line">        this.iRunBehavior = iRunBehavior;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Role1 setiAttackBehavior(IAttackBehavior iAttackBehavior) &#123;</span><br><span class="line">        this.iAttackBehavior = iAttackBehavior;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void display() &#123;</span><br><span class="line">        iDisplayBehavior.display();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void defend() &#123;</span><br><span class="line">        iDefendBehavior.defend();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void attack() &#123;</span><br><span class="line">        iAttackBehavior.attack();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        iRunBehavior.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-test"><a href="#3-test" class="headerlink" title="3.test"></a>3.test</h2><p>//这个new 一个roleA都可以给他不用的动作，并且每一个new都不许重写方法，方法在设置里就进行了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">RoleA roleA = <span class="keyword">new</span> RoleA(<span class="string">&quot;---A&quot;</span>);</span><br><span class="line">roleA.setiDisplayBehavior(<span class="keyword">new</span> DisplayYZ())</span><br><span class="line">      .setiAttackBehavior(<span class="keyword">new</span> AttackXL())</span><br><span class="line">      .setiDefendBehavior(<span class="keyword">new</span> DefendTMS())</span><br><span class="line">      .setiRunBehavior(<span class="keyword">new</span> RunJCTQ());</span><br><span class="line">roleA.display();<span class="comment">// 样子</span></span><br><span class="line">roleA.attack();<span class="comment">// 攻击</span></span><br><span class="line">roleA.run();<span class="comment">// 逃跑</span></span><br><span class="line">roleA.defend();<span class="comment">// 防御</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="5-适配器模式（重点）"><a href="#5-适配器模式（重点）" class="headerlink" title="5.适配器模式（重点）"></a>5.适配器模式（重点）</h1><p><strong>把一个类，传入一个（继承某个接口的）适配器，最终变成可以使用的这个某个接口</strong></p>
+<ul>
+<li><p>以充电器为实例: 手机充电器一般都是5V左右吧，咱天朝的家用交流电压220V，所以手机充电需要一个适配器（降压器）</p>
+</li>
+<li><p>一部手机: [Mobile.java]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Mobile &#123;</span><br><span class="line"></span><br><span class="line">    // 这里传入的是 v5接口,实现了这个接口的类也可以传入</span><br><span class="line">    public void inputPower(V5Power v5Power) &#123;</span><br><span class="line">        int provideV5Power = v5Power.provideV5Power();</span><br><span class="line">        Log.e(&quot;---&quot;, &quot;手机(客户端): 我需要的是5V电压充电,现在是&quot; + provideV5Power + &quot;V&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>手机依赖一个提供5V电压的接口: [V5Power.java],注意这里是接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface V5Power &#123;</span><br><span class="line"></span><br><span class="line">    public int provideV5Power();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>我们拥有的是220V家用交流电: [V220Power.java]，注意这里是类不是接口了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class V220Power &#123;</span><br><span class="line"></span><br><span class="line">    public int provideV220Power() &#123;</span><br><span class="line">        Log.e(&quot;---&quot;, &quot;现有类: 我们提供的是220v的家用电&quot;);</span><br><span class="line">        return 220;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>适配器，完成220V转5V的作用</strong>：[V5PowerAdapter.java]，要实现最终要的接口，并且实现接口的方法</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by jingbin on 2016/10/30.</span><br><span class="line"> * 将200v家用电转换为5v手机用电的适配器</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class V5PowerAdapter implements V5Power &#123;</span><br><span class="line"></span><br><span class="line">    private int v220power;</span><br><span class="line"></span><br><span class="line">    public V5PowerAdapter(V220Power v220Power) &#123;</span><br><span class="line">        v220power = v220Power.provideV220Power();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int provideV5Power() &#123;</span><br><span class="line">		//操作v220power这个类</span><br><span class="line">        Log.e(&quot;---&quot;, &quot;适配器: 经过复杂的操作,将&quot; + v220power + &quot;v电压转为5v&quot;);</span><br><span class="line">        return 5;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Mobile mobile = new Mobile();</span><br><span class="line">//经过实现接口的适配器把类转为最终要的接口</span><br><span class="line">V5Power v5Power = new V5PowerAdapter(new V200Power());</span><br><span class="line">mobile.inputPower(v5Power);</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-命令模式"><a href="#6-命令模式" class="headerlink" title="6.命令模式"></a>6.命令模式</h1><h1 id="7-装饰者模式（重点）"><a href="#7-装饰者模式（重点）" class="headerlink" title="7.装饰者模式（重点）"></a>7.装饰者模式（重点）</h1><p>装饰者模式：若要扩展功能，装饰者提供了比集成更有弹性的替代方案，动态地将责任附加到对象上。</p>
+<p>我们设计好了一个类，我们需要给这个类添加一些辅助的功能，并且不希望改变这个类的代码，这时候就是装饰者模式大展雄威的时候了。这里还体现了一个<strong>原则：类应该对扩展开放，对修改关闭。</strong></p>
+<p>背景：游戏装备系统，每种装备（比如地下城，武器，上衣等）都有自己的攻击力。现在要求可以给装备系统添加装饰品接口（宝石等），增加攻击力</p>
+<h2 id="1-装备接口"><a href="#1-装备接口" class="headerlink" title="1.装备接口"></a>1.装备接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by jingbin on 2016/11/1.</span></span><br><span class="line"><span class="comment"> * 装备的接口</span></span><br><span class="line"><span class="comment"> * 下面有:武器,护腕,鞋子,戒指、、、、还有装饰品接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IEquip</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 计算攻击力</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">caculateAttack</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 装备的描述</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">description</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-武器宝刀"><a href="#2-武器宝刀" class="headerlink" title="2.武器宝刀"></a>2.武器宝刀</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by jingbin on 2016/11/1.</span><br><span class="line"> * 武器</span><br><span class="line"> * 攻击力 20</span><br><span class="line"> */</span><br><span class="line">public class ArmEquip implements IEquip &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public int caculateAttack() &#123;</span><br><span class="line">        return 20;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public String description() &#123;</span><br><span class="line">        return &quot;屠龙宝刀&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-装饰品的接口（需求，要求给装备加上宝石等）"><a href="#3-装饰品的接口（需求，要求给装备加上宝石等）" class="headerlink" title="3.装饰品的接口（需求，要求给装备加上宝石等）"></a>3.装饰品的接口（需求，要求给装备加上宝石等）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by jingbin on 2016/11/1.</span><br><span class="line"> * 装饰品的接口</span><br><span class="line"> */</span><br><span class="line">public interface IEuipDecorator extends IEquip &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-装饰品（需求，要求给装备加上宝石等）"><a href="#4-装饰品（需求，要求给装备加上宝石等）" class="headerlink" title="4.装饰品（需求，要求给装备加上宝石等）"></a>4.装饰品（需求，要求给装备加上宝石等）</h2><h3 id="蓝宝石装饰品"><a href="#蓝宝石装饰品" class="headerlink" title="蓝宝石装饰品"></a>蓝宝石装饰品</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by jingbin on 2016/11/1.</span><br><span class="line"> * 蓝宝石装饰品</span><br><span class="line"> * 每颗攻击力: +5</span><br><span class="line"> * 这与武器等不同,它是可以累加的,而武器不能</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class BlueGemDecorator implements IEuipDecorator &#123;</span><br><span class="line"></span><br><span class="line">    private IEquip iEquip;</span><br><span class="line"></span><br><span class="line">    public BlueGemDecorator(IEquip iEquip) &#123;</span><br><span class="line">        this.iEquip = iEquip;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 累加攻击力</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public int caculateAttack() &#123;</span><br><span class="line">        return 5 + iEquip.caculateAttack();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String description() &#123;</span><br><span class="line">        return iEquip.description() + &quot;+ 蓝宝石&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="红宝石装饰品"><a href="#红宝石装饰品" class="headerlink" title="红宝石装饰品"></a>红宝石装饰品</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package com.jiang.test.demo;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by jingbin on 2016/11/1.</span><br><span class="line"> * 蓝宝石装饰品</span><br><span class="line"> * 每颗攻击力: +5</span><br><span class="line"> * 这与武器等不同,它是可以累加的,而武器不能</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class RedGemDecorator implements IEuipDecorator &#123;</span><br><span class="line"></span><br><span class="line">    private IEquip iEquip;</span><br><span class="line"></span><br><span class="line">    public RedGemDecorator(IEquip iEquip) &#123;</span><br><span class="line">        this.iEquip = iEquip;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 累加攻击力</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public int caculateAttack() &#123;</span><br><span class="line">        return 10 + iEquip.caculateAttack();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String description() &#123;</span><br><span class="line">        return iEquip.description() + &quot;+ 红宝石&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-test"><a href="#5-test" class="headerlink" title="5.test"></a>5.test</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;---一个镶嵌2颗红宝石,1颗蓝宝石的靴子: &quot;);</span><br><span class="line">		IEquip iEquip = new RedGemDecorator(new RedGemDecorator(new BlueGemDecorator(new ArmEquip())));</span><br><span class="line">		System.out.println(&quot;---攻击力:&quot; + iEquip.caculateAttack());</span><br><span class="line">		System.out.println(&quot;---描述语:&quot; + iEquip.description());</span><br></pre></td></tr></table></figure>
+
+<p><strong>宝石装在装备上，而且可以有多个宝石</strong></p>
+<p><img src="/../img/image-20220412160116859.png" alt="image-20220412160116859"></p>
+<h1 id="8-外观模式"><a href="#8-外观模式" class="headerlink" title="8.外观模式"></a>8.外观模式</h1><p>供一个统一的接口，用来访问子系统中的一群接口，外观定义了一个高层的接口，让子系统更容易使用。<strong>其实就是为了方便客户的使用，把一群操作，封装成一个方法。</strong></p>
+<p><img src="/../img/image-20220412160511171.png" alt="image-20220412160511171"></p>
+<h1 id="9-模板方法模式（重点）"><a href="#9-模板方法模式（重点）" class="headerlink" title="9. 模板方法模式（重点）"></a>9. 模板方法模式（重点）</h1><p>定义了一个算法的骨架，而将一些步骤延迟到子类中，模版方法使得子类可以在不改变算法结构的情况下，重新定义算法的步骤。</p>
+<p>本公司有程序猿、测试、HR、项目经理等人，下面使用模版方法模式，记录下所有人员的上班情况</p>
+<p>进公司，开电脑，离开等都是一样的，但是怎么工作不一致，这时可以用模板方法</p>
+<h2 id="work"><a href="#work" class="headerlink" title="work"></a>work</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Worker &#123;</span><br><span class="line"></span><br><span class="line">    protected String name;</span><br><span class="line"></span><br><span class="line">    public Worker(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 具体方法，看到定义了顺序的方法</span><br><span class="line">     */</span><br><span class="line">    public final void workOneDay() &#123;</span><br><span class="line">        Log.e(&quot;workOneDay&quot;, &quot;-----------------work start----------------&quot;);</span><br><span class="line"></span><br><span class="line">        enterCompany();</span><br><span class="line">        computerOn();</span><br><span class="line">        work();</span><br><span class="line">        computerOff();</span><br><span class="line">        exitCompany();</span><br><span class="line"></span><br><span class="line">        Log.e(&quot;workOneDay&quot;, &quot;-----------------work end----------------&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 工作  抽象方法</span><br><span class="line">     */</span><br><span class="line">    public abstract void work();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 钩子方法,如果想看到离开的时间，那么子类就重新为true即可，这个就叫钩子方法</span><br><span class="line">     */</span><br><span class="line">    public boolean isNeedPrintDate() &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void exitCompany() &#123;</span><br><span class="line">        if (isNeedPrintDate()) &#123;</span><br><span class="line">            Log.e(&quot;exitCompany&quot;, &quot;---&quot; + new Date().toLocaleString() + &quot;---&gt;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        Log.e(&quot;exitCompany&quot;, name + &quot;---离开公司&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    -----------------------------------</span><br><span class="line"></span><br><span class="line">    private void computerOn() &#123;</span><br><span class="line">        Log.e(&quot;computerOn&quot;, &quot;---打开电脑&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void computerOff() &#123;</span><br><span class="line">        Log.e(&quot;computerOff&quot;, &quot;---关闭电脑&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void enterCompany() &#123;</span><br><span class="line">        Log.e(&quot;enterCompany&quot;, &quot;---进入公司&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ITWorker"><a href="#ITWorker" class="headerlink" title="ITWorker"></a>ITWorker</h2><p>程序员需要重写work方法，并且向看到离开时间</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by jingbin on 2016/11/2.</span><br><span class="line"> * 程序员</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class ITWorker extends Worker &#123;</span><br><span class="line"></span><br><span class="line">    public ITWorker(String name) &#123;</span><br><span class="line">        super(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 重写父类的此方法,使可以查看离开公司时间</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public boolean isNeedPrintDate() &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void work() &#123;</span><br><span class="line">        Log.e(&quot;--work&quot;, &quot;---&quot; + name + &quot;, 写程序 - 测bug - 修复bug&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="test-1"><a href="#test-1" class="headerlink" title="test"></a>test</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> ITWorker itWorker = new ITWorker(&quot;name&quot;);</span><br><span class="line">itWorker.workOneDay();</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-状态模式"><a href="#10-状态模式" class="headerlink" title="10. 状态模式"></a>10. 状态模式</h1><h1 id="11-建造者模式"><a href="#11-建造者模式" class="headerlink" title="11. 建造者模式"></a>11. 建造者模式</h1><h1 id="12-原型模式（重点）"><a href="#12-原型模式（重点）" class="headerlink" title="12. 原型模式（重点）"></a>12. 原型模式（重点）</h1><p>原型模式是用于创建重复的对象，同时又能保证性能。</p>
+<p>一个对象是查询数据库以后才会有，每次需要操作这个对象</p>
+<p>那么可以查询第一次以后存入一个hashMap里，key为对象的id，value为对象</p>
+<p>然后clone这个对象进行操作</p>
+<p>主要是用于对象的clone，类需要继承Cloneable接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.jiang.test.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.hutool.core.convert.Convert;</span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.ToString;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>:jiangjiaxu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2022/04/12  16:37</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span>:V1.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ToString</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> String name;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> A <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      A object = <span class="keyword">null</span>;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         object = Convert.convert(A.class,<span class="keyword">super</span>.clone());</span><br><span class="line">      &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> object;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="test-2"><a href="#test-2" class="headerlink" title="test"></a>test</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">   A a = new A(&quot;A&quot;).clone();</span><br><span class="line">   System.out.println(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220412164118097.png" alt="image-20220412164118097"></p>
+<h1 id="13-享元模式"><a href="#13-享元模式" class="headerlink" title="13. 享元模式"></a>13. 享元模式</h1><h1 id="14-代理模式-重点"><a href="#14-代理模式-重点" class="headerlink" title="14.代理模式(重点)"></a>14.代理模式(重点)</h1><p>一个类代表另一个类的功能。在代理模式中，我们创建具有现有对象的对象，以便向外界提供功能接口。可以理解为内存中没有这个对象就创建，有就直接返回这个对象。</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>不论是否是代理，都要实现这个接口，最终调用接口的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Image &#123;</span><br><span class="line">   void display();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RealImage真正的加载"><a href="#RealImage真正的加载" class="headerlink" title="RealImage真正的加载"></a>RealImage真正的加载</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class RealImage implements Image &#123;</span><br><span class="line"></span><br><span class="line">    private String fileName;</span><br><span class="line"></span><br><span class="line">    public RealImage(String fileName) &#123;</span><br><span class="line">        this.fileName = fileName;</span><br><span class="line">        loadFromDisk(fileName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void loadFromDisk(String fileName) &#123;</span><br><span class="line">        Log.e(&quot;RealImage&quot;, &quot;loading &quot; + fileName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void display() &#123;</span><br><span class="line">        Log.e(&quot;RealImage&quot;, &quot;Displaying &quot; + fileName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ProxyImage代理"><a href="#ProxyImage代理" class="headerlink" title="ProxyImage代理"></a>ProxyImage代理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class ProxyImage implements Image &#123;</span><br><span class="line"></span><br><span class="line">    private String fileName;</span><br><span class="line">    private RealImage realImage;</span><br><span class="line"></span><br><span class="line">    public ProxyImage(String fileName) &#123;</span><br><span class="line">        this.fileName = fileName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void display() &#123;</span><br><span class="line">        if (realImage == null) &#123;</span><br><span class="line">            realImage = new RealImage(fileName);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        realImage.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="test-3"><a href="#test-3" class="headerlink" title="test"></a>test</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Image image = new ProxyImage(&quot;test_10mb.png&quot;);</span><br><span class="line">// 第一次是new的，图像从磁盘加载</span><br><span class="line">image.display();</span><br><span class="line">// 第二次取缓存，图像不需要从磁盘加载</span><br><span class="line">image.display();</span><br></pre></td></tr></table></figure>
+
+<h1 id="15-桥接模式"><a href="#15-桥接模式" class="headerlink" title="15. 桥接模式"></a>15. 桥接模式</h1><h1 id="16-组合模式"><a href="#16-组合模式" class="headerlink" title="16. 组合模式"></a>16. 组合模式</h1><h1 id="17-迭代器模式（重点）"><a href="#17-迭代器模式（重点）" class="headerlink" title="17. 迭代器模式（重点）"></a>17. 迭代器模式（重点）</h1><p>就是Iterator</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list = ListUtil.toList(1, 2, 3, 4);</span><br><span class="line">Iterator&lt;Integer&gt; it = list.iterator();</span><br><span class="line">if(it.hasNext())&#123;</span><br><span class="line">   Integer next = it.next();</span><br><span class="line">   //操作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="18-中介者模式"><a href="#18-中介者模式" class="headerlink" title="18. 中介者模式"></a>18. 中介者模式</h1><h1 id="19-备忘录模式"><a href="#19-备忘录模式" class="headerlink" title="19. 备忘录模式"></a>19. 备忘录模式</h1><h1 id="20-解释器模式"><a href="#20-解释器模式" class="headerlink" title="20. 解释器模式"></a>20. 解释器模式</h1><h1 id="21-责任链模式（重点）"><a href="#21-责任链模式（重点）" class="headerlink" title="21. 责任链模式（重点）"></a>21. 责任链模式（重点）</h1><p>把请求从链中的一个对象传到下一个对象，直到请求被响应为止。通过这种方式去除对象之间的耦合。</p>
+<h1 id="22-访问者模式"><a href="#22-访问者模式" class="headerlink" title="22. 访问者模式"></a>22. 访问者模式</h1>
+      
+    </div>
+    
+    
+    
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/23%E4%B8%AD%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"><i class="fa fa-at" aria-hidden="true"></i> 23中设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/30/alibaba%E5%92%8Cnetflix%E4%B8%8D%E5%90%8C/" rel="next" title="spring-cloud">
+                <i class="fa fa-chevron-left"></i> spring-cloud
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/30/%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/" rel="prev" title="问题整理">
+                问题整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1430319727&auto=1&height=66"></iframe>
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/a.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jiangjiaxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6428447095" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://weibo.com/u/6428447095" title="小姜的微博" target="_blank">小姜的微博</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">1.单例模式（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%A5%BF%E6%B1%89%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1.饿汉式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%87%92%E6%B1%89%E5%BC%8F-%E6%9C%80%E5%A5%BD"><span class="nav-number">1.2.</span> <span class="nav-text">2.懒汉式(最好)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">2.观察者模式（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-subject"><span class="nav-number">2.1.</span> <span class="nav-text">1.subject</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-ObjectFor3D"><span class="nav-number">2.2.</span> <span class="nav-text">2.ObjectFor3D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Observer"><span class="nav-number">2.3.</span> <span class="nav-text">3.Observer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-ObserverUser1-ObserverUser2"><span class="nav-number">2.4.</span> <span class="nav-text">4.ObserverUser1 ObserverUser2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Test%E6%B5%8B%E8%AF%95"><span class="nav-number">2.5.</span> <span class="nav-text">5.Test测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">3.工厂模式（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">1.静态工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">2.简单工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%99%AE%E9%80%9A%E5%B7%A5%E5%8E%82"><span class="nav-number">3.3.</span> <span class="nav-text">3.普通工厂</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">4. 策略模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8D%E6%98%AF%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E4%BB%A3%E7%A0%81"><span class="nav-number">4.1.</span> <span class="nav-text">1.不是策略模式代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8%E7%AD%96%E7%95%A5"><span class="nav-number">4.2.</span> <span class="nav-text">2.使用策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-test"><span class="nav-number">4.3.</span> <span class="nav-text">3.test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">5.适配器模式（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#test"><span class="nav-number">5.1.</span> <span class="nav-text">test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">6.命令模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">7.装饰者模式（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%A3%85%E5%A4%87%E6%8E%A5%E5%8F%A3"><span class="nav-number">7.1.</span> <span class="nav-text">1.装备接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%AD%A6%E5%99%A8%E5%AE%9D%E5%88%80"><span class="nav-number">7.2.</span> <span class="nav-text">2.武器宝刀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%A3%85%E9%A5%B0%E5%93%81%E7%9A%84%E6%8E%A5%E5%8F%A3%EF%BC%88%E9%9C%80%E6%B1%82%EF%BC%8C%E8%A6%81%E6%B1%82%E7%BB%99%E8%A3%85%E5%A4%87%E5%8A%A0%E4%B8%8A%E5%AE%9D%E7%9F%B3%E7%AD%89%EF%BC%89"><span class="nav-number">7.3.</span> <span class="nav-text">3.装饰品的接口（需求，要求给装备加上宝石等）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%A3%85%E9%A5%B0%E5%93%81%EF%BC%88%E9%9C%80%E6%B1%82%EF%BC%8C%E8%A6%81%E6%B1%82%E7%BB%99%E8%A3%85%E5%A4%87%E5%8A%A0%E4%B8%8A%E5%AE%9D%E7%9F%B3%E7%AD%89%EF%BC%89"><span class="nav-number">7.4.</span> <span class="nav-text">4.装饰品（需求，要求给装备加上宝石等）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%93%9D%E5%AE%9D%E7%9F%B3%E8%A3%85%E9%A5%B0%E5%93%81"><span class="nav-number">7.4.1.</span> <span class="nav-text">蓝宝石装饰品</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E5%AE%9D%E7%9F%B3%E8%A3%85%E9%A5%B0%E5%93%81"><span class="nav-number">7.4.2.</span> <span class="nav-text">红宝石装饰品</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-test"><span class="nav-number">7.5.</span> <span class="nav-text">5.test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">8.外观模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">9. 模板方法模式（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#work"><span class="nav-number">9.1.</span> <span class="nav-text">work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ITWorker"><span class="nav-number">9.2.</span> <span class="nav-text">ITWorker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-1"><span class="nav-number">9.3.</span> <span class="nav-text">test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">10. 状态模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">11.</span> <span class="nav-text">11. 建造者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">12.</span> <span class="nav-text">12. 原型模式（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#test-2"><span class="nav-number">12.1.</span> <span class="nav-text">test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="nav-number">13.</span> <span class="nav-text">13. 享元模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F-%E9%87%8D%E7%82%B9"><span class="nav-number">14.</span> <span class="nav-text">14.代理模式(重点)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">14.1.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RealImage%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">14.2.</span> <span class="nav-text">RealImage真正的加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ProxyImage%E4%BB%A3%E7%90%86"><span class="nav-number">14.3.</span> <span class="nav-text">ProxyImage代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test-3"><span class="nav-number">14.4.</span> <span class="nav-text">test</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">15.</span> <span class="nav-text">15. 桥接模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="nav-number">16.</span> <span class="nav-text">16. 组合模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">17.</span> <span class="nav-text">17. 迭代器模式（重点）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">18.</span> <span class="nav-text">18. 中介者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F"><span class="nav-number">19.</span> <span class="nav-text">19. 备忘录模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">20.</span> <span class="nav-text">20. 解释器模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">21.</span> <span class="nav-text">21. 责任链模式（重点）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">22.</span> <span class="nav-text">22. 访问者模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.JIANG</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

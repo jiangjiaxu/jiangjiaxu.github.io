@@ -95,7 +95,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220118154934633.png">
 <meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
-<meta property="article:modified_time" content="2022-01-18T08:18:48.571Z">
+<meta property="article:modified_time" content="2022-02-11T02:13:10.261Z">
 <meta property="article:author" content="Mr.JIANG">
 <meta property="article:tag" content="showDoc">
 <meta name="twitter:card" content="summary">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  330
+                  302
                 </span>
               
 
@@ -424,7 +424,7 @@
       
         <h1 id="docker安装showDoc"><a href="#docker安装showDoc" class="headerlink" title="docker安装showDoc"></a>docker安装showDoc</h1><h2 id="1-安装docker步骤略过"><a href="#1-安装docker步骤略过" class="headerlink" title="1.安装docker步骤略过"></a>1.安装docker步骤略过</h2><h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 中国大陆镜像安装命令（安装后记得执行docker tag命令以进行重命名）</span></span><br><span class="line">docker pull registry.cn-shenzhen.aliyuncs.com/star7th/showdoc</span><br><span class="line">docker tag registry.cn-shenzhen.aliyuncs.com/star7th/showdoc:latest star7th/showdoc:latest </span><br><span class="line"></span><br><span class="line"><span class="comment">##后续命令无论使用官方镜像还是加速镜像都需要执行</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#新建存放showdoc数据的目录</span></span><br><span class="line">mkdir -p /showdoc_data/html</span><br><span class="line">chmod  -R 777 /showdoc_data</span><br><span class="line"><span class="comment"># 如果你是想把数据挂载到其他目录，比如说/data1，那么，可以在/data1目录下新建一个showdoc_data/目录，</span></span><br><span class="line"><span class="comment"># 然后在根目录的新建一个软链接/showdoc_data到/data1/showdoc_data</span></span><br><span class="line"><span class="comment"># 这样既能保持跟官方教程推荐的路径一致，又能达到自定义存储的目的.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#启动showdoc容器</span></span><br><span class="line">docker run -d --name showdoc --user=root --privileged=<span class="literal">true</span> -p 4999:80 \</span><br><span class="line">-v /showdoc_data/html:/var/www/html/ star7th/showdoc</span><br></pre></td></tr></table></figure>
 
-<p>根据以上命令操作的话，往后showdoc的数据都会存放在 /showdoc_data/html 目录下。<br>你可以打开 <a target="_blank" rel="noopener" href="http://localhost:4999/">http://localhost:4999</a> 来访问showdoc (localhost可改为你的服务器域名或者IP)。账户密码是showdoc/123456，登录后你便可以看到右上方的管理后台入口。建议登录后修改密码。<br>对showdoc的问题或建议请至<a target="_blank" rel="noopener" href="https://github.com/star7th/showdoc">https://github.com/star7th/showdoc</a> 出提issue。若觉得showdoc好用，不妨点个star。</p>
+<p>根据以上命令操作的话，往后showdoc的数据都会存放在 /showdoc_data/html 目录下。<br>你可以打开 <a target="_blank" rel="noopener" href="http://localhost:4999/">http://localhost:4999</a> 来访问showdoc (localhost可改为你的服务器域名或者IP)。账户密码是showdoc/123456，登录后你便可以看到右上方的管理后台入口。建议登录后修改密码。</p>
 <p>如果报错</p>
 <p><img src="/../img/image-20220118154934633.png" alt="image-20220118154934633"></p>
 <p>重启docker</p>
@@ -469,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/11/30/%E5%8F%8D%E5%B0%84/" rel="next" title="反射">
-                <i class="fa fa-chevron-left"></i> 反射
+              <a href="/2021/11/30/swagger/" rel="next" title="swagger">
+                <i class="fa fa-chevron-left"></i> swagger
               </a>
             
           </div>
@@ -587,7 +587,7 @@ var jiathis_config={
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -598,7 +598,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -609,7 +609,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/a.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="shell," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="sed -i ‘s&#x2F;\r$&#x2F;&#x2F;‘ a.sh   #把window换行符等转成linux 1.Shell中的特殊符号1.$ 美元符号。用来表示变量的值。如变量NAME的值为Mike，则使用$NAME就可以得到“Mike”这个值。   2.# 井号。除了做为超级用户的提示符之外，还可以在脚本中做为注释的开头字母，每一行语句中，从#号开始的部分就不执行了。 3.””双引号。shell不会将一对双引号之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell">
+<meta property="og:url" content="http://xiaojiangzbc.top/2021/11/30/shell/index.html">
+<meta property="og:site_name" content="小姜的博客">
+<meta property="og:description" content="sed -i ‘s&#x2F;\r$&#x2F;&#x2F;‘ a.sh   #把window换行符等转成linux 1.Shell中的特殊符号1.$ 美元符号。用来表示变量的值。如变量NAME的值为Mike，则使用$NAME就可以得到“Mike”这个值。   2.# 井号。除了做为超级用户的提示符之外，还可以在脚本中做为注释的开头字母，每一行语句中，从#号开始的部分就不执行了。 3.””双引号。shell不会将一对双引号之">
+<meta property="og:locale">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220210175852468.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091104986.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091058114.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091126114.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091139509.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091126114.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091139509.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091320645.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091329068.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221104417269.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221104411559.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221091808883.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221093421522.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221095321023.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221100008257.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221100034667.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221100507263.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221100519083.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221100536384.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221100611803.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221100736917.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221144510050.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221113241712.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221113251126.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221113608498.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221113640101.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221104819464.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221110203826.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221144645994.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221111810327.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221111818271.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221143704302.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221112450776.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221112602080.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221142620311.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221144543902.png">
+<meta property="og:image" content="http://xiaojiangzbc.top/img/image-20220221151049998.png">
+<meta property="article:published_time" content="2021-11-30T09:45:46.000Z">
+<meta property="article:modified_time" content="2022-03-23T01:31:26.013Z">
+<meta property="article:author" content="Mr.JIANG">
+<meta property="article:tag" content="shell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiaojiangzbc.top/img/image-20220210175852468.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiaojiangzbc.top/2021/11/30/shell/"/>
+
+
+
+
+
+  <title>shell | 小姜的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <a target="_blank" rel="noopener" href="https://github.com/jiangjiaxu" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	<header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小姜的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaojiangzbc.top/2021/11/30/shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小姜的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">shell</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-30T17:45:46+08:00">
+                2021-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本站总阅读数 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/../img/image-20220210175852468.png" alt="image-20220210175852468"></p>
+<p>sed -i ‘s/\r$//‘ a.sh   #把window换行符等转成linux</p>
+<h1 id="1-Shell中的特殊符号"><a href="#1-Shell中的特殊符号" class="headerlink" title="1.Shell中的特殊符号"></a>1.<strong>Shell中的特殊符号</strong></h1><p>1.$ 美元符号。用来表示变量的值。如变量NAME的值为Mike，则使用$NAME就可以得到“Mike”这个值。</p>
+<p><img src="/../img/image-20220221091104986.png" alt="image-20220221091104986"></p>
+<p><img src="/../img/image-20220221091058114.png" alt="image-20220221091058114"></p>
+<p>2.# 井号。除了做为超级用户的提示符之外，还可以在脚本中做为注释的开头字母，每一行语句中，从#号开始的部分就不执行了。</p>
+<p>3.””双引号。shell不会将一对双引号之间的文本中的大多数特殊字符进行解释，如#不再是注释的开头，它只表示一个井号“#”。但$仍然保持特殊含义。（在双引号中的$加变量名，即：$PARAM_NAME，依然会转换成变量的值。）</p>
+<p><img src="/../img/image-20220221091126114.png" alt="image-20220221091126114"></p>
+<p><img src="/../img/image-20220221091139509.png" alt="image-20220221091139509"></p>
+<p>4.’’ 单引号。shell不会将一对单引号之间的任何字符做特殊解释。（在双引号中的$加变量名，即：$PARAM_NAME，不会转换成变量的值。）</p>
+<p><img src="/../img/image-20220221091126114.png" alt="image-20220221091126114"></p>
+<p><img src="/../img/image-20220221091139509.png" alt="image-20220221091139509"></p>
+<p>5.{}大括号，主要是和$符号配合，作为字符串连接来使用</p>
+<p><img src="/../img/image-20220221091320645.png" alt="image-20220221091320645"></p>
+<p><img src="/../img/image-20220221091329068.png" alt="image-20220221091329068"></p>
+<p>6.\ 斜杠。用来去掉在shell解释中字符的特殊含义。在文本中，跟在\后面的一个字符不会被shell特殊解释，但其余的不受影响。</p>
+<p>7.``:命令结构</p>
+<p>‘’直接打印而``里是命令结果，$()也是一样，命令结果</p>
+<p><img src="/../img/image-20220221104417269.png" alt="image-20220221104417269"></p>
+<p><img src="/../img/image-20220221104411559.png" alt="image-20220221104411559"></p>
+<h1 id="2-预定义的变量"><a href="#2-预定义的变量" class="headerlink" title="2.预定义的变量"></a>2.<strong>预定义的变量</strong></h1><p>$   shell变量名的开始，如$var</p>
+<p>|    管道，将标准输出转到下一个命令的标准输入</p>
+<p>$#   记录传递给Shell的自变量个数</p>
+<p>#    注释开始</p>
+<p>&amp;   在后台执行一个进程</p>
+<p>？   匹配一个字符</p>
+<p>*   匹配0到多个字符(与DOS不同，可在文件名中间使用，并且含.)</p>
+<p>$-   使用set及执行时传递给shell的标志位</p>
+<p>$!   最后一个子进程的进程号 </p>
+<p>$?   取最近一次命令执行后的退出状态(返回码)</p>
+<p>$*   传递给shell script的参数</p>
+<p>$@   所有参数，个别的用双引号括起来</p>
+<p>$0   当前shell的名字</p>
+<p>$n   (n:1-) 位置参数</p>
+<p>$$   进程标识号(Process Identifier Number, PID)</p>
+<p>&gt;   输出重定向</p>
+<p> &lt;   输入重定向</p>
+<p> &gt;&gt;   输出重定向（追加方式）</p>
+<p> []   列出字符变化范围，如[a-z]</p>
+<h1 id="3-设置变量"><a href="#3-设置变量" class="headerlink" title="3.设置变量"></a><strong>3.设置变量</strong></h1><p>3.1     格式：VARNAME=value （i.e. PARAM=’hello’）</p>
+<p><img src="/../img/image-20220221091808883.png" alt="image-20220221091808883"></p>
+<p>3.2     注意：</p>
+<p>3.2.1   等号的前后不能有空格</p>
+<p>3.2.2   如果变量的值是一个命令的执行结果，请加上反引号（`）。</p>
+<h1 id="4-引用变量"><a href="#4-引用变量" class="headerlink" title="4.引用变量"></a>4.引用变量</h1><p>在引用一个变量的时候可以设定默认值。如果在此之前，该变量已经设定了值，则此默认值无效。如果此时变量没有被设定值，则使用此默认值（但是没有改变此变量的值）。</p>
+<p>echo Hello ${UNAME:-there}   #其中there是UNAME的默认值</p>
+<p>使用${VALIABLE:?MESSAGE},如果发现此变量此时没有值，则脚本停止运行并显示行号和变量名称。 主要用于调试。</p>
+<h1 id="5-相关"><a href="#5-相关" class="headerlink" title="5.$相关"></a>5.$相关</h1><p>sed -i ‘s/\r$//‘ test.sh   #把window换行符等转成linux</p>
+<p>test.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/bash</span><br><span class="line"></span><br><span class="line">VAR=&quot;Hello World!&quot;</span><br><span class="line">echo &quot;\$VAR : $VAR&quot;</span><br><span class="line"></span><br><span class="line">echo &quot;\$# argc: $#&quot;</span><br><span class="line">echo &quot;\$@ argv[]: $@&quot;</span><br><span class="line">echo &quot;\$0 argv[0]: $0&quot;</span><br><span class="line">echo &quot;\$1 argv[1]: $1&quot;</span><br><span class="line">echo &quot;\$2 argv[2]: $2&quot;</span><br><span class="line">echo &quot;\$* argv_str: $*&quot;</span><br><span class="line">echo &quot;\$$ pid: $$&quot;</span><br><span class="line">echo &quot;\$? retcode: $?&quot;</span><br></pre></td></tr></table></figure>
+
+<p>执行 ./test a b c d #其中a b c d就是参数，以空格分隔</p>
+<p><img src="/../img/image-20220221093421522.png" alt="image-20220221093421522"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$# 代表传入参数的个数</span><br><span class="line">$@ 代表传入参数的列表</span><br><span class="line">$0 代表脚本本身</span><br><span class="line">$1 代表传入的第一个参数，$2，$3...以此类推</span><br><span class="line">$* 以字符串方式显示所有传入的参数</span><br><span class="line">$$ 脚本运行的进程ID</span><br><span class="line">$? 显示最后命令的退出状况，0表示没有错误</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-source-export-let-unset"><a href="#6-source-export-let-unset" class="headerlink" title="6.source / export / let / unset"></a>6.<strong>source / export / let / unset</strong></h1><h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2><p>正常情况下，脚本中执行的参数设置只能影响到shell脚本本身的执行环境，不能影响到调用此shell的脚本。</p>
+<p>使用source命令执行脚本，可以让脚本影响到父shell的环境（即调用此shell的当前shell）。</p>
+<p>脚本a.sh里设置变量a=2</p>
+<p><img src="/../img/image-20220221095321023.png" alt="image-20220221095321023"></p>
+<p><img src="/../img/image-20220221100008257.png" alt="image-20220221100008257"></p>
+<p>打印为空</p>
+<p>当source a.sh后</p>
+<p><img src="/../img/image-20220221100034667.png" alt="image-20220221100034667"></p>
+<p>但是另一个b.sh是获取不到a的值的</p>
+<p><img src="/../img/image-20220221100507263.png" alt="image-20220221100507263"></p>
+<p><img src="/../img/image-20220221100519083.png" alt="image-20220221100519083"></p>
+<p>修改a.sh,加上export</p>
+<p><img src="/../img/image-20220221100536384.png" alt="image-20220221100536384"></p>
+<p>source a.sh</p>
+<p>发现此时b.sh里可以获取到a的值了</p>
+<p><img src="/../img/image-20220221100611803.png" alt="image-20220221100611803"></p>
+<h2 id="export"><a href="#export" class="headerlink" title="export"></a>export</h2><p>在bash下，使用export建立环境变量后，会影响到子shell脚本和当前shell的环境变量</p>
+<p>比如在/etc/profile中的export中的变量，自己新建的sh文件可以获取到</p>
+<h2 id="unset"><a href="#unset" class="headerlink" title="unset"></a>unset</h2><p>删除环境变量</p>
+<p>unset a</p>
+<p>echo $a</p>
+<p> (此处为空行,a已经被删除)</p>
+<p><img src="/../img/image-20220221100736917.png" alt="image-20220221100736917"></p>
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><p>在bash中只用此命令可以建立一个临时的变量，此变量不会影响到子shell</p>
+<h1 id="7-shell脚本中执行时提示“没有那个文件或目录”的解决办法"><a href="#7-shell脚本中执行时提示“没有那个文件或目录”的解决办法" class="headerlink" title="7.shell脚本中执行时提示“没有那个文件或目录”的解决办法"></a>7.shell脚本中执行时提示“没有那个文件或目录”的解决办法</h1><p>vim filename<br>然后用命令 :set ff<br>可看到dos或unix的字样，如果的确是dos格式的, 那么用set ff=unix把它强制为unix格式的,，然后存盘退出后就可运行。</p>
+<h1 id="8-逻辑判断"><a href="#8-逻辑判断" class="headerlink" title="8.逻辑判断"></a>8.<strong>逻辑判断</strong></h1><p><img src="/../img/image-20220221144510050.png" alt="image-20220221144510050"></p>
+<p><img src="/../img/image-20220221113241712.png" alt="image-20220221113241712"></p>
+<p><img src="/../img/image-20220221113251126.png" alt="image-20220221113251126"></p>
+<p>注意，if后的[] ，要有空格，而[]里也要有空格。分号后也要有空格，要有fi结尾</p>
+<h2 id="test命令"><a href="#test命令" class="headerlink" title="test命令"></a>test命令</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/magiclyj/article/details/77923274?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164541445916781683931124%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=164541445916781683931124&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-77923274.first_rank_v2_pc_rank_v29&amp;utm_term=shell%E4%B8%ADtest%E5%8A%A0%E4%B8%8E%E4%B8%8D%E5%8A%A0&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/magiclyj/article/details/77923274?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164541445916781683931124%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=164541445916781683931124&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-77923274.first_rank_v2_pc_rank_v29&amp;utm_term=shell%E4%B8%ADtest%E5%8A%A0%E4%B8%8E%E4%B8%8D%E5%8A%A0&amp;spm=1018.2226.3001.4187</a></p>
+<p>不使用[],可以用test</p>
+<p><img src="/../img/image-20220221113608498.png" alt="image-20220221113608498"></p>
+<p><img src="/../img/image-20220221113640101.png" alt="image-20220221113640101"></p>
+<h1 id="9-时间"><a href="#9-时间" class="headerlink" title="9.时间"></a>9.时间</h1><p>date</p>
+<p>date ‘+%Y%m%d%H%M%S’</p>
+<p><img src="/../img/image-20220221104819464.png" alt="image-20220221104819464"></p>
+<p><img src="/../img/image-20220221110203826.png" alt="image-20220221110203826"></p>
+<h1 id="10-shell-脚本中-d-e-f的区别"><a href="#10-shell-脚本中-d-e-f的区别" class="headerlink" title="10.shell 脚本中-d,-e,-f的区别"></a>10.shell 脚本中-d,-e,-f的区别</h1><p>-e filename 如果 filename存在，则为真<br>-d filename 如果 filename为目录，则为真<br>-f filename 如果 filename为<a target="_blank" rel="noopener" href="http://www.so.com/s?q=%E5%B8%B8%E8%A7%84&ie=utf-8&src=internal_wenda_recommend_textn">常规</a>文件，则为真</p>
+<h1 id="11-shell中-和-、-、-、-和-使用"><a href="#11-shell中-和-、-、-、-和-使用" class="headerlink" title="11.shell中``和$()、$(())、${}、[]和[[]]使用"></a>11.shell中``和$()、$(())、${}、[]和[[]]使用</h1><h2 id="和"><a href="#和" class="headerlink" title="``和$()"></a>``和$()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$()与``都是用来做命令替换的。</span><br><span class="line">两个的区别在于``须要额外的跳脱( \` )处理</span><br><span class="line">举个列子：</span><br><span class="line">cmd1 `cmd2 `cmd3` `看这个初学者可能不知道这是什么意思,这句话其实是错误的,本意是想先执行cmd3,执行完之后交给cmd2再执行,最后再执行cmd1</span><br><span class="line">正确的写法应该是 cmd1 `cmd2 \`cmd3\` `还得转义。</span><br><span class="line">如果是换成$()的话，就可以写成cmd1 $(cmd2 $(cmd3)),只要你喜欢，做多少层的替换都没问题。</span><br><span class="line">$( ) 的不足:</span><br><span class="line">``基本上可用在全部的 unix shell 中使用，若写成 shell script ，其移植性比较高。</span><br><span class="line">而 $( ) 并不见的每一种 shell 都能使用。</span><br></pre></td></tr></table></figure>
+
+<h2 id><a href="#" class="headerlink" title="${}"></a>${}</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">$&#123; &#125; 用来作变量替换。</span><br><span class="line">一般情况下，$var 与 $&#123;var&#125; 并没有啥不一样。</span><br><span class="line">但是用 $&#123; &#125; 会比较精确的界定变量名称的范围，比方说：</span><br><span class="line">$ A=B</span><br><span class="line">$ echo $AB</span><br><span class="line">原本是打算先将 $A 的结果替换出来，然后再补一个 B 字母于其后，</span><br><span class="line">但在命令行上，真正的结果却是只会提换变量名称为 AB 的值出来…</span><br><span class="line">若使用 $&#123; &#125; 就没问题了：</span><br><span class="line">$ echo $&#123;A&#125;B</span><br><span class="line">BB</span><br><span class="line"></span><br><span class="line">#字符串截取</span><br><span class="line">file=/dir1/dir2/dir3/my.file.txt</span><br><span class="line">我们可以用 $&#123; &#125; 分别替换获得不同的值：</span><br><span class="line">$&#123;file#*/&#125;：拿掉第一条 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt</span><br><span class="line">$&#123;file##*/&#125;：拿掉最后一条 / 及其左边的字符串：my.file.txt</span><br><span class="line">$&#123;file#*.&#125;：拿掉第一个 .  及其左边的字符串：file.txt</span><br><span class="line">$&#123;file##*.&#125;：拿掉最后一个 .  及其左边的字符串：txt</span><br><span class="line">$&#123;file%/*&#125;：拿掉最后条 / 及其右边的字符串：/dir1/dir2/dir3</span><br><span class="line">$&#123;file%%/*&#125;：拿掉第一条 / 及其右边的字符串：(空值)</span><br><span class="line">$&#123;file%.*&#125;：拿掉最后一个 .  及其右边的字符串：/dir1/dir2/dir3/my.file</span><br><span class="line">$&#123;file%%.*&#125;：拿掉第一个 .  及其右边的字符串：/dir1/dir2/dir3/my</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#字符串替换</span><br><span class="line">我们也可以对变量值里的字符串作替换：其中file是变量</span><br><span class="line">$&#123;file/dir/path&#125;：将第一个 dir 提换为 path：/path1/dir2/dir3/my.file.txt</span><br><span class="line">$&#123;file//dir/path&#125;：将全部 dir 提换为 path：/path1/path2/path3/my.file.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">利用 $&#123; &#125; 还可针对不同的变量状态赋值(没设定、空值、非空值)： </span><br><span class="line">$&#123;file-my.file.txt&#125; ：假如 $file 没有设定，则使用 my.file.txt 作传回值。(空值及非空值时不作处理) </span><br><span class="line">$&#123;file:-my.file.txt&#125; ：假如 $file 没有设定或为空值，则使用 my.file.txt 作传回值。 (非空值时不作处理)</span><br><span class="line">$&#123;file+my.file.txt&#125; ：假如 $file 设为空值或非空值，均使用 my.file.txt 作传回值。(没设定时不作处理)</span><br><span class="line">$&#123;file:+my.file.txt&#125; ：若 $file 为非空值，则使用 my.file.txt 作传回值。 (没设定及空值时不作处理)</span><br><span class="line">$&#123;file=my.file.txt&#125; ：若 $file 没设定，则使用 my.file.txt 作传回值，同时将 $file 赋值为 my.file.txt 。 (空值及非空值时不作处理)</span><br><span class="line">$&#123;file:=my.file.txt&#125; ：若 $file 没设定或为空值，则使用 my.file.txt 作传回值，同时将 $file 赋值为 my.file.txt 。 (非空值时不作处理)</span><br><span class="line">$&#123;file?my.file.txt&#125; ：若 $file 没设定，则将 my.file.txt 输出至 STDERR。 (空值及非空值时不作处理)</span><br><span class="line">$&#123;file:?my.file.txt&#125; ：若 $file 没设定或为空值，则将 my.file.txt 输出至 STDERR。 (非空值时不作处理)</span><br><span class="line"></span><br><span class="line">#计算出变量值的长度</span><br><span class="line">$&#123;#var&#125; ，其中var为变量</span><br></pre></td></tr></table></figure>
+
+<h2 id="和expr"><a href="#和expr" class="headerlink" title="$(())和expr"></a>$(())和expr</h2><p>expr 3 + 2</p>
+<p><img src="/../img/image-20220221144645994.png" alt="image-20220221144645994"></p>
+<p>它是用来作整数运算</p>
+<p>$((a++))</p>
+<p>a=5; b=7; c=2<br>echo $(( a+b</p>
+<p>也可以<br>$(( $a + $b * $c)) 也可得到 19 的结果<br><img src="/../img/image-20220221111810327.png" alt="image-20220221111810327"></p>
+<p><img src="/../img/image-20220221111818271.png" alt="image-20220221111818271"></p>
+<p><img src="/../img/image-20220221143704302.png" alt="image-20220221143704302"></p>
+<h2 id="和-1"><a href="#和-1" class="headerlink" title="[]和[[]]"></a>[]和[[]]</h2><p>1.相同点：<br>二者都支持算术比较和字符串比较表达式（具体使用可能有点不同）<br>条件表达式要放在方括号之间，并且要有空格，例如: [$a==$b] 是错误的，必须写成 [ $a == $b ]。</p>
+<p>[ 1 == 1 ]&amp;&amp;echo true||echo false</p>
+<p>true</p>
+<p><img src="/../img/image-20220221112450776.png" alt="image-20220221112450776"></p>
+<p>2.不同点：</p>
+<p>[[ … ]]进行算术扩展，而[ … ]不做</p>
+<p><img src="/../img/image-20220221112602080.png" alt="image-20220221112602080"></p>
+<h1 id="12-字符串截取"><a href="#12-字符串截取" class="headerlink" title="12.字符串截取"></a>12.字符串截取</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33951180/article/details/68059098?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164541283916780265450858%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=164541283916780265450858&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-68059098.first_rank_v2_pc_rank_v29&amp;utm_term=shell%E6%88%AA%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/qq_33951180/article/details/68059098?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164541283916780265450858%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=164541283916780265450858&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-68059098.first_rank_v2_pc_rank_v29&amp;utm_term=shell%E6%88%AA%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2&amp;spm=1018.2226.3001.4187</a></p>
+<p>替换</p>
+<p>我们也可以对变量值里的字符串作替换：其中file是变量<br>${file/dir/path}：将第一个 dir 提换为 path：/path1/dir2/dir3/my.file.txt<br>${file//dir/path}：将全部 dir 提换为 path：/path1/path2/path3/my.file.txt</p>
+<h1 id="13-grep"><a href="#13-grep" class="headerlink" title="13.grep"></a>13.<strong>grep</strong></h1><p>查找某个文件夹下的文件</p>
+<p>ls -l 路径|grep ^- |wc -l</p>
+<h1 id="14-例子"><a href="#14-例子" class="headerlink" title="14.例子"></a>14.例子</h1><p>50服务器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#启动jar包脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">#找到与jar包名称一致的进程</span><br><span class="line">jar_pid=`ps -ef|grep -v grep | grep &#x27;nbd-traffic-nantong-2.0.0.jar&#x27;|awk &#x27;&#123; print $2 &#125;&#x27;`</span><br><span class="line">echo $jar_pid</span><br><span class="line">#如果不存在该进程</span><br><span class="line">if [ ! -n &quot;$jar_pid&quot; ]; then</span><br><span class="line">echo &#x27;will redploy.&#x27;</span><br><span class="line">#删除nohup.out，启动jar</span><br><span class="line">rm -rf nohup.out</span><br><span class="line">nohup java -Xms512m -Xmx2048m -Dspring.profiles.active=dev -jar nbd-traffic-nantong-2.0.0.jar &amp;</span><br><span class="line">echo &#x27;redploy success0.&#x27;</span><br><span class="line">else</span><br><span class="line">#存在，关闭进程</span><br><span class="line">kill -9 $jar_pid</span><br><span class="line">echo &#x27;kill&#x27; $jar_pid</span><br><span class="line">#删除nohup.out，启动jar</span><br><span class="line">rm -rf nohup.out</span><br><span class="line">nohup java -Xms512m -Xmx2048m -Dspring.profiles.active=dev -jar nbd-traffic-nantong-2.0.0.jar &amp;</span><br><span class="line">echo &#x27;redploy success1.&#x27;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#备份脚本</span><br><span class="line">#!/bin/bash</span><br><span class="line">#jarName是第一个参数，运行脚本命令 sh backup.sh a.jar</span><br><span class="line">jarName=$&#123;1&#125;</span><br><span class="line">#查看本路径</span><br><span class="line">path=`pwd`</span><br><span class="line">#打印时间</span><br><span class="line">time=`date &#x27;+%Y%m%d%H%M%S&#x27;`</span><br><span class="line">#时间</span><br><span class="line">date=$(date &quot;+%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">reservedNum=5</span><br><span class="line">#如果目录不存在，创建</span><br><span class="line">if [ ! -d &quot;$path/backup&quot; ]; then</span><br><span class="line">	mkdir $path/backup</span><br><span class="line">	echo &quot;Folder created successfully!&quot;</span><br><span class="line">else</span><br><span class="line">	echo &quot;The folder already exists!&quot;</span><br><span class="line">fi</span><br><span class="line">sleep 0.5</span><br><span class="line">#如果本jar存在了，复制本jar包，强制不提示复制到backup下+上时间戳</span><br><span class="line">if [ -f &quot;$path/$jarName&quot; ];then</span><br><span class="line">	echo &quot;$jarName File exists!&quot;</span><br><span class="line">	cp -f $jarName $path/backup/$jarName$time.bak</span><br><span class="line">	if [ -f &quot;$path/backup/$jarName$time.bak&quot; ];then</span><br><span class="line">	#然后删除jar包</span><br><span class="line">		rm -rf $jarName</span><br><span class="line">		#统计backup下有几个文件，如果大于5个</span><br><span class="line">		fileNum=$(ls -l $path/backup|grep ^- |wc -l)</span><br><span class="line">		while(( $fileNum &gt; $reservedNum))</span><br><span class="line">		do</span><br><span class="line">		#-r倒叙，-t时间排序，根据时间找到最老的文件删除</span><br><span class="line">			oldFile=$(ls -rt $path/backup| head -1)</span><br><span class="line">			echo  $date &quot;Delete File:&quot;$oldFile</span><br><span class="line">			rm -rf $path/backup/$oldFile</span><br><span class="line">			#然后文件数-1=5</span><br><span class="line">			let &quot;fileNum--&quot;</span><br><span class="line">		done</span><br><span class="line">		echo &quot;File backup succeeded!&quot;</span><br><span class="line">	else</span><br><span class="line">		echo &quot;File backup failed!&quot;</span><br><span class="line">	fi</span><br><span class="line">else</span><br><span class="line">	echo &quot;The file does not exist!&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h1 id="15-case"><a href="#15-case" class="headerlink" title="15.case"></a>15.case</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">a=5;</span><br><span class="line">case $a in</span><br><span class="line">	1)</span><br><span class="line">	echo &#x27;a&#x27;;;</span><br><span class="line">	5)</span><br><span class="line">	echo &#x27;b&#x27;;;</span><br><span class="line">	*)</span><br><span class="line">	echo &#x27;unkown&#x27;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220221142620311.png" alt="image-20220221142620311"></p>
+<h1 id="16-while"><a href="#16-while" class="headerlink" title="16.while"></a>16.while</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">a=5;</span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">	echo &#x27;a&#x27;</span><br><span class="line">	((a++))</span><br><span class="line">	echo $a</span><br><span class="line">	if [ $a -ge 10 ]; then</span><br><span class="line">		break;</span><br><span class="line">	fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/image-20220221144543902.png" alt="image-20220221144543902"></p>
+<h1 id="17-for"><a href="#17-for" class="headerlink" title="17.for"></a>17.for</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#格式</span><br><span class="line">for 变量 in 名字列表 </span><br><span class="line">do </span><br><span class="line">命令列表 </span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">for n in &#123;1..10&#125;</span><br><span class="line"></span><br><span class="line">do</span><br><span class="line"></span><br><span class="line">echo $n</span><br><span class="line"></span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for letter in a b c d e;</span><br><span class="line"></span><br><span class="line">do</span><br><span class="line"></span><br><span class="line">echo $letter</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>for循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (( i=1;$i&lt;10;i++))</span><br><span class="line"></span><br><span class="line">do</span><br><span class="line"></span><br><span class="line">echo $i</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h1 id="18-逻辑判断的表达"><a href="#18-逻辑判断的表达" class="headerlink" title="18.逻辑判断的表达"></a>18.逻辑判断的表达</h1><h2 id="一、判断文件的属性"><a href="#一、判断文件的属性" class="headerlink" title="*一、判断文件的属性"></a>*一、判断文件的属性</h2><p>格式：-操作符 filename<br>-e 文件存在返回1， 否则返回0<br>-r 文件可读返回1,否则返回0<br>-w 文件可写返回1,否则返回0<br>-x 文件可执行返回1,否则返回0<br>-o 文件属于用户本人返回1, 否则返回0<br>-z 文件长度为0返回1, 否则返回0.<br>-f 文件为普通文件返回1, 否则返回0<br>-d 文件为目录文件时返回1, 否则返回0 </p>
+<h2 id="二、测试字符串"><a href="#二、测试字符串" class="headerlink" title="二、测试字符串"></a>二、测试字符串</h2><p>字符串1 = 字符串2　当两个字串相等时为真<br>字符串1 != 字符串2 当两个字串不等时为真<br>-n 字符串　 　　 当字符串的长度大于0时为真<br>-z 字符串　　　　　 当字符串的长度为0时为真<br>字符串　　　　　　 当串字符串为非空时为真 </p>
+<h2 id="三、测试两个整数关系"><a href="#三、测试两个整数关系" class="headerlink" title="三、测试两个整数关系"></a>三、测试两个整数关系</h2><p>数字1 -eq 数字2　　　　 两数相等为真<br>数字1 -ne 数字2　　　　 两数不等为真<br>数字1 -gt 数字2　　　　 数字1大于数字2为真<br>数字1 -ge 数字2 　　 数字1大于等于数字2为真<br>数字1 -lt 数字2　　　　 数字1小于数字2为真<br>数字1 -le 数字2　　　　 数字1小于等于数字2为真 </p>
+<h2 id="四、逻辑测试"><a href="#四、逻辑测试" class="headerlink" title="四、逻辑测试"></a>四、逻辑测试</h2><p>-a  　　　　 与<br>-o　　　　　　　 或<br>!　　　　　　　　非* </p>
+<h1 id="19-shell中的表达式"><a href="#19-shell中的表达式" class="headerlink" title="19.shell中的表达式"></a>1<strong>9.shell中的表达式</strong></h1><h2 id="1-管道"><a href="#1-管道" class="headerlink" title="1.管道 |"></a>1.管道 |</h2><p>就管道符前的命令的输出作为管道符后的命令的输入。</p>
+<p>ls | grep ‘.txt’</p>
+<p>将ls的输出作为grep 的输入。 grep从输入中找出所有包含.txt的行。</p>
+<h2 id="2-输出-gt"><a href="#2-输出-gt" class="headerlink" title="2.输出 &gt;"></a>2.输出 &gt;</h2><p>将右尖括号前的命令的输入重定向到尖括号后的文件中。</p>
+<p>例如：</p>
+<p>ls *.sh &gt; list.txt</p>
+<p>将当前目录下所有末尾名为sh的文件的列表写入到list.txt</p>
+<h3 id="3-输入-lt"><a href="#3-输入-lt" class="headerlink" title="3.输入 &lt;"></a>3.输入 &lt;</h3><p>将左箭头后面的文件作为左箭头前的命令的输入。</p>
+<p>例如：</p>
+<p>grep “a” &lt; test.sh</p>
+<p>将test.sh中找到所有包含a的行</p>
+<h2 id="4-错误输出重定向"><a href="#4-错误输出重定向" class="headerlink" title="4.错误输出重定向"></a>4.错误输出重定向</h2><p>默认bash有3个标准输入输出设备。</p>
+<p>0 标准输入</p>
+<p>1 标准输出</p>
+<p>2错误输出</p>
+<p>如果执行脚本的时候发生错误，会输出到2上。</p>
+<p>要想就将错误的输出也输出在标准输出上，需要重定向。</p>
+<p>例如：</p>
+<p>./test.sh &gt; a.log 2&gt;&amp;1</p>
+<p>后面2&gt;&amp;1就是将标准错误的输出重定向到标准输出上。</p>
+<h2 id="5-tee"><a href="#5-tee" class="headerlink" title="5.tee"></a>5.tee</h2><p>将此命令的输入分叉，一支输出到屏幕一支可以重定向到其他位置。</p>
+<p>例如： ./test.sh | tee &gt;a.txt 2&gt;&amp;1</p>
+<p>运行test.sh，通过tee输出到a.txt，同时屏幕上可以看到输出。并且将错误输出重定向到标准输出( 2&gt;&amp;1 )</p>
+<h2 id="6-exec"><a href="#6-exec" class="headerlink" title="6.exec"></a>6.exec</h2><p>将此命令后的参数作为命令在当前的shell中执行，当前的shell或者脚本不在执行。</p>
+<p>例如： exec ls</p>
+<p>当前进程替换为ls,执行结束后就退出了。</p>
+<p>例如：在a.sh 中包含</p>
+<p>exec b.sh 则当a.sh 执行到此句后，被b.sh替换，a.sh中此句后的语句不会再被执行。</p>
+<h2 id="7-read"><a href="#7-read" class="headerlink" title="7.read"></a>7.read</h2><p>从标准输入读取数据</p>
+<p><img src="/../img/image-20220221151049998.png" alt="image-20220221151049998"></p>
+<h2 id="8-shift"><a href="#8-shift" class="headerlink" title="8.shift"></a>8.shift</h2><p>每次调用的时候，将参数列表中的第一个参数去掉。这样可以循环得到第一个参数。</p>
+<p>例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sum=0</span><br><span class="line">#一直到参数个数=0之前都do</span><br><span class="line">until [ $# -eq 0 ]</span><br><span class="line">do</span><br><span class="line">echo $*</span><br><span class="line">sum=`expr $sum + $1`</span><br><span class="line">shift</span><br><span class="line">done</span><br><span class="line">echo result is: $sum</span><br></pre></td></tr></table></figure>
+
+<p>#./t.sh 1 2 3</p>
+<p>1 2 3</p>
+<p>2 3</p>
+<p>3</p>
+<h2 id="9-awk"><a href="#9-awk" class="headerlink" title="9.awk"></a>9.awk</h2><p>提取输入中的某个参数</p>
+<p>提取输入中每一行的第一个参数</p>
+<p>du:显示文件的大小</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\#echo `du *.txt | awk ‘&#123;print $1&#125;’`</span><br><span class="line"></span><br><span class="line">1230 456</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-前后台运行"><a href="#10-前后台运行" class="headerlink" title="10.前后台运行"></a>10.前后台运行</h2><p>将某个程序在后台启动起来，只需要在命令的最后加上 &amp; 符号。</p>
+<p>例如： ./test.sh &amp;</p>
+<h1 id="20-nohup"><a href="#20-nohup" class="headerlink" title="20.nohup"></a>20.nohup</h1><p>不挂断地运行命令</p>
+<p>无论是否将 nohup 命令的输出<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E9%87%8D%E5%AE%9A%E5%90%91&spm=1001.2101.3001.7020">重定向</a>到终端，输出都将附加到当前目录的 nohup.out 文件中</p>
+<h1 id="21-ps-ef"><a href="#21-ps-ef" class="headerlink" title="21.ps -ef"></a>21.ps -ef</h1><p>用于查看当前所有的进程。</p>
+<h1 id="22-ll相关"><a href="#22-ll相关" class="headerlink" title="22.ll相关"></a>22.ll相关</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1、按照时间倒叙排列——  ll -nt ( LNT,大写备注区分一下)</span><br><span class="line">2、安照时间正序排列—— ll -rt (LRT)</span><br><span class="line">3、按照文件名正序排序（默认的排序方式）—— -l</span><br><span class="line">4、按照文件名倒叙排列 —— -lr</span><br><span class="line">5、按照大小升序——   -IS</span><br><span class="line">6、按照大小降序 —— -S</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	  
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag"><i class="fa fa-at" aria-hidden="true"></i> shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/30/socket/" rel="next" title="Socket">
+                <i class="fa fa-chevron-left"></i> Socket
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/30/restTemplate&&fegin/" rel="prev" title="restTemplate&&fegin">
+                restTemplate&&fegin <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1430319727&auto=1&height=66"></iframe>
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/a.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jiangjiaxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6428447095" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://weibo.com/u/6428447095" title="小姜的微博" target="_blank">小姜的微博</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Shell%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7"><span class="nav-number">1.</span> <span class="nav-text">1.Shell中的特殊符号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E9%A2%84%E5%AE%9A%E4%B9%89%E7%9A%84%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">2.预定义的变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%AE%BE%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">3.设置变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">4.引用变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%9B%B8%E5%85%B3"><span class="nav-number">5.</span> <span class="nav-text">5.$相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-source-export-let-unset"><span class="nav-number">6.</span> <span class="nav-text">6.source &#x2F; export &#x2F; let &#x2F; unset</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#source"><span class="nav-number">6.1.</span> <span class="nav-text">source</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#export"><span class="nav-number">6.2.</span> <span class="nav-text">export</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unset"><span class="nav-number">6.3.</span> <span class="nav-text">unset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let"><span class="nav-number">6.4.</span> <span class="nav-text">let</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-shell%E8%84%9A%E6%9C%AC%E4%B8%AD%E6%89%A7%E8%A1%8C%E6%97%B6%E6%8F%90%E7%A4%BA%E2%80%9C%E6%B2%A1%E6%9C%89%E9%82%A3%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95%E2%80%9D%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">7.shell脚本中执行时提示“没有那个文件或目录”的解决办法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E9%80%BB%E8%BE%91%E5%88%A4%E6%96%AD"><span class="nav-number">8.</span> <span class="nav-text">8.逻辑判断</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#test%E5%91%BD%E4%BB%A4"><span class="nav-number">8.1.</span> <span class="nav-text">test命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E6%97%B6%E9%97%B4"><span class="nav-number">9.</span> <span class="nav-text">9.时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-shell-%E8%84%9A%E6%9C%AC%E4%B8%AD-d-e-f%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">10.</span> <span class="nav-text">10.shell 脚本中-d,-e,-f的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-shell%E4%B8%AD-%E5%92%8C-%E3%80%81-%E3%80%81-%E3%80%81-%E5%92%8C-%E4%BD%BF%E7%94%A8"><span class="nav-number">11.</span> <span class="nav-text">11.shell中&#96;&#96;和$()、$(())、${}、[]和[[]]使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C"><span class="nav-number">11.1.</span> <span class="nav-text">&#96;&#96;和$()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">11.2.</span> <span class="nav-text">${}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8Cexpr"><span class="nav-number">11.3.</span> <span class="nav-text">$(())和expr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C-1"><span class="nav-number">11.4.</span> <span class="nav-text">[]和[[]]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96"><span class="nav-number">12.</span> <span class="nav-text">12.字符串截取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-grep"><span class="nav-number">13.</span> <span class="nav-text">13.grep</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-%E4%BE%8B%E5%AD%90"><span class="nav-number">14.</span> <span class="nav-text">14.例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-case"><span class="nav-number">15.</span> <span class="nav-text">15.case</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-while"><span class="nav-number">16.</span> <span class="nav-text">16.while</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-for"><span class="nav-number">17.</span> <span class="nav-text">17.for</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-%E9%80%BB%E8%BE%91%E5%88%A4%E6%96%AD%E7%9A%84%E8%A1%A8%E8%BE%BE"><span class="nav-number">18.</span> <span class="nav-text">18.逻辑判断的表达</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%A4%E6%96%AD%E6%96%87%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">18.1.</span> <span class="nav-text">*一、判断文件的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%B5%8B%E8%AF%95%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">18.2.</span> <span class="nav-text">二、测试字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%B5%8B%E8%AF%95%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E5%85%B3%E7%B3%BB"><span class="nav-number">18.3.</span> <span class="nav-text">三、测试两个整数关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%80%BB%E8%BE%91%E6%B5%8B%E8%AF%95"><span class="nav-number">18.4.</span> <span class="nav-text">四、逻辑测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-shell%E4%B8%AD%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">19.</span> <span class="nav-text">19.shell中的表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%AE%A1%E9%81%93"><span class="nav-number">19.1.</span> <span class="nav-text">1.管道 |</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%BE%93%E5%87%BA-gt"><span class="nav-number">19.2.</span> <span class="nav-text">2.输出 &gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BE%93%E5%85%A5-lt"><span class="nav-number">19.2.1.</span> <span class="nav-text">3.输入 &lt;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%94%99%E8%AF%AF%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">19.3.</span> <span class="nav-text">4.错误输出重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-tee"><span class="nav-number">19.4.</span> <span class="nav-text">5.tee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-exec"><span class="nav-number">19.5.</span> <span class="nav-text">6.exec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-read"><span class="nav-number">19.6.</span> <span class="nav-text">7.read</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-shift"><span class="nav-number">19.7.</span> <span class="nav-text">8.shift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-awk"><span class="nav-number">19.8.</span> <span class="nav-text">9.awk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E5%89%8D%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="nav-number">19.9.</span> <span class="nav-text">10.前后台运行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-nohup"><span class="nav-number">20.</span> <span class="nav-text">20.nohup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-ps-ef"><span class="nav-number">21.</span> <span class="nav-text">21.ps -ef</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-ll%E7%9B%B8%E5%85%B3"><span class="nav-number">22.</span> <span class="nav-text">22.ll相关</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.JIANG</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
